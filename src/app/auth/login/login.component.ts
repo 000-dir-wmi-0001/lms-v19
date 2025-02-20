@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -16,12 +17,21 @@ import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { CommonModule } from '@angular/common';
 
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonsModule,FormsModule,    // For Bootstrap buttons
+    BsDropdownModule, // For dropdowns
+    TooltipModule,    // For tooltips
+    ModalModule,      // For modals (if needed)
+    ProgressbarModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
@@ -166,6 +176,11 @@ export class LoginComponent implements OnInit {
 
 
 // import { Component } from '@angular/core';
+// import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+// import { Router } from '@angular/router';
+// import Swal from 'sweetalert2';
+// import {AuthService} from 'src/app/service/auth.service';
+
 
 // @Component({
 //   selector: 'app-login',
