@@ -1,19 +1,19 @@
+@import "bootstrap/dist/css/bootstrap.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500;600&display=swap");
 
 
 
 
-@import "bootstrap/dist/css/bootstrap.css";
 /* resolve: {
   fallback: {
     stream: require.resolve("stream-browserify");
   }
 } */
 
-/* @font-face {
+@font-face {
   font-family: "Poppins";
-  src: url("../src/assets/font/Poppins-Black.ttf");
-} */
+  src: url("/font/Poppins-Black.ttf");
+}
 
 * {
   font-family: "Poppins", sans-serif;
