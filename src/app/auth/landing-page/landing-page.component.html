@@ -1,1 +1,401 @@
-<p>landing-page works!</p>
+<div id="enquiryModal" class="modal fade" tabindex="-1" aria-hidden="true"  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enquiry Form</h5>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeEnquiryForm()"></button>
+        </div>
+        <div class="modal-body" >
+          <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" >
+            <div class="form-group mb-3">
+              <label for="fullName"><b>Name:</b></label>
+              <input
+                type="text"
+                formControlName="fullName"
+                class="form-control"
+                id="fullName"
+                placeholder="Enter Your Name"
+                [ngClass]="{'is-invalid': submitted && formControl['fullName'].errors}"
+              />
+              @if (submitted && formControl['fullName'].errors) {
+
+                  <div  class="invalid-feedback">
+                    @if (formControl['fullName'].errors['required']) {
+
+                        <div >Full Name is required</div>
+                    }
+                    @else if (formControl['fullName'].errors['minlength']) {
+
+                        <div>Minimum 2 characters required</div>
+                    }
+                    </div>
+                }
+            </div>
+            <div class="form-group mb-3">
+              <label for="phoneNumber"><b>Mobile No:</b></label>
+              <input
+                type="text"
+                formControlName="phoneNumber"
+                class="form-control"
+                id="phoneNumber"
+                placeholder="Enter Mobile No"
+                [ngClass]="{'is-invalid': submitted && formControl['phoneNumber'].errors}"
+              />
+              @if (submitted && formControl['phoneNumber'].errors) {
+
+                  <div class="invalid-feedback">
+                    @if (formControl['phoneNumber'].errors['required']) {
+                        
+                        Phone Number is required
+                    }
+                    @else if (formControl['phoneNumber'].errors['pattern']) {
+
+                        Must be exactly 10 digits
+                    }
+                    </div>
+                }
+                </div>
+            <div class="form-group mb-3">
+              <label for="email"><b>Email:</b></label>
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter Your Email"
+                [ngClass]="{'is-invalid': submitted && formControl['email'].errors}"
+              />
+              @if (submitted && formControl['email'].errors) {
+
+                  <div class="invalid-feedback">
+                    @if (formControl['email'].errors['required']) {
+
+                        Email is required
+                    }
+                    @else if (formControl['email'].errors['pattern']) {
+
+                        Valid Gmail required (username&#64;gmail.com)
+                    }
+                    </div>
+                }
+                </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success" [disabled]="isLoading">
+                @if (isLoading) {
+
+                    <span  class="spinner-border spinner-border-sm me-2"></span>
+                }
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--absolute whatsapp -->
+  <a href="https://wa.me/919604430489?text=I%20want%20to%20join%20project-based%20learning"><i
+      class="fa-brands fa-whatsapp"></i></a>
+  
+  <a href="tel:{{ contact }}"><img src="phone.png" alt="logo" class="phone" /></a>
+  
+  <a href="https://www.instagram.com/linkcode_technologies?igsh=MTk3ZmxvZXZzZzh6bw==">
+    <i class="fa-brands fa-instagram "></i>
+  </a>
+  
+  <section id="heading" class="container-fluid">
+    <!-- <div class="container"> -->
+    <div class="row">
+      <div class="col-md-6 content-container text-center">
+        <div class="content">
+          <h2 id="heading-text-1" class="mt-0">Enhance your "coding" skills with</h2>
+          <h2 id="heading-text-2" class="mt-0">Linkcode Technologies</h2>
+          <p class="mt-0">
+            A solution for easy and flexible online learning, you can study
+            anywhere and at anytime on this platform
+          </p>
+          <!-- <hr /> -->
+          <button class="btn btn-primary rounded" data-bs-toggle="modal" data-bs-target="#brochureModal">
+            Download Brochure
+          </button>
+          @if (isLoading) {
+
+              <div >
+                  Please Wait..
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </div>
+            }
+        </div>
+        <div class="features-container">
+          <div class="feature-1">
+            <img src="verify-icon.png" alt="" />
+            <p>Industry Experts</p>
+          </div>
+          <div class="feature-2">
+            <img src="verify-icon.png" alt="" />
+            <p>Real-Time Projects</p>
+          </div>
+          <div class="feature-3">
+            <img src="verify-icon.png" alt="" />
+            <p>Placement Assistance</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 img-container">
+        <img class="img-fluid" src="homepage.png" alt="homepage-img not found" />
+      </div>
+    </div>
+  </section>
+  
+  <div class="container my-5 shadow-sm" id="courses">
+    <h2 class="text-center h1-color my-4 pt-4">Popular Courses</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let course of courses">
+        <div class="card h-100 shadow-sm">
+          <iframe [src]="sanitizeUrl(course.src)" class="card-img-top" height="250" title="{{ course.title }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+          <div class="card-body">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text text-muted">Instructor: {{ course.instructor }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-warning">{{ course.rating }}</span>
+              <!-- <button class="btn btn-primary btn-sm">Enroll Now</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Why join us  -->
+  <section class="my-5 text-center container pt-5" id="join">
+    <h2>Why choose Linkcode Technologies?</h2>
+    <p>We don't just teach, we provide...</p>
+    <div class="row">
+      <div class="col-md-4 ">
+        <img src="expert.jpg" alt="Icon 1" class="img-fluid mb-3" />
+        <h5>Expert Guidance</h5>
+        <p>
+          Learn from industry professionals who bring real-world experience to
+          every lesson, ensuring you gain practical and up-to-date skills.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <img src="learning.jpg" alt="Icon 2" class="img-fluid mb-3" />
+        <h5>Comprehensive Learning</h5>
+        <p>
+          Our virtual environment offers hands-on projects and interactive
+          sessions, providing a thorough understanding of coding and its
+          applications.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <img src="career.jpg" alt="Icon 3" class="img-fluid mb-3" />
+        <h5>Career Advancement</h5>
+        <p>
+          With our placement assistance and career pathways, you'll have the
+          support and opportunities needed to launch or elevate your tech career.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- skills -->
+  <section class="my-5 text-center" id="skills">
+    <div class="container">
+      <h2 class="h2 mb-4">Skills to learn</h2>
+      <div class="row">
+        <div class="col-md-6 ">
+          <img src="Skills.png" class="img-fluid " alt="Skills" />
+        </div>
+        <div class="col-md-6 text-center">
+          <p>
+            Learn essential skills and knowledge areas that empower aspiring
+            software and coding engineering students. We offer a structured learning
+            path designed to cultivate proficiency in full-stack development, web
+            development, and related fields.
+          </p>
+          <a href="#" class="btn btn-primary">Start learning</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="my-5 text-center container" id="how-it-works">
+    <h2 class="h2">How it works</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <img src="how1.png" alt="How 1" class="img-fluid mb-3" />
+        <h5 class="h5">Take a course</h5>
+        <p>Take a course and learn at your own pace</p>
+      </div>
+      <div class="col-md-3">
+        <img src="how2.png" alt="How 2" class="img-fluid mb-3" />
+        <h5 class="h5">Practice quizzes</h5>
+        <p>Practice what you learned, take our quizzes</p>
+      </div>
+      <div class="col-md-3">
+        <img src="how3.png" alt="How 3" class="img-fluid mb-3" />
+        <h5 class="h5">Take assignments</h5>
+        <p>Once you are confident, solve assignments</p>
+      </div>
+      <div class="col-md-3">
+        <img src="how4.png" alt="How 4" class="img-fluid mb-3" />
+        <h5 class="h5">Earn certificate</h5>
+        <p>Level up your career with our certificates</p>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  <!-- placement section -->
+  
+  <h1 class="text-center">Placements</h1>
+  <p class="text-center text-primary">
+    Happy stories. We're very proud of the reputation we've built
+  </p>
+  
+  <!--  Carousel -->
+  <div id="placementCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let pair of placementPairs; let i = index" [ngClass]="{ 'carousel-item': true, 'active': i === 0 }">
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="card mx-2" style="width: 18rem; text-align: center;">
+            <div class="card-body">
+              <img [src]="pair[0].Image" class="rounded-circle mb-3" alt="..." style="width: 100px; height: 100px" />
+              <h5 class="card-title">{{ pair[0]?.Name }}</h5>
+              <p class="card-text">{{ pair[0]?.Company }}</p>
+            </div>
+          </div>
+          @if (pair[1]) {
+
+              <div  class="card mx-2" style="width: 18rem; text-align: center;">
+                  <div class="card-body">
+                      <img [src]="pair[1].Image" class="rounded-circle mb-3" alt="..." style="width: 100px; height: 100px" />
+                      <h5 class="card-title">{{ pair[1]?.Name }}</h5>
+                      <p class="card-text">{{ pair[1]?.Company }}</p>
+                    </div>
+                </div>
+            }
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    <!-- Carousel controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#placementCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#placementCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  
+  
+  <div class="modal fade" id="brochureModal" #brochureModal data-bs-backdrop="true" aria-labelledby="brochureModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="brochureModalLabel">Download Brochure</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brochureForm" (ngSubmit)="onBrochureSubmit()">
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" id="fullName" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('fullName')}" formControlName="fullName">
+              @if (isFieldInvalid('fullName')) {
+
+                  <div class="invalid-feedback" >
+                      {{ getErrorMessage('fullName') }}
+                    </div>
+                }
+            </div>
+            
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('email')}" formControlName="email">
+              @if (isFieldInvalid('email')) {
+
+                  <div class="invalid-feedback" >
+                      {{ getErrorMessage('email') }}
+                    </div>
+                }
+            </div>
+            
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Mobile</label>
+              <input type="text" id="mobile" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('mobile')}" formControlName="mobile">
+              @if (isFieldInvalid('mobile')) {
+
+                  <div class="invalid-feedback">
+                      {{ getErrorMessage('mobile') }}
+                    </div>
+                }
+            </div>
+            
+            <div class="mb-3">
+              <label class="form-label">Select Courses</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseC">
+                <label class="form-check-label" for="c">C</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseCpp">
+                <label class="form-check-label" for="c">C++</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseDSA">
+                <label class="form-check-label" for="c">DSA</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseJavaFullStack">
+                <label class="form-check-label" for="c">Java Full Stack</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="coursePythonFullStack">
+                <label class="form-check-label" for="c">Python Full Stack</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseDataScience">
+                <label class="form-check-label" for="c">Data Science</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseMEARNStack">
+                <label class="form-check-label" for="c">Mean/Mearn Stack</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="c" formControlName="courseOther">
+                <label class="form-check-label" for="c">Others</label>
+              </div>
+      
+  
+      @if (brochureForm.errors?.['noCourseSelected'] && brochureForm.touched) {
+
+          <div class="text-danger small">
+              Please select at least one course
+            </div>
+        }
+            </div>
+            
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            @if (isLoading) {
+
+                <span  class="spinner-border spinner-border-sm me-2"></span>
+            }
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
