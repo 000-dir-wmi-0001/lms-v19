@@ -1,0 +1,50 @@
+.container {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+}
+
+.card a {
+  color: #212121;
+}
+
+.form-floating {
+  position: relative;
+}
+
+.col-12 {
+  margin-top: 240px;
+}
+
+
+.form-floating>.form-control {
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.form-floating>label {
+  padding-top: 0.75rem;
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+}
+
+#eyeIcon {
+  font-size: 1.25rem;
+}
+
+#signIn {
+  text-decoration: underline !important;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media screen and (max-device-width: 480px) {
+  .col-12 img {
+    width: 100%;
+  }
+}

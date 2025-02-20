@@ -5,6 +5,10 @@ import { HomepageComponent } from './auth/homepage/homepage.component';
 import { AboutUsComponent } from './auth/about-us/about-us.component';
 import { ContactComponent } from './auth/contact/contact.component';
 import { LandingPageComponent } from './auth/landing-page/landing-page.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoggedInAuthGuard } from './guards/logged-in-auth.guard';
+import { ForgotPassComponent } from './auth/forgot-pass/forgot-pass.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -12,14 +16,7 @@ export const routes: Routes = [
       { 
         path: '', redirectTo: 'main', pathMatch: 'prefix'
       }
-      ,
-      {
-        path: 'login', component: LoginComponent
-      }
-      ,
-      {
-        path: 'homepage', component: HomepageComponent
-      }
+      
       ,
       {
         path: 'aboutUs', component: AboutUsComponent
@@ -31,7 +28,16 @@ export const routes: Routes = [
       ,
       {
         path: 'main', component: LandingPageComponent
-      }
+      },
+      { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
+      { path: 'homepage', component: HomepageComponent },
+      { path: "register", component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
+      { path: 'password_reset', component: ForgotPassComponent },
+
     ]
   },
+  {path:'dashboard', component:DashboardComponent,children:[
+    
+  ]
+},
 ]
