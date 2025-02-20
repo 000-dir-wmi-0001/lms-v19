@@ -1,1 +1,68 @@
-<p>forgot-pass works!</p>
+<div class="forgot-container">
+  <div class="forgot-pass-form">
+    <h3 class="main-title">Reset Your Password</h3>
+    <div [hidden]="successMessage">
+      <div class="container">
+        <!-- Show this section if successMessage is false -->
+
+        <form [formGroup]="forgotPasswordForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              formControlName="email"
+              id="email"
+              placeholder="Enter your email"
+            />
+
+            <!-- <div class="error-message" *ngIf="issubmitted && resetPasswordForm.controls['newPassword'].hasError('required')">
+            Password is required.
+          </div> -->
+
+          <div class="error-message">
+          @if( issubmitted && forgotPasswordForm.controls['email'].hasError('required')){
+            Email is required.
+          }@else if (issubmitted && forgotPasswordForm.controls['email'].hasError('email')) {
+            Invalid email format.
+
+          }
+          </div>
+
+          </div>
+          <button [disabled]="isLoading" type="submit">
+           @if(!isLoading){
+
+             <ng-container>
+               Send Password Reset Link
+              </ng-container>
+            }
+            @if(isLoading){
+
+              <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            }
+          </button>
+          @if(errorMessage){
+
+            <p class="error-message">{{ errorMessage }}</p>
+          }
+          <p class="back-to-login">
+            Remembered your password? <a routerLink="/auth/login">Back to Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+    <!-- Show this section if successMessage is true -->
+     @if(successMessage){
+
+       <div class="container">
+         <p>
+           Check your email for reset link to reset your password. If it doesn't
+           appear within a few minutes, check your spam folder.
+          </p>
+          <button type="submit" routerLink="/auth/login">Return to sign in</button>
+        </div>
+      }
+  </div>
+</div>

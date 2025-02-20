@@ -1,1 +1,9 @@
+@if(!isLoggedIn && showHeaderFooter){
+
+  <app-header></app-header>
+}
 <router-outlet></router-outlet>
+
+@if(!isLoggedIn && showHeaderFooter){
+  <app-footer></app-footer>
+}
