@@ -1,0 +1,44 @@
+.container {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+}
+
+.card a {
+  color: #212121;
+}
+
+.form-floating>.form-control {
+  padding-top: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.form-floating>label {
+  padding-top: 0.75rem;
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+}
+
+#eyeIcon {
+  font-size: 1.25rem;
+}
+
+#signUp {
+  text-decoration: underline !important;
+  font-weight: 800;
+}
+
+
+@media screen and (max-device-width: 480px) {
+  .rememberMe {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,132 @@
+<p>login works!</p>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="row w-100">
+    <div
+      class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center"
+    >
+      <img
+        src="login.png"
+        class="img-fluid"
+        alt="LinkCode Logo"
+      />
+    </div>
+    <div class="col-12 d-lg-none d-flex align-items-center justify-content-center mb-4">
+      <img src="logo-removebg.png" class="img-fluid" id="logo" alt="Mobile Logo">
+    </div>
+    <div class="col-lg-6">
+    <!-- <div class="col-lg-6 col-md-8 col-sm-12"> -->
+      <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-4">Log In</h2>
+        <form [formGroup]="form" (ngSubmit)="signIn()">
+          <div class="form-floating mb-3">
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Enter your email"
+              id="email"
+              name="email"
+              required
+              [ngClass]="{
+                'is-invalid': submitted && formControls['email'].errors
+              }"
+            />
+            <label for="email">Email address</label>
+            @if(submitted && formControls['email'].errors){
+              <div class="invalid-feedback" >
+                @if(formControls['email'].errors['required']){
+                  Email is required
+                }@else if (formControls['email'].errors['email']) {
+                  Email is invalid
+                }
+              </div>
+            }
+
+          </div>
+          <div class="form-floating mb-3">
+            <input
+            [type]="showPassword ? 'text' : 'password'"
+            required
+            placeholder="Enter your password"
+            formControlName="password"
+            class="form-control"
+            id="password"
+            name="password"
+            [ngClass]="{
+              'is-invalid': submitted && formControls['password'].errors
+            }"
+          />
+            <label for="password">Password</label>
+            <span
+            class="password-toggle position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer"
+            [ngClass]="{
+              'password-toggle2': submitted && formControls['password'].errors
+            }"
+            (click)="togglePasswordVisibility()"
+          >
+            <i
+              class="fa"
+              id="eyeIcon"
+              [ngClass]="{
+                'fa-eye': showPassword,
+                'fa-eye-slash': !showPassword
+              }"
+            ></i>
+          </span>
+          @if(submitted && formControls['password'].errors){
+            <div class="invalid-feedback">
+              @if(formControls['password'].errors['required']){
+                Password is required
+              }@else if (formControls['password'].errors['minlength']) {
+                Password must be at least 8 characters
+              }@else if (formControls['password'].errors['maxlength']) {
+                Password must not be greater than 20 characters
+              }
+          </div>
+          }
+          </div>
+          <div class="d-flex justify-content-between rememberMe">
+            <div class="form-check mb-3">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="rememberMe"
+                name="rememberMe"
+              />
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <div class="forgotPassword">
+              <a class="forgotPass" routerLink="/password_reset" class="text-decoration-none">Forgot Password ?</a>
+            </div>
+          </div>
+          <!-- <div class="forgotPassword">
+            <a class="forgotPass" routerLink="/password_reset">Forgot Password ?</a>
+          </div> -->
+          <!-- <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-dark btn-lg">CONTINUE</button>
+          </div> -->
+            <div class="d-grid mb-3 btn-group">
+              <button [disabled]="isLoading" type="submit" class="btn submitButton btn-dark btn-lg mb-3">
+                @if(!isLoading){
+                  <ng-container>Login</ng-container>
+                }
+                <!-- <ng-container *ngIf="!isLoading"> Login </ng-container> -->
+                @if(isLoading){
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                }
+                <!-- <div *ngIf="isLoading" class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div> -->
+              </button>
+            </div>
+
+          <div class="text-center mt-3">
+            New User? <a href="#" routerLink="/register" class="text-decoration-none" id="signUp">SIGN UP HERE</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
