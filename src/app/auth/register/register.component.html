@@ -1,1 +1,268 @@
-<p>register works!</p>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="row w-100">
+    <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center">
+      <img src="login.png" class="img-fluid" alt="LinkCode Logo" />
+    </div>
+    <div class="col-12 d-lg-none d-flex align-items-center justify-content-center mb-4">
+      <img src="logo-removebg.png" class="img-fluid" id="logo" alt="Mobile Logo" />
+    </div>
+    <div class="col-lg-6">
+      @if(!showOtpField){
+        <div class="card shadow-sm p-4">
+          <h2 class="text-center mb-4">Create New Account</h2>
+          @if(emailExistsError){
+            <div class="alert alert-warning">
+              {{ emailExistsError }}
+            </div>
+          }
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                formControlName="firstname"
+                class="form-control"
+                placeholder="Enter your first name"
+                required
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['firstname'].errors
+                }"
+              />
+              <label for="firstName">First Name</label>
+                @if(submitted && formControl['firstname'].errors){
+                  <div class="invalid-feedback" style="color: #dd2e2e">
+                    @if(formControl['firstname'].errors['required']){
+
+                      First Name is required
+                    }
+                  </div>
+                }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                formControlName="lastname"
+                class="form-control"
+                placeholder="Enter your last name"
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['lastname'].errors
+                }"
+                required
+              />
+              <label for="lastName">Last Name</label>
+              @if(submitted && formControl['lastname'].errors){
+                <div  class="invalid-feedback" style="color: #dd2e2e">
+                  @if(formControl['lastname'].errors['required']){
+
+                    Last Name is required
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                id="mobNo"
+                name="mobNo"
+                formControlName="mobileno"
+                class="form-control"
+                placeholder="Enter your mobile number"
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['mobileno'].errors
+                }"
+                required
+              />
+              <label for="mobNo">Mobile Number</label>
+              @if(submitted && formControl['mobileno'].errors){
+                <div class="invalid-feedback" style="color: #dd2e2e">
+                @if(formControl['mobileno'].errors['mobileno']){
+                  Mobile Number is required
+                }@else if (formControl['mobileno'].errors['pattern']) {
+
+                  Mobile Number is invalid
+                }
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                id="email"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                placeholder="Enter your email"
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['email'].errors
+                }"
+                required
+                (input)="onEmailInput()"
+              />
+              <label for="email">Email</label>
+              @if(submitted && formControl['email'].errors){
+                <div class="invalid-feedback" style="color: #dd2e2e">
+                  @if(formControl['email'].errors['required']){
+                  Email is required
+                  }@else if (formControl['email'].errors['email']) {
+                    Email is invalid
+                  }
+
+                </div>
+              }
+
+            </div>
+
+
+            <div class="form-floating mb-3">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                required
+                placeholder="Enter your password"
+                formControlName="password"
+                class="form-control"
+                id="password"
+                name="password"
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['password'].errors
+                }"
+              />
+              <label for="password">Password</label>
+              <span
+                class="password-toggle position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer"
+                [ngClass]="{
+                  'password-toggle2': submitted && formControl['password'].errors
+                }"
+                (click)="togglePasswordVisibility()"
+              >
+                <i
+                  class="fa"
+                  id="eyeIcon"
+                  [ngClass]="{
+                    'fa-eye': showPassword,
+                    'fa-eye-slash': !showPassword
+                  }"
+                ></i>
+              </span>
+              @if(submitted && formControl['password'].errors){
+                <div  class="invalid-feedback" style="color: #dd2e2e">
+                  @if(formControl['password'].errors['required']){
+                    Password is required
+                  }@else if (formControl['password'].errors['minlength']) {
+                    Password must be at least 8 characters
+                  }@else if (formControl['password'].errors['maxlength']) {
+                    Password must not exceed 20 characters
+                  }@else if (formControl['password'].errors['pattern']) {
+                    Password is weak
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="form-floating mb-3">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                required
+                placeholder="Enter your confirm password"
+                formControlName="confirmPassword"
+                class="form-control"
+                id="confirmPassword"
+                name="confirmPassword"
+                [ngClass]="{
+                  'is-invalid': submitted && formControl['confirmPassword'].errors
+                }"
+              />
+              <label for="confirmPassword">Confirm Password</label>
+              <span
+                class="password-toggle position-absolute end-0 top-50 translate-middle-y me-3 cursor-pointer"
+                [ngClass]="{
+                  'password-toggle2': submitted && formControl['confirmPassword'].errors
+                }"
+                (click)="togglePasswordVisibility()"
+              >
+                <i
+                  class="fa"
+                  id="eyeIcon"
+                  [ngClass]="{
+                    'fa-eye': showPassword,
+                    'fa-eye-slash': !showPassword
+                  }"
+                ></i>
+              </span>
+              @if(submitted && formControl['confirmPassword'].errors){
+                <div  class="invalid-feedback" style="color: #dd2e2e">
+                  @if(formControl['confirmPassword'].errors['required']){
+                    Confirm Password is required
+                  }@else if (formControl['confirmPassword'].errors['matching']) {
+                    Confirm Password does not match
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="d-grid mb-3 btn-group">
+              <button
+                [disabled]="isLoading"
+                type="submit"
+                class="btn submitButton btn-dark btn-lg mb-3"
+              >
+              @if(!isLoading){
+
+                <ng-container> Sign Up </ng-container>
+              }
+              @if(isLoading){
+
+                <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              }
+              </button>
+            </div>
+
+            <div class="text-center mt-3">
+              Own an Account?
+              <a href="#" routerLink="/auth/login" class="text-decoration-none" id="signIn">Jump Right Here</a>
+            </div>
+
+
+          </form>
+
+        </div>
+      }
+      @if(showOtpField){
+        <div class="d-flex flex-column align-items-center">
+          <!-- OTP Form -->
+          <div class="card p-4 shadow-lg border-0 text-center" style="max-width: 400px; width: 100%;">
+            <h2 class="mb-3">Enter OTP</h2>
+
+            <p class="text-muted mb-2">OTP is valid for <b>5 minutes</b></p>
+            <p class="fw-bold text-danger">Time left: {{ countdownMinutes }}:{{ countdownSeconds | number: '2.0' }}</p>
+
+            <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+              <div class="form-floating mb-3">
+                <input type="text" id="otp" formControlName="otp" class="form-control text-center fw-bold"
+                       placeholder="Enter OTP" required maxlength="6" />
+                <label for="otp">OTP</label>
+              </div>
+              <button type="submit" class="btn btn-dark btn-lg w-100">Verify OTP</button>
+            </form>
+
+            <button type="button" class="btn btn-outline-dark btn-lg w-100 mt-3"
+                    (click)="resendOtp()" [disabled]="timerActive">
+              Resend OTP
+            </button>
+          </div>
+
+        </div>
+      }
+
+
+    </div>
+  </div>
+</div>
+
+
