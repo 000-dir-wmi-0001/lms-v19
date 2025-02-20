@@ -11,7 +11,7 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
       { path: 'homepage', component: HomepageComponent },
       { path: "register", component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
-
+      { path: 'password_reset', component: for },
     ]
   },
 ]
