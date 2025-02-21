@@ -43,23 +43,29 @@
       </li>
 
       <!-- Cart (Visible only to students) -->
-      <li class="nav-item m-2" *ngIf="getRole() === 'STUDENT'">
-        <a class="nav-link active" routerLink="/dashboard/cart">
-          <i class="fa-solid fa-cart-shopping fa-2x"></i>
-        </a>
-      </li>
+      @if(getRole() === 'STUDENT'){
+
+        <li class="nav-item m-2" >
+          <a class="nav-link active" routerLink="/dashboard/course/cart">
+            <i class="fa-solid fa-cart-shopping fa-2x"></i>
+          </a>
+        </li>
+      }
 
       <!-- Register/Login buttons for non-logged-in users -->
-      <li class="nav-item m-2" *ngIf="!isLoggedIn">
-        <a class="nav-link" routerLink="/auth/register">
-          <button class="btn btn-outline-dark"><b>Register</b></button>
-        </a>
-      </li>
-      <li class="nav-item m-2" *ngIf="!isLoggedIn">
-        <a class="nav-link" routerLink="/auth/login">
-          <button class="btn btn-outline-dark"><b>Login</b></button>
-        </a>
-      </li>
+      @if(!isLoggedIn){
+        <li class="nav-item m-2">
+          <a class="nav-link" routerLink="/auth/register">
+            <button class="btn btn-outline-dark"><b>Register</b></button>
+          </a>
+        </li>
+      }@else if (!isLoggedIn) {
+        <li class="nav-item m-2" >
+          <a class="nav-link" routerLink="/auth/login">
+            <button class="btn btn-outline-dark"><b>Login</b></button>
+          </a>
+        </li>
+      }
     </ul>
   </div>
 </nav>

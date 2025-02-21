@@ -1,0 +1,67 @@
+  <!-- Page Content -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <div class="p-4" id="content">
+<div class="container-fluid my-5">
+  <h3 class="text-left mb-4">Shopping Cart</h3>
+  <p class="cart-count">{{ courses.length }} courses in cart</p>
+  <div class="cart-box">
+    @if(courses.length === 0){
+
+      <div  class="text-center mb-4" [@fadeInOut]>
+        <img src="empty-cart.png" alt="No Courses" class="no-courses-image">
+        <p class="heading">Your cart is currently empty. Browse courses to find a course</p>
+        <a routerLink="../" class="btn btn-primary">Browse Courses</a>
+      </div>
+    }
+    @if(courses.length > 0){
+      <div class="row">
+        <div class="col-lg-8 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <div *ngFor="let course of courses" class="d-flex mb-4">
+                <div class="flex-shrink-0 me-3">
+                  <img [src]="course.url" class="img-fluid rounded-3" alt="Course Image" style="width: 100px;">
+                </div>
+                <div>
+                  <h5 class="card-title">{{ course.courseId.name }}</h5>
+                  <p class="card-text">{{ course.courseId.category }}</p>
+                  <button (click)="removeItem(course.courseId._id)" class="btn btn-outline-danger btn-sm">Remove</button>
+                </div>
+                <div class="ms-auto">
+                  <p class="mb-0">Price</p>
+                  <h5>Rs. {{ course.price }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Cart Summary</h5>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <p class="mb-0">Total</p>
+                <h5 class="mb-0">Rs. {{ total }}</h5>
+              </div>
+              <hr>
+              <button id ="paynow" type="button" (click)="payNow()" class="btn btn-info btn-block btn-lg">
+                <div class="d-flex justify-content-between">
+                  <span>{{ total }}</span>
+                  <span>PAY NOW<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
+
+<div class="form-group text-center">
+  <button id ="paynow" type="submit" class="btn btn-primary" routerLink="/dashboard/course">Add more items</button>
+</div>
+</div>

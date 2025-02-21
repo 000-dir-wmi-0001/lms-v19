@@ -1,1 +1,48 @@
-<p>review works!</p>
+<h2 class="title text-center p-2 mb-4"><strong>REVIEWS</strong></h2>
+<ul class="nav nav-tabs d-flex justify-content-center mb-4">
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/auth/placement">Placements</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/auth/review">Reviews</a>
+  </li>
+</ul>
+
+<div class="reviews-container">
+  @for(item of allRec;track item; let i = $index){
+
+    <div
+         class="review-card"
+         [style.animation-delay]="i * 0.1 + 's'">
+      <div class="review-content">
+        <div class="review-text-container">
+          <p class="review-text">
+            {{ item.isExpanded ? item.Review : getTruncatedReview(item.Review) }}
+          </p>
+          @if(shouldShowReadMore(item.Review)){
+
+            <button
+            (click)="toggleReadMore(item)"
+            class="read-more-btn">
+            {{ item.isExpanded ? 'Read Less' : 'Read More' }}
+          </button>
+        }
+        </div>
+
+        <div class="review-meta">
+          <p class="reviewer-name">~ {{ item.Name }}</p>
+          <div class="review-details">
+            <div class="company">
+              <strong>Company:</strong>
+              <span>{{ item.Company }}</span>
+            </div>
+            <div class="package">
+              <strong>Package:</strong>
+              <span>{{ item.Package }} LPA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

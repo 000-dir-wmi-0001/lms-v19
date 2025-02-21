@@ -1,0 +1,23 @@
+.page-footer {
+  background-color: #EAF1FE;
+  color: #777;
+}
+
+img {
+  width: 200px;
+  margin-bottom: 20px !important;
+}
+
+h5 {
+  font-weight: 900;
+}
+
+a {
+  text-decoration: none !important;
+  color: #777 !important;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}

@@ -21,9 +21,11 @@
     "bootstrap": "^5.3.3",
     "lms-linkcode": "file:",
     "ngx-bootstrap": "^19.0.2",
+    "ngx-online-status": "^2.0.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.17.2",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

@@ -1,0 +1,304 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Improved section spacing */
+section {
+  padding: 4rem 0;
+}
+
+/* Main container style */
+.container {
+  margin: 12px 0 0 20px !important;
+  padding: 0 !important;
+  width: calc(100% - 40px) !important;
+  max-width: none;
+}
+
+
+/* Header section style */
+.bg-light {
+  background-color: transparent !important;
+  padding: 0 0 12px 0 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Title style - increased size */
+.h4 {
+  font-size: 2rem !important;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px !important;
+}
+
+/* Search bar container */
+.mx-4 {
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+/* Search input style */
+.form-control {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Button styles - updated colors */
+/* Button styles - updated to match design */
+.btn-outline-success {
+  border: 2px solid #28a745;
+  color: #28a745;
+  background-color: transparent;
+  font-weight: 500;
+  padding: 6px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
+}
+
+/* Add spacing between buttons */
+.d-flex.gap-2 {
+  gap: 12px !important;
+}
+
+/* Adjust icon spacing inside buttons */
+.btn-outline-success i {
+  margin-right: 8px;
+}
+
+/* Mobile responsiveness for buttons */
+@media (max-width: 768px) {
+  .btn-outline-success {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* Table styles */
+.table-responsive {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 12px !important;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  padding: 12px 8px;
+  font-weight: 500;
+}
+
+.table td {
+  padding: 12px 8px;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Pagination styles */
+.pagination-container {
+  margin-top: 20px;
+  margin-left: 0;
+}
+
+.pagination {
+  margin: 0;
+}
+
+/* Modal styles */
+.modal-content {
+  border-radius: 4px;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Action buttons in table */
+.btn-warning,
+.btn-danger {
+  padding: 4px 8px;
+  margin: 0 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    margin: 10px !important;
+    width: calc(100% - 20px) !important;
+  }
+
+  .table-responsive {
+    border: none;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  /* Maintain large title size on mobile */
+  .h4 {
+    font-size: 1.8rem !important;
+  }
+}
+
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Add these styles to your alumni-list.component.css */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.pagination {
+  margin-bottom: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 12px;
+  padding: 0;
+}
+
+.page-item {
+  display: inline-block;
+}
+
+.pagination-btn {
+  background-color: white;
+  color: #4c5156;
+  cursor: pointer;
+  transition: all 0.3s ease, font-size 0.3s ease;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  line-height: 30px;
+  font-size: 12px;
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-btn:hover:not([disabled]) {
+  color: #2b2e33;
+  font-size: 14px;
+}
+
+.pagination-btn.active {
+  color: #0d6efd;
+  font-size: 18px;
+}
+
+.dots {
+  display: inline-block;
+  text-align: center;
+  color: #4c5156;
+  font-size: 16px;
+  width: 40px;
+  line-height: 40px;
+}
+
+.total-count-container {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.total-count {
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  color: #6c757d;
+  margin-left: 8px;
+  line-height: 30px;
+  /* Aligns vertically with buttons */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .pagination {
+    margin-bottom: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .pagination-btn {
+    background-color: white;
+    color: #4c5156;
+    cursor: pointer;
+    transition: all 0.3s ease, font-size 0.3s ease;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+  }
+
+  .page-item {
+    display: inline-block;
+  }
+
+  .pagination-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .pagination-btn:hover:not([disabled]) {
+    background-color: white;
+    color: #2b2e33;
+    font-size: 14px;
+  }
+
+  .pagination-btn.active {
+    background-color: white;
+    color: #0d6efd;
+    border: none;
+    box-shadow: none;
+    font-size: 18px;
+  }
+
+}

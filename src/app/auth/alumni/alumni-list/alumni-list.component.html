@@ -1,1 +1,284 @@
-<p>alumni-list works!</p>
+<div class="container mt-4">
+  <!-- Desktop View (md and up) -->
+  <div class="d-none d-md-flex align-items-center justify-content-between bg-light p-3 rounded">
+    <!-- Left: Title -->
+    <div class="d-flex align-items-center">
+      <h2 class="h4 m-0">Alumni List</h2>
+
+    </div>
+
+    <!-- Middle: Search Bar -->
+    <div class="mx-4" style="min-width: 200px; max-width: 300px;">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="searchTerm"
+        (input)="filterAlumni()"
+      >
+    </div>
+
+    <!-- Right: Buttons -->
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-success d-flex align-items-center" (click)="export()">
+        <i class="fas fa-download me-2"></i>
+        Download Report
+      </button>
+      <button class="btn btn-outline-success d-flex align-items-center" (click)="addAlumni()">
+        <i class="fas fa-plus me-2"></i>
+        Alumni
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile View (sm and down) -->
+  <div class="d-md-none bg-light p-3 rounded">
+    <!-- Title and Count -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h4 m-0">Alumni List</h2>
+
+    </div>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="searchTerm"
+        (input)="filterAlumni()"
+      >
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row g-2">
+      <div class="col-6">
+        <button class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center" (click)="export()">
+          <i class="fas fa-download me-2"></i>
+          Download
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-outline-success w-100 d-flex align-items-center justify-content-center" (click)="addAlumni()">
+          <i class="fas fa-plus me-2"></i>
+          Alumni
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Table of Alumni Details -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-responsive" id="excel-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Mobile Number</th>
+          <th>Skills</th>
+          <th>Passout Year</th>
+          <th>Company</th>
+          <th>Job Title</th>
+          <th>Experience</th>
+          <th>Current CTC</th>
+          <th>Expected CTC</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr *ngFor="let alumni of filteredAlumniList"> -->
+        <tr *ngFor="let alumni of paginatedAlumniList">
+          <td>{{ alumni.firstName }}</td>
+          <td>{{ alumni.lastName }}</td>
+          <td>{{ alumni.mobileNumber }}</td>
+          <td>{{ alumni.skills }}</td>
+          <td>{{ alumni.passoutYear }}</td>
+          <td>{{ alumni.company }}</td>
+          <td>{{ alumni.jobTitle }}</td>
+          <td>{{ alumni.experience }}</td>
+          <td>{{ alumni.currentCTC }}</td>
+          <td>{{ alumni.expectedCTC }}</td>
+          <td class="d-flex gap-2">
+            <button class="btn btn-warning btn-sm" (click)="openEditModal(alumni)">
+              <i class="fa fa-edit"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="openDeleteModal(alumni._id!)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add Alumni Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Alumni</h5>
+        <button type="button" class="close" (click)="closeAddModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitNewAlumni()">
+          <div class="form-group mb-3">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="newAlumnus.firstName" name="firstName" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="newAlumnus.lastName" name="lastName" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Mobile Number</label>
+            <input type="text" [(ngModel)]="newAlumnus.mobileNumber" name="mobileNumber" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Skills</label>
+            <input type="text" [(ngModel)]="newAlumnus.skills" name="skills" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Passout Year</label>
+            <input type="number" [(ngModel)]="newAlumnus.passoutYear" name="passoutYear" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Company</label>
+            <input type="text" [(ngModel)]="newAlumnus.company" name="company" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Job Title</label>
+            <input type="text" [(ngModel)]="newAlumnus.jobTitle" name="jobTitle" class="form-control" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Experience</label>
+            <input type="text" [(ngModel)]="newAlumnus.experience" name="experience" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Alumni</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Alumnus</h5>
+        <button type="button" class="close" (click)="closeEditModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="updateAlumnus()">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.firstName" name="firstName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.lastName" name="lastName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.mobileNumber" name="mobileNumber" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.skills" name="skills" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Passout Year</label>
+            <input type="number" [(ngModel)]="selectedAlumnus.passoutYear" name="passoutYear" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.company" name="company" class="form-control" required=""/>
+          </div>
+          <div class="form-group">
+            <label>Job Title</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.jobTitle" name="jobTitle" class="form-control" required=""/>
+          </div>
+          <div class="form-group">
+            <label>Experience</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.experience" name="experience" class="form-control" required=""/>
+          </div>
+          <div class="form-group mb-3">
+            <label>Current CTC</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.currentCTC" name="currentCTC" class="form-control" placeholder="Enter current CTC">
+          </div>
+          <div class="form-group mb-3">
+            <label>Expected CTC</label>
+            <input type="text" [(ngModel)]="selectedAlumnus.expectedCTC" name="expectedCTC" class="form-control" placeholder="Enter expected CTC">
+          </div>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" (click)="closeDeleteModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this alumnus?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteAlumnus()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<nav aria-label="Page navigation" class="pagination-container">
+  <div class="pagination-wrapper">
+    <ul class="pagination">
+      <!-- Previous button -->
+      <li class="page-item">
+        <button class="pagination-btn prev" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+          &laquo;
+        </button>
+      </li>
+
+      <!-- Page numbers and ellipsis -->
+       @for(page of getPages(); track page) {
+        <li class="page-item">
+          <ng-container>
+            @if(page === '...') {
+              <span class="dots">...</span>
+            } @else {
+              <button
+                class="pagination-btn number"
+                [class.active]="page === currentPage"
+                (click)="onPageChange(page)"
+              >
+                {{ page }}
+              </button>
+            }
+          </ng-container>
+        </li>
+      }
+
+      <!-- Next button -->
+      <li class="page-item">
+         <button class="pagination-btn next" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+                      &raquo;
+                    </button>
+      </li>
+            <!-- Total count -->
+            <li class="page-item">
+              <span class="total-count">Total: {{ totalItems }}</span>
+            </li>
+
+    </ul>
+  </div>
+</nav>

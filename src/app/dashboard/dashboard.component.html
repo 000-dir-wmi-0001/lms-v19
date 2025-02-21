@@ -1,1 +1,61 @@
-<p>dashboard works!</p>
+<div class="main">
+  <app-left-nav></app-left-nav>
+  <div class="right" [ngClass]="{'expanded-right': isSidebarExpanded, 'collapsed-right': !isSidebarExpanded}">
+    <div id="navbar">
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a href="#" class="navbar-brand">
+            <img src="linkcodelogo.png" alt="Logo" width="180" height="40" class="mb-1 mt-3"
+                 [ngClass]="{'d-none': isSidebarExpanded && !isMobile}" />
+          </a>
+
+          <!-- User Profile Dropdown with Logout Inside -->
+          <div class="navbar-right">
+            <div class="nav-item dropdown user-dropdown">
+              <a #userIcon class="nav-link" href="#" id="userDropdown"
+                 (click)="toggleDropdown($event)" aria-expanded="false">
+                <i class="fa-solid fa-user-circle user-icon"></i>
+              </a>
+              <div #dropdownMenu class="dropdown-menu" [class.show]="isDropdownOpen"
+                   aria-labelledby="userDropdown">
+              <!-- Notifications for Student role -->
+              @if(getRole() === 'STUDENT'){
+                <div>
+                  <div class="notification-submenu">
+                    <a class="dropdown-item" href="#">
+                      <i class="fa-solid fa-bell"></i> Notifications
+                    </a>
+                    <div class="dropdown-divider"></div>
+                  </div>
+
+                  <!-- Cart Link -->
+                  <a class="dropdown-item" [routerLink]="['course/cart']" (click)="closeNavbar()">
+                    <i class="fa-solid fa-cart-shopping me-2"></i>Cart
+                  </a>
+                  <div class="dropdown-divider"></div>
+                </div>
+
+              }
+                <!-- Profile and Logout Options -->
+                <a class="dropdown-item" [routerLink]="['profile']" (click)="closeNavbar()">
+                  <i class="fa-solid fa-user me-2"></i>Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout(); closeNavbar()">
+                  <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
+                </a>
+              </div>
+
+          </div>
+        </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Router Outlet -->
+    <div id="router-outlet">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

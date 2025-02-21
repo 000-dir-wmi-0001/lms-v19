@@ -1,1 +1,119 @@
-<p>alumni-register works!</p>
+
+<div class="container   rounded mt-4 mb-4 shadow">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+    <img src="alumini_progress.svg"  alt="Alumini " class="img-fluid">
+  </div>
+  <div class="col-md-8">
+  <h2 class="text-center text-primary my-2">Register Alumni</h2>
+  <p class="text-center text-success my-4">As our valued alumni, we're committed to offering you the best opportunities for a brighter future!</p>
+
+  <form (ngSubmit)="onSubmit(alumniForm)" #alumniForm="ngForm">
+
+    <div class="row">
+      <div class="form-group mb-2 col-md-6">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" class="form-control rounded-0 shadow-sm " required pattern="[A-Za-z\s]+" [(ngModel)]="alumni.firstName" name="firstName" #firstName="ngModel">
+        @if(firstName.invalid && (firstName.touched || alumniForm.submitted)){
+          <div class="text-danger">
+            <small>* First name is required.</small>
+          </div>
+        }
+      </div>
+
+      <div class="form-group mb-2 col-md-6">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" class="form-control rounded-0 shadow-sm " required pattern="[A-Za-z\s]+" [(ngModel)]="alumni.lastName" name="lastName" #lastName="ngModel">
+        @if(lastName.invalid && (lastName.touched || alumniForm.submitted)){
+          <div class="text-danger">
+            <small>* Last name is required .</small>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group mb-2 col-md-6">
+        <label for="mobileNumber">Mobile Number</label>
+        <input type="text" id="mobileNumber" class="form-control rounded-0 shadow-sm" required [(ngModel)]="alumni.mobileNumber" name="mobileNumber" #mobileNumber="ngModel" pattern="[0-9]{10}" >
+        @if(mobileNumber.invalid && (mobileNumber.touched || alumniForm.submitted)){
+          <div class="text-danger">
+            <small>* Please Enter valid Mobile Number.</small>
+          </div>
+        }
+        <div *ngIf="mobileNumberError" class="text-danger">
+          <small>{{ mobileNumberError }}</small>
+        </div>
+      </div>
+      <div class="form-group mb-2 col-md-6">
+        <label for="passoutYear">Passout Year</label>
+        <input type="number" id="passoutYear" class="form-control rounded-0 shadow-sm " required [(ngModel)]="alumni.passoutYear" name="passoutYear" #passoutYear="ngModel" min="2015" max="{{ maxDate.getFullYear() }}" placeholder="eg. 2022">
+        @if(passoutYear.invalid && (passoutYear.touched || alumniForm.submitted)){
+
+          <div class="text-danger">
+            <small>* Please Enter valid Passout year.</small>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group mb-2 col-md-6">
+        <label for="company">Company Name</label>
+        <input type="text" id="company" class="form-control rounded-0 shadow-sm " required pattern=".*\S.*[A-Za-z\s]*" [(ngModel)]="alumni.company" name="company" #company="ngModel">
+        @if(company.invalid && (company.touched || alumniForm.submitted)){
+
+          <div class="text-danger">
+            <small>* Company Name is required .</small>
+          </div>
+        }
+      </div>
+      <div class="form-group mb-2 col-md-6">
+        <label for="experience">Experience</label>
+        <input type="text" id="experience" class="form-control rounded-0 shadow-sm " required pattern=".*\S.*[A-Za-z\s]*" [(ngModel)]="alumni.experience" name="experience" #experience="ngModel" (ngModelChange)="validateExperience()">
+        @if(experience.invalid && (experience.touched || alumniForm.submitted)){
+          <div class="text-danger">
+            <small>* Experience is required.</small>
+          </div>
+        }
+        @if(experienceError){
+          <div class="text-danger">
+            {{ experienceError }}
+          </div>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group mb-2 col-md-6">
+        <label for="jobTitle">Job Title</label>
+        <input type="text" id="jobTitle" class="form-control rounded-0 shadow-sm  " required pattern=".*\S.*[A-Za-z\s]*" [(ngModel)]="alumni.jobTitle" name="jobTitle" #jobTitle="ngModel">
+        @if(jobTitle.invalid && (jobTitle.touched || alumniForm.submitted)){
+
+          <div class="text-danger">
+            <small>* Job Title is required .</small>
+          </div>
+        }
+      </div>
+      <div class="form-group mb-2 col-md-6">
+        <label for="skills">Skills</label>
+        <textarea type="text" id="skills" class="form-control rounded-0 shadow-sm " rows="1" required pattern=".*\S.*[A-Za-z\s]*" [(ngModel)]="alumni.skills" name="skills" #skills="ngModel"></textarea>
+        @if(skills.invalid && (skills.touched || alumniForm.submitted)){
+
+          <div class="text-danger">
+            <small>* Skills are required.</small>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto my-3">
+      <button type="submit" class="btn btn-outline-primary" [disabled]="loading" >
+        @if(loading){
+
+          <span  class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        }
+            {{ loading ? 'Submitting...' : 'Register' }}
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+</div>
