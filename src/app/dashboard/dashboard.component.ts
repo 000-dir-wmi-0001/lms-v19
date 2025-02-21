@@ -5,17 +5,21 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FeeService } from '../services/fee.service';
 import { StudentNotificationService } from '../services/student-notification.service';
 import { SidebarService } from '../services/sidebar.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LeftNavComponent } from "./left-nav/left-nav.component";
+import { LeftNavComponent } from './left-nav/left-nav.component';
 
 @Component({
-  imports: [CommonModule, RouterLink, LeftNavComponent, RouterOutlet],
+  imports: [RouterOutlet, RouterLink, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
+  providers: [OnlineStatusService], // Provide the service here
+
 })
 export class DashboardComponent implements OnInit {
-  status: OnlineStatusType = 0;
+  status!: OnlineStatusType;
   onlineStatusCheck: any = OnlineStatusType;
 
   token!: any;

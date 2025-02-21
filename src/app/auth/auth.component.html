@@ -1,9 +1,14 @@
-@if(!isLoggedIn && showHeaderFooter){
 
+<app-header *ngIf="!isLoggedIn && showHeaderFooter"></app-header>
+<router-outlet></router-outlet>
+<app-footer *ngIf="!isLoggedIn && showHeaderFooter"></app-footer>
+
+
+
+<!-- @if (!isLoggedIn && showHeaderFooter) {
   <app-header></app-header>
 }
 <router-outlet></router-outlet>
-
-@if(!isLoggedIn && showHeaderFooter){
+@if (!isLoggedIn && showHeaderFooter) {
   <app-footer></app-footer>
-}
+} -->

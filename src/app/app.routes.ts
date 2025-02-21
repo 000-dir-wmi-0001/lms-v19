@@ -20,37 +20,38 @@ import { GalleryComponent } from './auth/gallery/gallery.component';
 import { PlacementComponent } from './auth/placement/placement.component';
 import { ReviewComponent } from './auth/review/review.component';
 import { VerifyUserComponent } from './auth/verify-user/verify-user.component';
-import { ResetpasswordComponent } from './auth/resetpassword/resetpassword.component';
+import { ResetPasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { PosComponent } from './pos/pos.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CourseInfoComponent } from './course-info/course-info.component';
 import { ListBatchComponent } from './dashboard/batch/list-batch/list-batch.component';
 import { BatchDetailsComponent } from './dashboard/batch/batch-details/batch-details.component';
+import { LandingComponent } from './auth/landing/landing.component';
 
 export const routes: Routes = [
 
   //Auth Components routes
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth', pathMatch: 'prefix' },
   {
     path: 'auth', component: AuthComponent, children: [
-
       { path: '', redirectTo: 'main', pathMatch: 'prefix' },
-      { path: 'aboutUs', component: AboutUsComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: 'main', component: LandingPageComponent },
+      { path: 'main', component: LandingPageComponent, canActivate: [LoggedInAuthGuard] },
+      { path: "homepage", component: LandingComponent, canActivate: [LoggedInAuthGuard] },
+      // { path: 'homepage', component: HomepageComponent },
       { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
-      { path: 'homepage', component: HomepageComponent },
       { path: "register", component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
-      { path: 'dashboard/cart', component: CartComponent },
-      { path: 'password_reset/:resetToken', component: ResetpasswordComponent },
+      { path: 'password_reset', component: ForgotPassComponent },
+      { path: 'password_reset/:resetToken', component: ResetPasswordComponent },
+      { path: 'dashboard/cart', component: CartComponent, canActivate: [AuthGuard] },
       { path: 'placement', component: PlacementComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'gallery', component: GalleryComponent },
       { path: 'verifyUser/:token', component: VerifyUserComponent },
       { path: 'alumni', component: AlumniRegisterComponent },
       { path: 'review', component: ReviewComponent },
-
       { path: 'aboutUs', component: AboutUsComponent },
+
+
 
       { path: 'c', component: CComponent },
       { path: 'java', component: JavaComponent },
