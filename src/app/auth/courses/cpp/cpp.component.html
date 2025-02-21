@@ -1,1 +1,468 @@
-<p>cpp works!</p>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="courses text-center">
+    <h2>COURSES</h2>
+</div>
+
+<div class="course container-fluid px-4">
+
+
+    <!-- Main Content Area -->
+    <div class="row justify-content-center">
+        <!-- Left Section (Course Description, Video, etc.) -->
+        <div class="left-hero col-12 col-md-8 col-lg-8">
+            <div class="left-hero-content">
+                <h3>Master Python Full Stack Development: Zero to Hero - Build Dynamic Web Apps and Propel Your Software
+                    Engineering Career</h3>
+                <span>3-in-1 Course: Learn Python from scratch, master front-end and back-end technologies, and
+                    jumpstart your career as a Full Stack Developer.</span>
+            </div>
+
+            <!-- Instructor and Rating Section -->
+            <div class="profile-img-container d-flex align-items-center mt-3">
+                <!-- Profile image with smaller size -->
+                <div class="profile-img">
+                    <img src="RahulAhireSir.png" class="rounded-circle img-fluid" style="width: 50px;"
+                        alt="Avatar" />
+                </div>
+
+                <!-- Name, star rating, and stats aligned properly -->
+                <div class="credits d-flex flex-column flex-md-row align-items-start align-items-md-center ms-3">
+                    <div class="d-flex align-items-center">
+                        <div class="name me-2">
+                            <span>Created by</span>
+                            <!-- <br /> -->
+                            <span>Prof. Rahul Ahire</span>
+                        </div>
+
+                        <!-- Star rating aligned next to the name -->
+                        <div class="star-rating d-flex align-items-end ms-3">
+                            <label for="star5" class="me-1">&#9733;</label>
+                            <label for="star4" class="me-1">&#9733;</label>
+                            <label for="star3" class="me-1">&#9733;</label>
+                            <label for="star2" class="me-1">&#9733;</label>
+                            <label for="star1" class="me-1">&#9733;</label>
+                        </div>
+                    </div>
+
+                    <!-- Rating stats in a new line for smaller screens, next to the rating on larger screens -->
+                    <span class="rating-stats mt-1 mt-md-0 ms-md-3">4.8 (451,455)</span>
+                </div>
+            </div>
+
+
+
+            <!-- Video Section -->
+            <div class="video-container text-center mt-4">
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/r4Kqk_CdCvM?si=ETT8oVusNAlR-Jef"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="video"></iframe>
+            </div>
+        </div>
+
+        <!-- Right Section (Price, Course Details, etc.) -->
+        <div class="right-hero col-12 col-md-4 col-lg-4">
+            <div class="price text-center mb-4">
+                <h5 class="display-4 fw-bold">₹25000</h5>
+                <span class="discount-price text-muted text-decoration-line-through">₹25000</span>
+                <div class="discount bg-danger text-white rounded-pill p-1 mt-2">56% OFF</div>
+                <span class="offer-time d-block mt-2">&#9200; 2 days left at this price</span>
+                <hr>
+            </div>
+
+            <div class="course-right mb-4">
+                <div class="course-duration d-flex justify-content-between">
+                    <span>🕙 Course Duration</span>
+                    <span class="course-text">6 Months</span>
+                </div>
+                <div class="course-level d-flex justify-content-between">
+                    <span>📊 Course Level</span>
+                    <span class="course-text">Beginner</span>
+                </div>
+                <div class="course-language d-flex justify-content-between">
+                    <span>🗣 Language</span>
+                    <span class="course-text">English</span>
+                </div>
+            </div>
+
+            <div class="cart mb-3">
+                <button class="btn btn-primary w-100">Add To Cart</button>
+            </div>
+            <div class="buy mb-4">
+                <button class="btn btn-success w-100" (click)="onBuy()">Buy Now</button>
+            </div>
+
+            <div class="right-courses">
+                <h5>This course includes:</h5>
+                <ul class="list-unstyled">
+                    <li>🕘 Lifetime access</li>
+                    <li>💲30 days money back guarantee</li>
+                    <li>📁 Free exercises file</li>
+                    <li>🏆 Shareable certificate of completion</li>
+                    <li>📱 Access on mobile, tablet, and TV</li>
+                    <li>🛜 100% online course</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-container text-center my-4">
+    <div class="nav">
+        <a (click)="scrollTo('overview')" class="nav-link ">Overview</a>
+        <a (click)="scrollTo('curriculum')" class="nav-link ">Curriculum</a>
+        <a (click)="scrollTo('instructor')" class="nav-link ">Instructor</a>
+        <a (click)="scrollTo('feedback')" class="nav-link ">Review</a>
+    </div>
+</div>
+
+
+<hr class="nav-hr">
+<div class="nav-content container">
+    <div #overviewScroll id="overview-scroll">
+        <h3>Overview</h3>
+        <p class="nav-content-span" style="font-size: large;">
+            In the evolving world of web development, mastering both front-end and back-end technologies is essential
+            for creating seamless and dynamic applications. Our Python Full Stack course is designed to equip you with
+            the skills needed to build fully functional, scalable web applications from scratch. From mastering Python’s
+            simplicity and power in back-end development with Django to creating engaging user interfaces with HTML,
+            CSS, JavaScript, and frameworks like Angular or React, this course prepares you for a successful career in
+            full-stack development. Learn to integrate databases, version control tools, and modern development
+            methodologies, positioning yourself as a versatile and in-demand developer.
+        </p>
+
+
+        <div class="learn mt-4">
+            <h5>What you will learn in this course</h5>
+            <div class=" row">
+                <div class="left-learn col-md-6 col-12">
+                    <ul>
+                        <li>✓ Master the fundamentals of Core Python</li>
+                        <li>✓ Build dynamic web applications using the Django framework</li>
+                        <li>✓ Understand front-end development with HTML, CSS, JavaScript and Angular/React</li>
+                        <li>✓ Learn database management with Oracle/MySQL</li>
+                    </ul>
+                </div>
+                <div class="right-learn col-md-6 col-12">
+                    <ul>
+                        <li>✓ Gain expertise in version control using Git & GitHub</li>
+                        <li>✓ Work with REST APIs and test them using Postman</li>
+                        <li>✓ Develop full-stack projects with Angular/React and Django</li>
+                        <li>✓ Enhance your project management skills using Agile and Trello</li>
+                    </ul>
+                </div>
+
+                <div class="container">
+                    <div class="course-for mb-2"> <!-- Changed to mb-2 to add a little space -->
+                        <h5 style="font-size: x-large;">Who this course is for:</h5>
+                        <div class="main-course" style="font-size: large;">
+                            <span>➡ Beginners looking to kickstart their career in full-stack web development.</span>
+                            <span>➡ Students eager to learn both front-end and back-end technologies.</span>
+                            <span>➡ Developers wanting to build dynamic web applications using Django and Python.</span>
+                            <span>➡ Engineering students requiring full-stack development skills for projects and
+                                academic work.</span>
+                            <span>➡ Programmers looking to transition into full-stack development with Python.</span>
+                            <span>➡ Entrepreneurs and tech enthusiasts aiming to create scalable web
+                                applications.</span>
+                            <span>➡ Professionals preparing for technical interviews or seeking career advancement in
+                                full-stack roles.</span>
+
+                        </div>
+                    </div>
+
+                    <div #curriculumScroll class="py-5" id="curriculum-scroll">
+                        <h3 class="mt-0">Curriculum</h3> <!-- Use mt-4 for spacing -->
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        Core Python
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">Introduction to Python <span>09:00</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Data Types & Variables <span>11:20</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Control Structures & Loops <span>13:40</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Functions & Modules <span>15:30</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Python -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                        Advanced Python
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">Object-Oriented Programming <span>10:30</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Exception Handling <span>13:00</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">File Handling & I/O <span>14:50</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Working with Libraries & APIs <span>16:10</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Django Framework -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                        Django Framework
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">Introduction to Django <span>12:45</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Building RESTful APIs with Django <span>15:20</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Template Inheritance in Django <span>16:40</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Working with Databases in Django <span>18:00</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Frontend Technologies -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                        Frontend Technologies (HTML, CSS, JavaScript, Angular/React)
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">HTML & CSS: Responsive Design <span>11:00</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">JavaScript: Interactive Web Elements <span>13:30</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Angular/React Fundamentals <span>15:00</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Building SPAs with Angular/React <span>17:10</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Database (Oracle & MySQL) -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                        Database (Oracle & MySQL)
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">SQL Basics <span>10:15</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Database Integration with Django <span>12:30</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Database Queries and Optimizations <span>14:45</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tools & Version Control -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingSix">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                                        Tools & Version Control
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between">Version Control with Git & GitHub <span>09:50</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Agile Methodologies for Development <span>12:10</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">API Testing with Postman <span>14:30</span></li>
+                                            <li class="list-group-item d-flex justify-content-between">Project Management with Trello <span>16:00</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div #instructorScroll class="pb-5" id="instructor-scroll">
+                    <h3 class="container mt-0">Course Instructor</h3>
+                    <div class="instructor-main row align-items-center justify-content-center mx-auto"
+                        style="max-width: 1200px;">
+                        <div class="col-12 col-md-3 text-center text-md-start mb-4 mb-md-0">
+                            <img src="RahulAhireSir.png" class="rounded-circle img-fluid instructor-img"
+                                alt="Avatar" />
+                        </div>
+                        <div class="col-12 col-md-9 text-center text-md-start">
+                            <h3 class="instructor-name">Rahul Ahire</h3>
+                            <span class="instructor-title">Full Stack Web Developer • Founder of LinkCode Technologies</span><br>
+                            <div
+                                class="instructor-info-main d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mt-2">
+                                <div class="course-rating me-3 mb-2 mb-md-0">
+                                    <span>⭐ 4.9 Course Rating</span>
+                                </div>
+                                <div class="student-info me-3 mb-2 mb-md-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-person" viewBox="0 0 16 16">
+                                        <path
+                                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                                    </svg>
+                                    <span>234,567 Students</span>
+                                </div>
+                                <div class="play">
+                                    <span>▶ 09 Courses</span>
+                                </div>
+                            </div>
+                            <div class="instructor-about mt-3">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem consequatur illum magni
+                                officia, voluptatem necessitatibus quisquam architecto beatae laborum voluptas ipsam
+                                odit porro provident quas cupiditate. Voluptates sequi adipisci veniam.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div #feedbackScroll>
+                    <div class="row">
+                        <div class="col-md-3 text-center mb-3">
+                            <h4>Course Rating</h4>
+                            <h1 class="display-4 mb-0 fw-bold">4.8</h1>
+                            <p class="text-muted">Course Rating</p>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="rating-bar mb-2 d-flex align-items-center">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-text mx-2">5 Star Rating</span>
+                                <div class="progress flex-grow-1 mx-3">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                                </div>
+                                <span class="rating-percent fw-bold">75%</span>
+                            </div>
+                            <div class="rating-bar mb-2 d-flex align-items-center">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text mx-2">4 Star Rating</span>
+                                <div class="progress flex-grow-1 mx-3">
+                                    <div class="progress-bar" style="width: 21%"></div>
+                                </div>
+                                <span class="rating-percent fw-bold">21%</span>
+                            </div>
+                            <div class="rating-bar mb-2 d-flex align-items-center">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text mx-2">3 Star Rating</span>
+                                <div class="progress flex-grow-1 mx-3">
+                                    <div class="progress-bar" style="width: 3%"></div>
+                                </div>
+                                <span class="rating-percent fw-bold">3%</span>
+                            </div>
+                            <div class="rating-bar mb-2 d-flex align-items-center">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text mx-2">2 Star Rating</span>
+                                <div class="progress flex-grow-1 mx-3">
+                                    <div class="progress-bar" style="width: 1%"></div>
+                                </div>
+                                <span class="rating-percent fw-bold">1%</span>
+                            </div>
+                            <div class="rating-bar mb-2 d-flex align-items-center">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-text mx-2">1 Star Rating</span>
+                                <div class="progress flex-grow-1 mx-3">
+                                    <div class="progress-bar" style="width: 0.5%"></div>
+                                </div>
+                                <span class="rating-percent fw-bold">&lt;1%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="mt-5 ">Students Feedback</h4>
+                    <div class="d-flex justify-content-end mb-4">
+                        <select class="form-control w-auto">
+                            <option>5 Star Rating</option>
+                        </select>
+                    </div>
+
+                    <div class="feedback-item mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle me-3"
+                                width="50" height="50">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0">Guy Hawkins</h5>
+                                <small class="text-muted">1 week ago</small>
+                            </div>
+                            <div class="stars ms-auto d-flex">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p>I appreciate the precise short videos (10 mins or less each) because overly long videos tend
+                            to make me lose focus. The instructor is very knowledgeable in Web Design and it shows as he
+                            shares his knowledge. These were my best 6 months of training. Thanks, Vako.</p>
+                    </div>
+                    <hr>
+
+                    <div class="feedback-item mb-4">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle me-3"
+                                width="50" height="50">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0">Dianne Russell</h5>
+                                <small class="text-muted">51 mins ago</small>
+                            </div>
+                            <div class="stars ms-auto d-flex">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p>This course is just amazing! It has great course content, the best practices, and a lot of
+                            real-world knowledge. I love the way of giving examples, the best tips by the instructor
+                            which are pretty interesting.</p>
+                    </div>
+
+                    <hr>
+                </div>
+
+                <!-- Bootstrap JS -->
+                <script
+                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

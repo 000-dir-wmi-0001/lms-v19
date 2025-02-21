@@ -1,1 +1,437 @@
-<p>c works!</p>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="courses text-center">
+    <h2>COURSES</h2>
+  </div>
+
+  <div class="course container-fluid px-4">
+    
+
+    <!-- Main Content Area -->
+    <div class="row justify-content-center">
+        <!-- Left Section (Course Description, Video, etc.) -->
+        <div class="left-hero col-12 col-md-8 col-lg-8">
+            <div class="left-hero-content">
+                <h3>Master Java Full Stack Development: Zero to Hero - Unlock the Power of End-to-End Coding and Skyrocket Your Software Engineering Career</h3>
+                <span>3 in 1 Course: Learn to code in Java, master front-end and back-end technologies, and launch your career as a full stack developer.</span>
+            </div>
+
+            <!-- Instructor and Rating Section -->
+            <div class="row profile-img-container mt-3">
+                <!-- Profile image with smaller size -->
+                <div class="col-auto profile-img">
+                    <img src="RahulAhireSir.png" class="rounded-circle" alt="Avatar" />
+                </div>
+            
+                <!-- Name, star rating, and stats aligned properly -->
+                <div class="col credits d-flex flex-column flex-md-row align-items-start align-items-md-center">
+                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center">
+                        <div class="name me-2">
+                            <span>Created by</span>
+                            <span class="prof-name">Prof. Rahul Ahire</span>
+                        </div>
+                        <!-- Star rating aligned next to the name -->
+                        <div class="star-rating d-flex align-items-center ms-3">
+                            <label class="star">&#9733;</label>
+                            <label class="star">&#9733;</label>
+                            <label class="star">&#9733;</label>
+                            <label class="star">&#9733;</label>
+                            <label class="star">&#9733;</label>
+                        </div>
+                    </div>
+            
+                    <!-- Rating stats in a new line for smaller screens -->
+                    <span class="rating-stats mt-1">4.8 (451,455)</span>
+                </div>
+            </div>
+            
+          
+          
+
+            <!-- Video Section -->
+            <div class="video-container text-center mt-4">
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/r4Kqk_CdCvM?si=ETT8oVusNAlR-Jef" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="video"></iframe>
+            </div>
+        </div>
+
+        <!-- Right Section (Price, Course Details, etc.) -->
+        <div class="right-hero col-12 col-md-4 col-lg-4">
+            <div class="price text-center mb-4">
+                <h5 class="display-4 fw-bold">₹25000</h5>
+                <span class="discount-price text-muted text-decoration-line-through">25000</span>
+                <div class="discount bg-danger text-white rounded-pill p-1 mt-2">56% OFF</div>
+                <span class="offer-time d-block mt-2">&#9200; 2 days left at this price</span>
+                <hr>
+            </div>
+
+            <div class="course-right mb-4">
+                <div class="course-duration d-flex justify-content-between">
+                    <span>🕙 Course Duration</span>
+                    <span class="course-text">6 Months</span>
+                </div>
+                <div class="course-level d-flex justify-content-between">
+                    <span>📊 Course Level</span>
+                    <span class="course-text">Beginner</span>
+                </div>
+                <div class="course-language d-flex justify-content-between">
+                    <span>🗣 Language</span>
+                    <span class="course-text">English</span>
+                </div>
+            </div>
+
+            <div class="cart mb-3">
+                <button class="btn btn-primary w-100">Add To Cart</button>
+            </div>
+            <div class="buy mb-4">
+                <button class="btn btn-success w-100" (click)="onBuy()">Buy Now</button>
+            </div>
+
+            <div class="right-courses">
+                <h5>This course includes:</h5>
+                <ul class="list-unstyled">
+                    <li>🕘 Lifetime access</li>
+                    <li>💲30 days money back guarantee</li>
+                    <li>📁 Free exercises file</li>
+                    <li>🏆 Shareable certificate of completion</li>
+                    <li>📱 Access on mobile, tablet, and TV</li>
+                    <li>🛜 100% online course</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav-container text-center my-4">
+    <div class="nav">
+        <a (click)="scrollTo('overview')" class="nav-link ">Overview</a>
+        <a (click)="scrollTo('curriculum')" class="nav-link ">Curriculum</a>
+        <a (click)="scrollTo('instructor')" class="nav-link ">Instructor</a>
+        <a (click)="scrollTo('feedback')" class="nav-link ">Review</a>
+    </div>
+</div>
+
+
+
+<hr class="nav-hr">
+<div class="nav-content container">
+  <div #overviewScroll id="overview-scroll">
+      <h3>Overview</h3>
+      <p class="nav-content-span" style="font-size: large;">
+        In today's fast-paced tech landscape, mastering full stack development is crucial for building versatile and scalable applications. Our Java Full Stack Development course equips you with the comprehensive skills needed to thrive in modern software development. Java, with its powerful back-end capabilities, combined with cutting-edge front-end technologies like Angular and React, makes this course a must for aspiring full stack developers. From crafting dynamic user interfaces to building robust server-side applications, you'll learn the tools and frameworks essential for end-to-end application development in today's industry.
+      </p>
+
+      <div class="learn mt-4">
+          <h5>What you will learn in this course</h5>
+          
+          <div class="row">
+            <div class="left-learn col-md-6 col-12">
+                <ul>
+                    <li>✓ Core & Advanced Java: Master OOP, exception handling, multithreading, JDBC, and networking.</li>
+                    <li>✓ Servlet & JSP: Build dynamic web applications using server-side Java.</li>
+                    <li>✓ Spring Boot & Hibernate: Build RESTful APIs and integrate databases efficiently.</li>
+                    <li>✓ Full Stack Project: Develop a Spring and Angular application.</li>
+                </ul>
+            </div>
+            
+            <div class="right-learn col-md-6 col-12">
+                <ul>
+                    <li>✓ HTML, CSS, Bootstrap: Create responsive, user-friendly UIs.</li>
+                    <li>✓ Angular/React: Build interactive front-end applications.</li>
+                    <li>✓ Work with Oracle/MySQL: Efficient data management and integration.</li>
+                    <li>✓ Git, Agile, Postman: Version control, project management, and API testing.</li>
+                </ul>
+            </div>
+            
+              <div class="container">
+                <div class="course-for mb-2"> <!-- Changed to mb-2 to add a little space -->
+                    <h5 style="font-size: x-large;">Who this course is for:</h5>
+                    <div class="main-course" style="font-size: large;">
+                        <span>➡ Beginners interested in becoming proficient in full stack development.</span>
+                        <span>➡ Students pursuing computer science or related fields who want to build dynamic web applications.</span>
+                        <span>➡ Software engineers seeking to develop end-to-end solutions with Java and modern frameworks.</span>
+                        <span>➡ Developers wanting to build scalable web services and microservices using Spring Boot.</span>
+                        <span>➡ Front-end developers looking to expand their skills into back-end development.</span>
+                        <span>➡ Back-end developers aiming to master front-end technologies and frameworks like Angular or React.</span>
+                        <span>➡ Professionals looking to enhance their database management skills with Oracle and MySQL.</span>
+                        <span>➡ Enthusiasts interested in learning the complete process of full stack application development.</span>
+                    </div>
+                    
+                </div>
+            
+                <div #curriculumScroll class="py-5" id="curriculum-scroll">
+                    <h3 class="mt-0">Curriculum</h3> <!-- Use mt-4 for spacing -->
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <!-- Core & Advanced Java -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Core & Advanced Java
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">Introduction to Java <span>10:00</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Object-Oriented Programming Concepts <span>12:30</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Exception Handling & Multithreading <span>15:40</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">JDBC and Networking in Java <span>16:20</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Servlet & JSP -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    Servlet & JSP
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">Introduction to Servlets <span>11:15</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">JSP Basics and Dynamic Web Applications <span>14:20</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Session Management in Web Apps <span>16:45</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Spring Framework (Spring Boot & Hibernate) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Spring Boot & Hibernate
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">Spring Boot Fundamentals <span>13:50</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Building RESTful APIs with Spring Boot <span>18:00</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Hibernate ORM Integration with Spring <span>20:15</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Frontend (HTML, CSS, JavaScript, Angular/React) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                    Frontend Development (HTML, CSS, JavaScript, Angular/React)
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">HTML & CSS: Designing Responsive Layouts <span>12:45</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">JavaScript: Dynamic Web Pages <span>14:30</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Introduction to Angular/React <span>16:50</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Building Single-Page Applications (SPA) <span>19:20</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Database (Oracle/MySQL) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                    Database (Oracle & MySQL)
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">Introduction to Databases <span>11:30</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">SQL Basics for Oracle & MySQL <span>13:45</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Database Integration with Java <span>15:30</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Tools & Version Control -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                                    Tools & Version Control
+                                </button>
+                            </h2>
+                            <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between">Git & GitHub for Version Control <span>10:00</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">Using Agile Methodologies <span>12:10</span></li>
+                                        <li class="list-group-item d-flex justify-content-between">API Testing with Postman <span>13:50</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            
+            <div #instructorScroll class="pb-5"  id="instructor-scroll">
+              <h3 class="container mt-0">Course Instructor</h3>
+              <div class="instructor-main row align-items-center justify-content-center mx-auto" style="max-width: 1200px;">
+                <div class="col-12 col-md-3 text-center text-md-start mb-4 mb-md-0">
+                  <img src="RahulAhireSir.png" class="rounded-circle img-fluid instructor-img" alt="Avatar" />
+                </div>
+                <div class="col-12 col-md-9 text-center text-md-start">
+                  <h3 class="instructor-name">Rahul Ahire</h3>
+                  <span class="instructor-title">Full Stack Web Developer • Founder of LinkCode Techonologies</span><br>
+                  <div class="instructor-info-main d-flex flex-wrap align-items-center justify-content-center justify-content-md-start mt-2">
+                    <div class="course-rating me-3 mb-2 mb-md-0">
+                      <span>⭐ 4.9 Course Rating</span>
+                    </div>
+                    <div class="student-info me-3 mb-2 mb-md-0">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                      </svg>
+                      <span>234,567 Students</span>
+                    </div>
+                    <div class="play">
+                      <span>▶ 09 Courses</span>
+                    </div>
+                  </div>
+                  <div class="instructor-about mt-3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem consequatur illum magni officia, voluptatem necessitatibus quisquam architecto beatae laborum voluptas ipsam odit porro provident quas cupiditate. Voluptates sequi adipisci veniam.
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+
+      
+      <div #feedbackScroll >
+        <div class="row">
+          <div class="col-md-3 text-center mb-3">
+            <h4>Course Rating</h4>
+            <h1 class="display-4 mb-0 fw-bold">4.8</h1>
+            <p class="text-muted">Course Rating</p>
+        </div>
+          <div class="col-md-9">
+            <div class="rating-bar mb-2 d-flex align-items-center">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <span class="rating-text mx-2">5 Star Rating</span>
+              <div class="progress flex-grow-1 mx-3">
+                <div class="progress-bar" style="width: 75%"></div>
+              </div>
+              <span class="rating-percent fw-bold">75%</span>
+            </div>
+            <div class="rating-bar mb-2 d-flex align-items-center">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text mx-2">4 Star Rating</span>
+              <div class="progress flex-grow-1 mx-3">
+                <div class="progress-bar" style="width: 21%"></div>
+              </div>
+              <span class="rating-percent fw-bold">21%</span>
+            </div>
+            <div class="rating-bar mb-2 d-flex align-items-center">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text mx-2">3 Star Rating</span>
+              <div class="progress flex-grow-1 mx-3">
+                <div class="progress-bar" style="width: 3%"></div>
+              </div>
+              <span class="rating-percent fw-bold">3%</span>
+            </div>
+            <div class="rating-bar mb-2 d-flex align-items-center">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text mx-2">2 Star Rating</span>
+              <div class="progress flex-grow-1 mx-3">
+                <div class="progress-bar" style="width: 1%"></div>
+              </div>
+              <span class="rating-percent fw-bold">1%</span>
+            </div>
+            <div class="rating-bar mb-2 d-flex align-items-center">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+              <span class="rating-text mx-2">1 Star Rating</span>
+              <div class="progress flex-grow-1 mx-3">
+                <div class="progress-bar" style="width: 0.5%"></div>
+              </div>
+              <span class="rating-percent fw-bold">&lt;1%</span>
+            </div>
+          </div>
+        </div>
+      
+        <h4 class="mt-5">Students Feedback</h4>
+<div class="d-flex justify-content-end mb-4">
+  <select class="form-control w-auto">
+    <option>5 Star Rating</option>
+  </select>
+</div>
+
+<div class="feedback-item mb-4">
+  <div class="d-flex align-items-center mb-2">
+    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle me-3" width="50" height="50">
+    <div class="flex-grow-1">
+      <h5 class="mb-0">Guy Hawkins</h5>
+      <small class="text-muted">1 week ago</small>
+    </div>
+    <div class="stars ms-auto d-flex">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+  <p>I appreciate the precise short videos (10 mins or less each) because overly long videos tend to make me lose focus. The instructor is very knowledgeable in Web Design and it shows as he shares his knowledge. These were my best 6 months of training. Thanks, Vako.</p>
+</div>
+<hr>
+
+<div class="feedback-item mb-4">
+  <div class="d-flex align-items-center mb-2">
+    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle me-3" width="50" height="50">
+    <div class="flex-grow-1">
+      <h5 class="mb-0">Dianne Russell</h5>
+      <small class="text-muted">51 mins ago</small>
+    </div>
+    <div class="stars ms-auto d-flex">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+  <p>This course is just amazing! It has great course content, the best practices, and a lot of real-world knowledge. I love the way of giving examples, the best tips by the instructor which are pretty interesting.</p>
+</div>
+
+    <hr>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

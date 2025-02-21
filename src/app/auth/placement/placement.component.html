@@ -1,1 +1,110 @@
-<p>placement works!</p>
+<!-- Placement section -->
+
+<h2 class="title text-center p-2 mb-4"><strong>PLACEMENTS</strong></h2>
+<ul class="nav nav-tabs d-flex justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="auth/placement">Placements</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="auth/review">Reviews</a>
+  </li>
+</ul>
+
+
+<div class="row" id="placements_records">
+  <div class="col-md-10">
+    <div id="placementCarousel" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-inner">
+            @for(allRec of chunkedData; let i = $index; track $index) {
+
+                <div class="carousel-item mb-5" [ngClass]="{'active': i === 0}" >
+                    <div class="row">
+                        @for (item of allRec; track $index) {
+
+                            <div class="col col-md-6 col-lg-3 mt-3 d-flex justify-content-center">
+                                <div class="card text-center" style="width: 12rem; margin-left: 5%;">
+                                    <img [src]="item.Image" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{item.Name}}</h5>
+                                        <p class="card-text">{{item.Company}}<br>{{item.Package}} LPA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="container text-center">
+          <ul class="pagination">
+            <div class="carousel-indicators">
+              <li data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"><a href="">«</a></li>
+              @for ( allRec of chunkedData; let i = $index; track $index) {
+
+                  <li [ngClass]="{'active': i === 0}"
+                  data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i">
+                  <a>{{i + 1}}<span class="sr-only"></span></a>
+                </li>
+            }
+              <li data-bs-target="#carouselExampleIndicators" data-bs-slide="next"><a href="">»</a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="text-center my-5"><strong>Our Students Placed at</strong></h2>
+<div class="companies row d-flex justify-content-center">
+<div class="col-md-10">
+  <div class="text-center company-logos">
+    <div class="row my-3">
+      <div class="col">
+        <img src="Ms.png" alt="Microsoft">
+      </div>
+      <div class="col">
+        <img src="Cognizant.png" alt="Cognizant">
+      </div>
+      <div class="col">
+        <img src="Providence.png" alt="Providence">
+      </div>
+      <div class="col">
+        <img src="accenture.png" alt="Accenture">
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <img src="Barclays.png" alt="Barclays">
+      </div>
+      <div class="col">
+        <img src="Persistent.png" alt="Persistent">
+      </div>
+      <div class="col">
+        <img src="Capgemini.png" alt="Capgemini">
+      </div>
+      <div class="col">
+        <img src="BNY_Mellon.png" alt="BNY Mellon">
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <img src="Bajaj.png" alt="Bajaj">
+      </div>
+      <div class="col">
+        <img src="SAP.png" alt="SAP">
+      </div>
+      <div class="col">
+        <img src="AVAYA.png" alt="Avaya">
+      </div>
+      <div class="col">
+        <img src="Deutsche.png" alt="Deutsche Bank">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

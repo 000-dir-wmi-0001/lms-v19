@@ -1,0 +1,273 @@
+.fa-whatsapp {
+    position: fixed;
+    bottom: 25px;
+    right: 20px;
+    z-index: 100;
+    color: #fff;
+    background-color: rgb(10, 218, 10);
+    padding: 5px 4px 7px 4px;
+    font-size: 40px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
+  
+  .phone {
+    position: fixed;
+    bottom: 80px;
+    right: 25px;
+    z-index: 100;
+    color: #fff;
+    background-color: rgb(16, 131, 208);
+    padding: 5px;
+    font-size: 25px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+  }
+  
+  
+  .h1-color {
+    color: #2980b9;
+    font-weight: bold;
+  }
+  
+  .navbar div ul li a:hover {
+    color: #2980b9;
+  }
+  
+  .card-img {
+    width: 100px;
+    height: 70px;
+  }
+  
+  footer {
+    color: white;
+  }
+  
+  footer a {
+    color: white;
+  }
+  
+  footer ul li a {
+    text-align: center;
+  }
+  
+  /* slider */
+  .tests {
+    padding: 20px 0;
+  }
+  
+  .slider-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 210px;
+  }
+  
+  .slider-main {
+    /* position: absolute; */
+    width: 200%;
+  }
+  
+  .item {
+    display: inline-block;
+    width: 350px;
+  
+    background-color: rebeccapurple;
+    position: relative;
+    margin: 0 12px;
+  }
+  
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: wheat;
+    font-size: 24px;
+  }
+  
+  .prev {
+    position: absolute;
+    left: 33px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .next {
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .panel {
+    margin-left: 20px;
+  }
+  
+  /* skill card */
+  .containCard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .containCard div {
+    margin: 30px 40px;
+    text-align: center;
+  }
+  
+  .containCard div img {
+    width: 100px;
+    height: 70px;
+  }
+  
+  @media screen and (max-width: 389px) {
+    .navbar-brand img {
+      width: 210px;
+    }
+  
+    .containCard div {
+      margin: 30px 20px;
+    }
+  }
+  @keyframes slide {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+  body{
+      margin:0;
+      padding:0;
+  }
+  /* .container{
+      width:90%
+      margin:10px auto;
+  } */
+  .portfolio-menu{
+      text-align:center;
+  }
+  .portfolio-menu ul li{
+      display:inline-block;
+      margin:0;
+      list-style:none;
+      padding:10px 15px;
+      cursor:pointer;
+      -webkit-transition:all 05s ease;
+      -moz-transition:all 05s ease;
+      -ms-transition:all 05s ease;
+      -o-transition:all 05s ease;
+      transition:all .5s ease;
+  }
+  
+  .portfolio-item{
+      /*width:100%;*/
+  }
+  .portfolio-item .item{
+      /*width:303px;*/
+      float:left;
+      margin-bottom:10px;
+  }
+  
+  .img-thumbnail{
+    padding: .5rem;
+    /*border: 2px solid #868e96;*/
+    border: 2px solid rgb(205, 249, 249);;
+    border-radius: 0;
+    background-color: #fbf7f7;
+  }
+  .bg-white {
+    background-color:#8AD4F3!important;
+  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  }
+  .ms-auto .m-2 .btn-outline-dark{
+    margin: 4px;
+  }
+  .ms-auto .m-2 .btn-primary .register{
+    color:white;
+      text-decoration: none;
+      font-weight: bold;
+      /* background-color: transparent; */
+  }
+  .ms-auto .m-2 .btn-outline-dark .register{
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Default styles for the navigation bar */
+  .navbar {
+    background-color: #ffffff;
+    z-index: 10;
+  }
+  
+  .navbar-brand img {
+    max-width: 100%;
+    width: 200px; /* Adjust the width as needed */
+  }
+  
+  .navbar-toggler-icon {
+    color: #000;
+  
+  }
+  
+  .nav-link {
+    color: #000;
+    font-weight: bold;
+  }
+  .close-btn{
+    opacity: 0
+  }
+  .container {
+    padding-top: 80px;
+  }
+  
+  /* Media query for screens smaller than 768px (typical mobile devices) */
+  @media (max-width: 768px) {
+    .navbar-toggler {
+      float: right; /* Move the toggle button to the right */
+      margin-right: 10px; /* Add some spacing */
+    }
+  
+    .navbar-collapse {
+      background-color: #8AD4F3;
+      padding: 10px;
+      position: absolute;
+      top: 63px;
+      right: 0; /* Position the dropdown menu on the right corner */
+    }
+  
+    .navbar-toggler-icon {
+      color: #000;
+      float: right; /* Move the icon to the right */
+    }
+  
+    .nav-item {
+      margin: 10px 0;
+    }
+  
+    .navbar-brand img {
+      width: 150px; /* Adjust the width as needed */
+    }
+  
+    .nav-link {
+      color: #000;
+      font-weight: bold;
+    }
+    .close-btn{
+      opacity: 100%;
+    }
+    .navbar-nav .nav-item {
+      margin: 10px 0;
+    }
+  }
+  
+  
+  
+  

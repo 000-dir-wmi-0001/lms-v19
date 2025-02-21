@@ -1,0 +1,144 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Improved section spacing */
+  section {
+    padding: 4rem 0;
+  }
+  
+  /* * {
+    font-family: sans-serif;
+  } */
+  .card-img {
+    width: 100px;
+    height: 70px;
+  }
+  .slider-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 210px;
+  }
+  .body {
+    width: 150px;
+    height: 50px;
+  }
+  .nav-link {
+    color: #000;
+    font-weight: bold;
+  }
+  .title {
+    background-color: rgb(96, 96, 255);
+  }
+  .company-logos img {
+    max-height: 50px;
+    margin: 10px;
+  }
+  .card-img-top {
+    background-color: white;
+    max-width: auto;
+    width: 80%;
+    margin: auto;
+    max-height: 120px;
+  }
+  .card {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    transition: all 0.6s ease;
+  }
+  .card:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    /* box-shadow: rgba(255, 172, 28, 0.199) -10px 10px, rgba(255, 172, 28, 0.19) -20px 20px ; */
+    box-shadow: rgba(255, 172, 28, 0.199) -10px 10px, rgba(74, 174, 255, 0.274) -20px 20px 20px;
+  }
+  .carousel-indicators>li>a {
+    margin-left: 3300%;
+    color: black;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50% !important;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+  }
+  .carousel-indicators>li>a:hover,
+  .carousel-indicators>li>a:focus {
+    color: #033eff;
+    background-color: #a3d2fc;
+    border-color: #ddd;
+  }
+  .carousel-indicators>li>.active>a>.active,
+  .carousel-indicators>li>.active>a:hover,
+  .carousel-indicators>li>.active>a:focus {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca;
+  }
+  .pagination {
+    display: inline-block;
+    margin: 20px 0;
+  }
+  .pagination>li {
+    display: inline
+  }
+  .pagination>li>a,
+  .pagination>li>span {
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    color: black;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd
+  }
+  .pagination>li:first-child>a,
+  .pagination>li:first-child>span {
+    margin-left: 0;
+  }
+  .pagination>li>a:hover,
+  .pagination>li>span:hover,
+  .pagination>li>a:focus,
+  .pagination>li>span:focus {
+    color: #428bca;
+    background-color: #afd7fa;
+    border-color: #ddd
+  }
+  .pagination>.active>a,
+  .pagination>.active>span,
+  .pagination>.active>a:hover,
+  .pagination>.active>span:hover,
+  .pagination>.active>a:focus,
+  .pagination>.active>span:focus {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #428bca
+  }
+  .pagination>.disabled>span,
+  .pagination>.disabled>span:hover,
+  .pagination>.disabled>span:focus,
+  .pagination>.disabled>a,
+  .pagination>.disabled>a:hover,
+  .pagination>.disabled>a:focus {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd
+  }
+  .pagination>li>a,
+  .pagination>li>span {
+    border-radius: 50% !important;
+    margin: 0 5px;
+  }
+  .row{
+    justify-content: center;
+  }
+  .carousel-inner{
+    justify-content: center;
+  }
