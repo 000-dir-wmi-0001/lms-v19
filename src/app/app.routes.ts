@@ -9,6 +9,10 @@ import { ContactComponent } from './auth/contact/contact.component';
 import { LandingPageComponent } from './auth/landing-page/landing-page.component';
 import { ForgotPassComponent } from './auth/forgot-pass/forgot-pass.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LandingComponent } from './auth/landing/landing.component';
+import { GalleryComponent } from './auth/gallery/gallery.component';
+import { PlacementComponent } from './auth/placement/placement.component';
+import { ReviewComponent } from './auth/review/review.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +37,9 @@ export const routes: Routes = [
       { path: 'login', component: LoginComponent, canActivate: [LoggedInAuthGuard] },
       { path: 'homepage', component: HomepageComponent },
       { path: "register", component: RegisterComponent, canActivate: [LoggedInAuthGuard] },
-      { path: 'password_reset', component: ForgotPassComponent },
+      { path: 'password_reset', component: ForgotPassComponent },      
+   
+      
 
     ]
   },

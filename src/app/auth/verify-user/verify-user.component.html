@@ -1,1 +1,19 @@
-<p>verify-user works!</p>
+
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">User Verification Status</h5>
+      @if (isVerified) {
+
+          <div class="alert alert-success">
+              User is verified!
+            </div>
+        }
+        @else if (!isVerified) {
+
+            <div class="alert alert-danger">
+                User is not verified.
+            </div>
+        }
+    </div>
+  </div>
+  

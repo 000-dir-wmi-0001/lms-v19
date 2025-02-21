@@ -1,0 +1,473 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.course {
+max-width: 1440px; /* Maximum width for large screens */
+margin: 0 auto; /* Center the container */
+padding-left: 15px;
+padding-right: 15px;
+}
+
+@media (min-width: 1600px) {
+.course {
+max-width: 1440px; /* Keep content centered on larger screens like 4K */
+}
+}
+
+@media (max-width: 1199px) {
+.left-hero, .right-hero {
+padding-left: 15px;
+padding-right: 15px;
+}
+}
+
+.hero {
+    padding: 20px;
+}
+
+.left-hero-content h3 {
+    font-size: 1.5rem;
+}
+
+.profile-img {
+    margin-right: 10px;
+}
+
+.credits .name span {
+    display: block;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+}
+
+.star-rating label {
+    font-size: 1.5rem;
+    color: gold;
+}
+
+.rating-stats {
+    margin-left: 10px;
+}
+
+/* Custom responsive styling */
+@media (max-width: 768px) {
+    .hero {
+        padding: 10px;
+    }
+
+    .left-hero-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .profile-img-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-img {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .left-hero-content h3 {
+        font-size: 1rem;
+    }
+
+    .profile-img-container {
+        flex-direction: column;
+    }
+}
+
+.hero {
+    padding: 20px;
+}
+
+.left-hero-content h3 {
+    font-size: 1.5rem;
+}
+
+.profile-img {
+    margin-right: 10px;
+}
+
+.credits .name span {
+    display: block;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+}
+
+.star-rating label {
+    font-size: 1.5rem;
+    color: gold;
+}
+
+.rating-stats {
+    margin-left: 10px;
+}
+.nav-container {
+ text-align: center;
+ font-weight: bold;
+ font-size: xx-large;
+}
+.nav {
+display: inline-block;
+padding: 10px 0;
+}
+
+.nav-link {
+  display: inline-block;
+padding: 10px 20px;
+margin: 0 10px; /* Adds space between links */
+text-decoration: none;
+font-size: 1.1rem;
+color: #007bff;
+transition: color 0.3s ease-in-out;
+}
+.nav-link:hover {
+color: #0056b3;
+}
+
+/* Adding some responsiveness for smaller screens */
+@media (max-width: 768px) {
+.nav-link {
+padding: 8px 12px;
+font-size: 1rem;
+margin: 0 5px;
+}
+}
+.overview-scroll>nav-co
+
+.learn, .course-for, .course-req {
+    margin-top: 20px;
+}
+
+.main-learn, .main-course {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.main-learn .left-learn, .main-learn .right-learn, .main-course {
+    width: 100%;
+    max-width: 45%;
+    
+}
+.left-learn, .right-learn{
+  background: #c1ecc5;
+  border-radius: 15px;
+  line-height: 2;
+  font-size: larger;
+}
+
+.main-learn span, .main-course span {
+    display: inline-flex;
+    margin-bottom: 10px;
+    white-space: nowrap; /* This will prevent text from wrapping */
+        /* This will hide any overflow of text */
+    text-overflow: ellipsis; /* This adds "..." if the text overflows */
+}
+
+.li-main ul {
+    padding-left: 20px;
+}
+
+.li-main ul li {
+    margin-bottom: 10px;
+}
+
+/* Custom responsive styling */
+@media (max-width: 768px) {
+    .main-learn .left-learn, .main-learn .right-learn {
+        width: 100%;
+        margin-bottom: 20px;
+       
+    }
+
+    .main-course {
+        width: 100%;
+    }
+
+    .left-hero-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .hero {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .left-hero-content h3 {
+        font-size: 1rem;
+    }
+
+    .profile-img-container {
+        flex-direction: column;
+    }
+
+    .nav a {
+        font-size: 0.9rem;
+    }
+}
+/* Ensure the content remains centered vertically and horizontally */
+.container-fluid {
+background-color: #f8f9fa; /* Light background for better contrast */
+}
+
+.left-hero-content {
+padding: 20px;
+background-color: #ffffff;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+font-size: 2rem;
+color: #007bff;
+font-weight: bold;
+}
+
+.hero-subtitle {
+font-size: 1.2rem;
+color: #555;
+display: block;
+margin-top: 10px;
+}
+
+/* Media queries for larger screens */
+@media (min-width: 768px) {
+.hero-title {
+    font-size: 2.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+}
+}
+
+@media (min-width: 992px) {
+.hero-title {
+    font-size: 3rem;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+}
+}
+
+.courses {
+width: 100%;
+margin: 0;
+padding: 0;
+text-align: center;
+}
+
+.courses>h2 {
+/* center the h2 element vertically */
+display: flex;
+justify-content: center;
+align-items: center;
+/* height: 100vh; */
+background: #0290E3;
+margin-top: 0.5rem;
+height: 5rem;
+font-weight: bolder;
+}
+
+.course-for {
+margin-bottom: 0; /* Remove any default margin */
+}
+
+.curriculum {
+margin-top: 10px; /* Adjust as necessary */
+background: white;
+padding: 60px 0;
+}
+
+.main-course {
+padding-left: 0; /* Remove any default padding if needed */
+}
+
+.main-course span {
+display: block; /* Ensures spans take full width */
+margin-bottom: 3px; /* Adjust space between items */
+}
+
+
+
+/* Styling for the curriculum section */
+.curriculum h3 {
+font-size: 2rem;
+margin-bottom: 40px;
+color: #333;
+}
+
+.accordion-button {
+/* background-color: #f8f9fa; */
+font-size: 1.2rem;
+color: #333;
+}
+
+.accordion-button:focus {
+box-shadow: none;
+}
+
+.accordion-body {
+padding: 20px;
+}
+
+.list-group-item {
+font-size: 1.1rem;
+color: #555;
+padding: 15px 20px;
+}
+
+.list-group-item span {
+font-size: 1rem;
+color: #777;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.curriculum h3 {
+font-size: 1.6rem;
+margin-bottom: 30px;
+}
+
+.list-group-item {
+font-size: 1rem;
+padding: 10px 15px;
+}
+}
+/* Instructor section adjustments */
+/* Move content and image to the left */
+.instructor-main {
+padding: 15px; /* Adds some padding around the content */
+border: 3px solid #ddd; /* Light border around the content */
+border-radius: 5px; /* Rounded corners */
+}
+
+/* Instructor image styling */
+.instructor-img {
+max-width: 150px; /* Sets the size of the image */
+margin-left: 0; /* Aligns the image properly */
+}
+
+/* Instructor name and title styling */
+.instructor-name {
+margin-bottom: 5px;
+font-size: 1.75rem;
+}
+
+.instructor-title {
+font-size: 1rem;
+line-height: 1.4;
+color: #666;
+}
+
+/* Instructor info row */
+.instructor-info-main {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+margin-bottom: 10px; /* Reduces spacing below this section */
+}
+
+/* Rating, students, and courses */
+.course-rating, .student-info, .play {
+margin-right: 20px; /* Adds spacing between these items */
+font-size: 0.95rem;
+color: #333;
+}
+
+.student-info svg {
+margin-right: 5px;
+}
+
+/* Instructor bio/description */
+.instructor-about {
+font-size: 0.95rem;
+line-height: 1.6;
+color: #555;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 768px) {
+    .instructor-main {
+    text-align: center;
+    }
+
+    .instructor-info-main {
+    justify-content: center;
+    text-align: center;
+    }
+
+    .instructor-img {
+    max-width: 120px; /* Smaller image on mobile */
+    }
+}
+
+.feedback-item {
+padding-bottom: 15px;
+}
+
+.feedback-item .d-flex {
+display: flex;
+align-items: center;
+}
+
+img.rounded-circle {
+border-radius: 50%;
+}
+
+.flex-grow-1 {
+flex-grow: 1;
+}
+
+.stars {
+display: flex;
+color: #ffc107; /* Star color */
+}
+
+.stars i {
+margin-right: 2px; /* Adds space between stars */
+}
+
+/* Alignment for feedback text */
+.feedback-item h5 {
+font-size: 1rem;
+margin-bottom: 0.2rem; /* Adjust spacing between name and time */
+}
+
+.feedback-item small {
+color: #6c757d; /* Time text color */
+}
+
+.feedback-item p {
+margin-top: 0.5rem;
+font-size: 1rem;
+}
+
+/* Small adjustments for mobile */
+@media (max-width: 576px) {
+.stars i {
+font-size: 0.9rem; /* Reduce star size for smaller screens */
+}
+
+.feedback-item h5 {
+font-size: 0.9rem; /* Adjust name size on small screens */
+}
+
+.feedback-item p {
+font-size: 0.9rem;
+}
+}
