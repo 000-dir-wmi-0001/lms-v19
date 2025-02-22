@@ -1,0 +1,90 @@
+.card {
+  /* Add card styles */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.marks {
+  font-weight: bold;
+  text-align: right;
+}
+
+.question {
+  font-weight: bold;
+  margin-left: 30px;
+}
+
+button {
+  /* Add button styles */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.start-button {
+  background-color: #4caf50;
+}
+
+.stop-button {
+  background-color: #f44336;
+}
+
+.cancel-button {
+  background-color: #ff9800;
+}
+
+.download-button {
+  background-color: #2196f3;
+}
+
+.recording-time {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+  overflow-x: hidden;
+}
+
+#sidebar.active {
+  margin-left: -17rem;
+}
+
+#content.active {
+  width: 100%;
+  margin-left: 0;
+}
+
+@media (max-width: 767px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+
+  #content.active {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .horizontal_nav {
+    margin: 0;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+}

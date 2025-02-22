@@ -1,25 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentNotificationService {
-  getAllNotifications(userId: any): Observable<any> {
-    return of({ Notifications: [] }); // Returns an empty observable
+
+  constructor(private http: HttpClient) { }
+
+  saveNotification(user: any, message: any) {
+    return this.http.post(`${environment.api}/studentNotification/saveNotification/`, { user, message });
   }
+
+  getAllNotifications(id: any) {
+    return this.http.get(`${environment.api}/studentNotification/getAllNotifications/${id}`);
+  }
+
 }
-
-
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class StudentNotificationService {
-//   getAllNotifications(_userId: any) {
-//     throw new Error('Method not implemented.');
-//   }
-
-//   constructor() { }
-// }

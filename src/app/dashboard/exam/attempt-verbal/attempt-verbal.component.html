@@ -1,1 +1,77 @@
-<p>attempt-verbal works!</p>
+<!-- Page Content -->
+<div class="page-content px-5 pt-5" id="content">
+  <div class="card mt-5 mb-5">
+    <div class="card-header" style="background-color: #4169e1; color: white">
+      <div class="card-title" style="width: 120rem">
+        <b>Course Name &nbsp;:</b> {{examdetail?.course?.['name']}}
+      </div>
+      <div class="card-title" style="width: 120rem">
+        <b>Topic Name &nbsp;&nbsp; :</b> {{examdetail?.['name']}}
+      </div>
+      <div class="card-title" style="width: 120rem">
+        <b>Exam Type &nbsp;&nbsp;&nbsp;&nbsp; :</b> {{examdetail?.['type']}}
+      </div>
+      <div class="card-title" style="width: 120rem">
+        <b> Start Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b>
+        {{examdetail?.['startDate'].slice(0,10)}}
+      </div>
+      <br /><br />
+    </div>
+
+    @for( question of questions; let i= $index;track questions){
+    <div class="card m-3">
+      <div class="marks">Marks: {{question?.['marks']}}</div>
+      <div class="question">{{ i + 1 }}. {{question?.['name']}}</div>
+      <br />
+      <div>
+        @if(!isRecording && !blobUrl){
+
+          <button
+          class="start-button"
+          (click)="startRecording(question?.['_id'])"
+          >
+          Start Recording
+        </button>
+      }@else if (isRecording && !blobUrl) {
+
+        <button
+        class="stop-button"
+        (click)="stopRecording(question?.['_id'])"
+        >
+        Stop Recording
+      </button>
+    }
+    @if(!isRecording && blobUrl){
+
+      <button
+      class="cancel-button"
+      (click)="clearRecordedData()"
+      >
+      Clear Recording
+    </button>
+  }
+        <br /><br />
+      </div>
+      @if(isRecording && !blobUrl){
+
+        <div class="recording-time">
+          {{ recordedTime }}
+        </div>
+      }
+      <div>
+       @if(!isRecording && blobUrl){
+
+         <audio controls>
+           <source [src]="blobUrl" type="audio/mp3" />
+          </audio>
+        }
+      </div>
+    </div>
+  }
+    <div class="text-center">
+      <button routerLink="/dashboard/exam/" class="btn btn-primary">
+        SUBMIT
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,86 @@
-<p>display-result works!</p>
+<div class="page-content px-5 pt-5" id="content">
+  <div class="card text-white my-card">
+
+    @if(getFinalMarks() > 75){
+      <!-- Section for Excellent -->
+      <div class="excellent-section">
+        <div class="card-body">
+          <h1 class="card-title">
+            <h3>Excellent...</h3> Congratulations!
+          </h1>
+          <h4 class="card-title">Your score in <b><i>{{ examName }}</i></b></h4>
+          <h4 class="card-text highlight-green">Percentage: {{ getFinalMarks() }}%</h4>
+          <h4 class="card-text highlight-green">Obtained Marks: {{ obtainedMarks }}</h4>
+          <h4 class="card-text highlight-green">Total Marks: {{ totalMarks }}</h4>
+        </div>
+      </div>
+    }@else if(getFinalMarks() <= 75 && getFinalMarks() > 40){
+    <!-- Section for Awesome -->
+
+      <div class="good-section">
+        <div class="card-body">
+          <h1 class="card-title">
+            <h3>Awesome...</h3> Congratulations!
+          </h1>
+          <h4 class="card-title">Your score in <b><i>{{ examName }}</i></b></h4>
+          <h4 class="card-text highlight-yellow">Percentage: {{ getFinalMarks() }}%</h4>
+          <h4 class="card-text highlight-yellow">Obtained Marks: {{ obtainedMarks }}</h4>
+          <h4 class="card-text highlight-yellow">Total Marks: {{ totalMarks }}</h4>
+        </div>
+      </div>
+    }@else if (getFinalMarks() <= 40) {
+      <!-- Section for Need Improvement -->
+      <div class="improvement-section">
+        <div class="card-body">
+          <h3 class="card-title">Need Improvement</h3>
+          <h4 class="card-title">Your score in <b><i>{{ examName }}</i></b></h4>
+          <h4 class="card-text highlight-red">Percentage: {{ getFinalMarks() }}%</h4>
+          <h4 class="card-text highlight-red">Obtained Marks: {{ obtainedMarks }}</h4>
+          <h4 class="card-text highlight-red">Total Marks: {{ totalMarks }}</h4>
+        </div>
+      </div>
+    }
+
+    <!-- Result Analysis Section -->
+    <div>
+      <h2 class="ml-5">RESULT ANALYSIS</h2>
+
+      <!-- Attempted Questions -->
+      <h3 class="ml-5 mt-5">Attempted Questions</h3>
+      <div class="attempted-questions">
+        @for(result of resultAnalysis;track result){
+          @if(result.attempt === true){
+            <div class="result-section">
+              <p><strong>Question:</strong> {{ result.questname }}</p>
+              <p><strong>Selected Answers:</strong> {{ result.selectedanswers }}</p>
+              <p><strong>Correct Answers:</strong> {{ result.correctanswers }}</p>
+              <p><strong>Obtained Score:</strong> {{ result.score }}</p>
+            </div>
+          }
+        }
+
+      </div>
+
+      <!-- Unattempted Questions -->
+      <h3 class="ml-5 mt-5">Unattempted Questions</h3>
+      <div class="unattempted-questions">
+        @for( result of resultAnalysis; track result){
+          @if(result.attempt === false){
+
+            <div class="result-section">
+              <p><strong>Question:</strong> {{ result.questionName }}</p>
+              <p><strong>Answers:</strong> {{ result.answers }}</p>
+              <p><strong>Options:</strong> {{ result.options }}</p>
+              <p><strong>Marks:</strong> {{ result.marks }}</p>
+            </div>
+          }
+        }
+      </div>
+
+      <!-- Back Button -->
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-primary btn-lg" (click)="gotolistpage()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>

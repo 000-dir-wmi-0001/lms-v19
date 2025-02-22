@@ -1,1 +1,900 @@
-<p>admission works!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Admission</a>
+
+    <!-- Navbar toggler (for mobile view) -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <!-- Add Student Button -->
+        <li class="nav-item">
+          <button
+            class="btn btn-primary me-2"
+            [routerLink]="['/dashboard/addAdmission']"
+          >
+            + Add Student
+          </button>
+        </li>
+
+        <!-- Download Report Button -->
+        <li class="nav-item">
+          <button class="btn btn-outline-success me-2" (click)="export()">
+            <img src="assets/excel-icon.png" alt="" /> Download Report
+          </button>
+        </li>
+
+        <!-- Search Box -->
+        <li class="nav-item">
+          <div class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              [(ngModel)]="searchText"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              (click)="searchEnquiries()"
+            >
+              <img src="assets/search_icon.svg" height="20px" alt="" />
+            </button>
+          </div>
+        </li>
+
+        <!-- Filter by Verification -->
+        <li class="nav-item">
+          <select
+            class="form-select me-2"
+            [(ngModel)]="selectedStatus"
+            (change)="filterRecords()"
+          >
+            <option value="all" hidden>Verification Filter</option>
+            <option value="all">All</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </li>
+
+        <!-- Filter by Status -->
+        <li class="nav-item">
+          <select
+            class="form-select me-2"
+            [(ngModel)]="Status"
+            (change)="Statusfilter()"
+          >
+            <option value="all" hidden>Status Filter</option>
+            <option value="all">All</option>
+            <option value="Nurture">Nurture</option>
+            <option value="Enrolled">Enrolled</option>
+            <option value="Follow Up">Follow Up</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </li>
+
+        <!-- Date Filter -->
+        <li class="nav-item">
+          <input
+            type="date"
+            class="form-control"
+            placeholder="From Date"
+            [(ngModel)]="fromDate"
+            (input)="filterByDate()"
+            style="background-color: #3d70f5; color: #fff"
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Loading Spinner -->
+<div class="text-center mt-5">
+  @if(isLoading){
+
+    <div class="loader-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="table-responsive">
+  @if(!isLoading){
+  <table class="table table-striped" id="excel-table">
+    <thead>
+      <tr>
+        <th>Sr.No</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Verified</th>
+        <th scope="col">Status</th>
+        <th scope="col">Batch No.</th>
+
+        <th scope="col">Date of Addmission</th>
+        <th scope="col">Edit Profile</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of studentData.slice(getRange().start, getRange().end);
+          index as i
+        "
+        (dblclick)="openModal(modalTemplate, item._id)"
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ item._id.slice(-7) }}</td>
+        <td>{{ item.firstName }} {{ item.lastName }}</td>
+        <td>{{ item.mobileno }}</td>
+        <td>{{ item.isVerified ? "true" : "false" }}</td>
+        <td>
+          <select
+            name="status"
+            [ngModel]="item['status']"
+            (change)="Statusselect(item, $event)"
+          >
+            <ng-container *ngIf="item['status'] !== 'new'">
+              <option value="new" hidden>New</option>
+            </ng-container>
+            <ng-container *ngIf="item['status'] !== 'Option1'">
+              <option value="Enrolled">Enrolled</option>
+            </ng-container>
+            <ng-container *ngIf="item['status'] !== 'Option2'">
+              <option value="Prospect">Prospect</option>
+            </ng-container>
+            <ng-container *ngIf="item['status'] !== 'Option3'">
+              <option value="Follow Up">Follow Up</option>
+            </ng-container>
+            <ng-container *ngIf="item['status'] !== 'Option4'">
+              <option value="Nurture">Nurture</option>
+            </ng-container>
+            <ng-container *ngIf="item['status'] !== 'Option5'">
+              <option value="Closed">Closed</option>
+            </ng-container>
+          </select>
+        </td>
+
+        <td>{{ item.batchno }}</td>
+        <td>{{ item.admissiondate }}</td>
+        <td class="text-center">
+          <ng-container *ngIf="item.editStatus === 'pending'">
+            <button
+              class="btn btn-outline-success btn-sm me-2"
+              (click)="updateEditStatus(item._id, 'approved')"
+            >
+              Approve
+            </button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="updateEditStatus(item._id, 'rejected')"
+            >
+              Reject
+            </button>
+          </ng-container>
+          <ng-container *ngIf="item.editStatus !== 'pending'">
+            <span class="badge bg-secondary text-capitalize">
+              {{ item.editStatus}}
+            </span>
+          </ng-container>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+}
+</div>
+
+<!-- Pagination -->
+<nav aria-label="Page navigation example ">
+  <ul class="pagination justify-content-center">
+    @for(page of (getPages() || []); track page){
+    <li class="page-item m-2">
+      <button
+        class="btn btn-primary"
+        [class.active]="page === currentPage"
+        (click)="setPage(page)"
+      >
+        {{ page }}
+      </button>
+    </li>
+  }
+  </ul>
+</nav>
+
+<!-- <div class="pagination">
+  <ul class="pagination-list">
+    <li class="pagination-item" *ngFor="let page of getPages()">
+      <button class="pagination-link" [class.active]="page === currentPage" (click)="setPage(page)">
+        {{ page }}
+      </button>
+    </li>
+  </ul>
+</div> -->
+
+<!-- Modal for displaying detailed student information -->
+<div class="modalTemplate">
+  <ng-template #modalTemplate>
+    <h2>Admission Process</h2>
+    <div class="modal-header">
+      <ul class="nav nav-tabs">
+        <li class="nav-item" (click)="activeTab = 'personal'">
+          <a class="nav-link" [ngClass]="{ active: activeTab === 'personal' }"
+            >Personal Details</a
+          >
+        </li>
+        <li class="nav-item" (click)="activeTab = 'academic'">
+          <a class="nav-link" [ngClass]="{ active: activeTab === 'academic' }"
+            >Academic Details</a
+          >
+        </li>
+        <li class="nav-item" (click)="activeTab = 'fees-details'">
+          <a
+            class="nav-link"
+            [ngClass]="{ active: activeTab === 'fees-details' }"
+            >Fees Details</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="modal-body">
+      <!-- Form for personal details -->
+       @if(activeTab === 'personal'){
+
+      <div>
+        Personal Details
+        <form [formGroup]="userForm">
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>First Name</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.firstName }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <input
+                    class="user-name"
+                    type="text"
+                    formControlName="firstName"
+                    placeholder="Enter First Name"
+                    />
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Last Name</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.lastName }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <input
+                    class="user-name"
+                    type="text"
+                    formControlName="lastName"
+                    placeholder="Last Name"
+                    />
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>
+                  @if(!editMode){
+
+
+                  <div>
+                    @if(user?.email.length > 20 && !showFullEmail){
+                    <div
+                      class="user-name"
+                      style="
+                        max-width: 200px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      "
+                    >
+                      <span
+                        (click)="showFullEmail = true"
+                        style="cursor: pointer; color: blue"
+                      >
+                        {{ user?.email }}
+                      </span>
+                    </div>
+                  }
+                  @if(showFullEmail){
+
+
+                    <div
+
+                      style="
+                        max-width: 200px;
+                        word-wrap: break-word;
+                        white-space: normal;
+                      "
+                    >
+                      {{ user?.email }}
+                      <span
+                        (click)="showFullEmail = false"
+                        style="cursor: pointer; color: red"
+                      >
+                        (Hide)</span
+                      >
+                    </div>
+                  }
+                  @if(user?.email.length <= 20){
+
+
+                    <div
+                      class="user-name"
+                      style="white-space: normal"
+                    >
+                      {{ user?.email }}
+                    </div>
+                  }
+                  </div>
+                }
+                @if(editMode){
+
+                  <input
+                  class="user-name"
+                  type="email"
+                  formControlName="email"
+                  placeholder="Email"
+                  style="max-width: 200px"
+                  />
+                }
+                </td>
+              </tr>
+              <tr>
+                <td>Id</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?._id.slice(-7) }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <div class="user-name">
+                      {{ user?._id.slice(-7) }}
+                    </div>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Batch No.</td>
+                <td>
+                  <!-- Search Input -->
+                  @if(editMode){
+
+                    <input
+                    type="text"
+                    [(ngModel)]="searchText"
+                    (input)="searchBatch()"
+                    placeholder="Search Batches"
+                    />
+                  }
+
+                  <!-- List of Filtered Batches -->
+                  @if(filteredBatches.length > 0){
+
+                    <ul>
+                      <li
+                      *ngFor="let batch of filteredBatches"
+                      (click)="selectBatch(batch)"
+                      >
+                      {{ batch.name }}
+                    </li>
+                  </ul>
+                }
+                  <div class="user-name">
+                    {{ getSelectedBatchNumbers() }}
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Student Mobile No</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.mobileno }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <input
+                    class="user-name"
+                    type="tel"
+                    formControlName="mobileno"
+                    placeholder="Student Mobile No"
+                    />
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Parents Mobile No</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.parentsmobileno }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <input
+                    class="user-name"
+                    type="tel"
+                    formControlName="parentsmobileno"
+                    placeholder="Parents Mobile No"
+                    />
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>DOB</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.dob }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <input
+                    class="user-name"
+                    type="date"
+                    formControlName="dob"
+                    placeholder="Date of Birth"
+                    />
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Type(Verified/NonVerified)</td>
+                <td>
+                  @if(!editMode){
+
+                    <div class="user-name">
+                      {{ user?.isVerified }}
+                    </div>
+                  }
+                  @if(editMode){
+
+                    <div>
+                      <label>False</label>
+                      <input
+                      type="radio"
+                      id="verifiedFalse"
+                      name="isVerified"
+                      value="false"
+                      (change)="onStatusChange(user._id, false)"
+                      />
+                      <label>True</label>
+                      @if(editMode){
+
+                        <input
+                        type="radio"
+                        id="verifiedTrue"
+                        name="isVerified"
+                        value="true"
+                        (change)="onStatusChange(user._id, true)"
+                        />
+                      }
+                    </div>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Courses</td>
+                <td>
+                  <div>
+                    @for(course of courses;track course){
+
+                      <li>
+                        {{ course.name }}
+                      </li>
+                    }
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Add Courses to module</td>
+                <td>
+                  @if(editMode){
+
+
+                  <div class="container-wrapper">
+                    <ng-multiselect-dropdown
+                      [placeholder]="'select courses'"
+                      [settings]="dropdownSettings"
+                      [data]="dropdownList"
+                      [(ngModel)]="selectedItems"
+                      (onSelect)="onItemSelect($event)"
+                      (onSelectAll)="onSelectAll($event)"
+                      (onDeSelect)="onDeSelect($event)"
+                      (onDeSelectAll)="onAllUnselect($event)"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+
+
+
+                }
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </form>
+
+        Fees Details
+
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                  <td>Selected Modules</td>
+                  <td>
+                    <ul *ngIf="selectedItems.length > 0;">
+                      <li *ngFor="let item of selectedItems">
+                        {{ item.name }} - ${{ item.price }}
+                        <button (click)="onDeSelect(item)">Remove</button>
+                      </li>
+                    </ul>
+                    <p *ngIf="selectedItems.length === 0">No modules selected yet.</p>
+                  </td>
+              </tr>
+              <tr>
+                <td>Total fees</td>
+                <td>
+                  <div class="user-name">
+                    <input
+                      type="number"
+                      [value]="totalmodulefee"
+                      class="user-name"
+                      disabled
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Set installments</td>
+                <td>
+                  <input
+                    class="user-name"
+                    type="number"
+                    formControlName="installmentsAllowed"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Status</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ user?.status }}
+                  </div>
+                  <select
+                    *ngIf="editMode"
+                    formControlName="status"
+                    class="user-name"
+                  >
+                    <option value="Enrolled">Enrolled</option>
+                    <option value="Prospect">Prospect</option>
+                    <option value="Follow Up">Follow Up</option>
+                    <option value="Nurture">Nurture</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Date of Admission</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ user?.admissiondate }}
+                  </div>
+                  <input
+                    *ngIf="editMode"
+                    class="user-name"
+                    type="date"
+                    formControlName="admissiondate"
+                    placeholder="Date of Admission"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Set Follow up</td>
+                <td>
+                  <input
+                    type="date"
+                    [(ngModel)]="followUpdate"
+                    class="form-control"
+                    placeholder="Select Follow-Up Date"
+                  />
+                  <br />
+                  <textarea
+                    [(ngModel)]="description"
+                    class="form-control"
+                    placeholder="Enter Follow-Up Description"
+                  ></textarea>
+                  <br />
+                  <button class="btn btn-primary" (click)="saveFollowUp()">
+                    Save Follow-Up
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }@else if(activeTab === 'academic'){
+      <!-- Form for academic details -->
+      <div>
+        SSC
+
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>College Name</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscClg ? academicData?.sscClg : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Percentage</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscPer ? academicData?.sscPer : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Year of Passing</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        HSC/Diploma
+
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>College Name</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.hscClg ? academicData?.hscClg : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Percentage</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.hscPer ? academicData?.hscPer : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Year of Passing</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.hscYop ? academicData?.hscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        UG
+
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>College Name</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.ugClg ? academicData?.ugClg : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Percentage</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.ugPer ? academicData?.ugPer : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Year of Passing</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.ugYop ? academicData?.ugYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        PG
+
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>College Name</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.pgClg ? academicData?.pgClg : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Percentage</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.pgPer ? academicData?.pgPer : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Year of Passing</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.pgYop ? academicData?.pgYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }@else if(activeTab === 'fees-details'){
+
+      <!-- Fees details content here -->
+      <div>
+        <div class="container-wrapper">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>PaymentMode</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscClg ? academicData?.sscClg : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>ToWhom</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscPer ? academicData?.sscPer : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Total amount</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Paid fees</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Installment date</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Follow up</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Batch NO</td>
+                <td>
+                  <div *ngIf="!editMode" class="user-name">
+                    {{ academicData?.sscYop ? academicData?.sscYop : "NA" }}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">
+        Close
+      </button>
+      @if(!editMode && activeTab === 'personal'){
+
+        <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="edit()"
+        >
+        Edit
+      </button>
+    }
+    @if(editMode){
+
+      <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="save()"
+      >
+      Save
+    </button>
+  }
+  @if(editMode && activeTab === 'personal'){
+
+    <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="cancelEdit()"
+    >
+    Cancel Edit
+  </button>
+}
+    </div>
+  </ng-template>
+</div>

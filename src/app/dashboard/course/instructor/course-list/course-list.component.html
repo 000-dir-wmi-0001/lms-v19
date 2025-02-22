@@ -1,55 +1,68 @@
-<div *ngIf="isLoading" class="loader-overlay">
-  <div class="loader-container">
-    <div class="spinner"></div>
-    <p class="loading-text">Loading...</p>
-  </div>
-</div>
+@if(isLoading){
 
-<!-- Page Content -->  
+  <div class="loader-overlay">
+    <div class="loader-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+  </div>
+}
+
+<!-- Page Content -->
 <div class="p-4" id="content">
   <div class="container">
     <!-- search Course -->
     <div class="input-group my-4 align-items-center">
-      <input 
-        type="text" 
-        id="searchInput" 
-        class="form-control mr-2" 
+      <input
+        type="text"
+        id="searchInput"
+        class="form-control mr-2"
         placeholder="Search any Course"
-        [(ngModel)]="searchQuery" 
-        (ngModelChange)="onSearch()" 
-        #searchBox 
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()"
+        #searchBox
       />
       <button class="btn btn-primary" type="button" id="searchButton" (click)="onSearch()">
         <i class="fa fa-search pr-2"></i>search
       </button>
-      <button 
-        type="button" 
-        id="resetFilterButton" 
-        class="btn btn-secondary" 
-        *ngIf="shouldFilter"
+      @if(shouldFilter){
+
+        <button
+        type="button"
+        id="resetFilterButton"
+        class="btn btn-secondary"
+
         (click)="resetFilter()"
-      >
+        >
         x
       </button>
+    }
     </div>
 
     <!-- Add Course Button -->
-    <button
-      id="add-button"
-      type="button"
-      class="btn btn-primary mb-4"
-      *ngIf="getRole() == 'INSTRUCTOR'"
-      [routerLink]="['add']"
-    >
-      Add new course
-    </button>
+     @if(getRole() == 'INSTRUCTOR'){
+
+       <button
+       id="add-button"
+       type="button"
+       class="btn btn-primary mb-4"
+       [routerLink]="['add']"
+       >
+       Add new course
+      </button>
+    }
 
     <!-- Display course -->
     <div class="row">
-      <div *ngIf="courses.length === 0" class="col-12">No courses found.</div>
+      @if(courses.length === 0){
+
+        <div class="col-12">No courses found.</div>
+      }
       <div class="row w-100">
-        <div *ngFor="let course of courses; let i = index" class="col-md-4 col-sm-6 col-12 mb-4">
-          
+        @for(course of courses; let i = $index;track course){
+
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+
           <!-- Card -->
           <div class="card bg-light h-100 p-4 text-dark text-center">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -64,27 +77,34 @@
             </div>
             <div class="mt-auto">
               <button [routerLink]="course._id" class="btn btn-primary">View</button>&nbsp;&nbsp;&nbsp;
-              <button 
-                *ngIf="getRole() == 'STUDENT' && !checkAccessibility(course._id)" 
-                class="btn btn-success" 
+              @if(getRole() == 'STUDENT' && !checkAccessibility(course._id)){
+
+                <button
+                class="btn btn-success"
                 (click)="addToCart(course._id)"
-              >
+                >
                 Add to Cart
               </button>
-              <button 
-                *ngIf="userId == course.instructor" 
-                [routerLink]="course._id + '/update'" 
-                class="btn btn-secondary"
+            }
+            @if(userId == course.instructor){
+
+              <button
+              [routerLink]="course._id + '/update'"
+              class="btn btn-secondary"
               >
-                Update
-              </button>&nbsp;&nbsp;
-              <button 
-                *ngIf="userId == course.instructor" 
-                class="btn btn-danger" 
-                (click)="openModal(template)"
-              >
-                Delete
-              </button>
+              Update
+            </button>&nbsp;&nbsp;
+          }
+
+          @if(userId == course.instructor){
+
+            <button
+            class="btn btn-danger"
+            (click)="openModal(template)"
+            >
+            Delete
+          </button>
+        }
             </div>
             <ng-template #template>
               <div class="modal-body text-center">
@@ -96,13 +116,14 @@
           </div>
             <!--End Card -->
           </div>
+        }
         </div>
       </div>
       <!-- End Display course -->
     </div>
     <!-- End Page Content -->
   <!-- End Page Content -->
-  <!-- 
+  <!--
   <div class="py-5 container">
   <div class="container1">
     <div class="search-container">

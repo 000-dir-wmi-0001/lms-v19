@@ -1,0 +1,9 @@
+.profile-container {
+  margin: 50px auto;
+  max-width: 800px;
+  padding: 20px;
+  border: 1px solid #db7373;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(196, 150, 150, 0.2);
+  margin-left: 150px
+}
