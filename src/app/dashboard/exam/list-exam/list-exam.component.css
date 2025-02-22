@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.exam-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  border: 1px solid #e1e1e1;
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header.main {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+}
+
+.course-name,
+.topic-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.exam-type {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.exam-schedule,
+.exam-time {
+  font-size: 0.9rem;
+  color: #666;
+  padding-left: 10px;
+}
+
+.card-footer .btn {
+  margin: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.button-group .btn-outline-primary:hover,
+.button-group .btn-outline-secondary:hover,
+.button-group .btn-outline-danger:hover,
+.button-group .btn-outline-dark:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .exam-card {
+    width: 100%;
+  }
+}

@@ -1,1 +1,495 @@
-<p>profile works!</p>
+<div class="p-4">
+  <div class="profile-header d-flex align-items-center">
+    <input type="file" (change)="onFileSelected($event)" style="display: none" #fileInput>
+    <img
+      [src]="profilePictureUrl || '/assets/linkcodelogo.png'"
+      class="profile-image rounded-circle"
+      (click)="fileInput.click()"
+      title="Update Profile Picture"
+      alt="Profile Picture"
+      style="cursor: pointer; width: 120px; height: 120px;"
+    >
+    <div class="profile-details ms-3">
+      <h3>{{ firstName + " " + lastName }}</h3>
+      <p>{{ email }}</p>
+      <p>{{ role }}</p>
+    </div>
+  </div>
+
+
+  <div class="tabs mt-3">
+    <button (click)="activeTab = 'personal'" class="btn btn-outline-primary me-2" [class.active]="activeTab === 'personal'">Personal Info</button>
+    <button (click)="activeTab = 'academic'" class="btn btn-outline-primary me-2" [class.active]="activeTab === 'academic'">Academic Info</button>
+    <button (click)="activeTab = 'accountSetting'" class="btn btn-outline-primary" [class.active]="activeTab === 'accountSetting'">Account Settings</button>
+  </div>
+
+<!-- Displaying the Preview Form for Student if editStatus is not approved -->
+@if(activeTab === 'personal' && role === 'STUDENT' && editStatus !== 'approved'){
+  <div class="card mt-4 p-4 shadow">
+    <form class="form-container">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            [value]="firstName"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            [value]="lastName"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email Id:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [value]="email"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="mobileno" class="form-label">Mobile no.:</label>
+          <input
+            type="text"
+            id="mobileno"
+            name="mobileno"
+            [value]="mobileno"
+            disabled
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="dob" class="form-label">Date of Birth:</label>
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            [value]="dob"
+            disabled
+            class="form-control"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="address" class="form-label">Address:</label>
+          <textarea
+            id="address"
+            name="address"
+            rows="1"
+            [value]="address"
+            disabled
+            class="form-control"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Request to Edit Button -->
+      @if(editStatus !== 'approved'){
+
+        <div class="row mt-3">
+          <div class="d-flex justify-content-center align-items-center w-100">
+            <!-- Request to Edit Button -->
+            @if(editStatus !== 'pending'){
+
+              <div class="col-md-6">
+                <button
+              class="btn btn-warning w-100"
+              (click)="updateEditStatus(userId, 'request to edit')"
+              >
+              Request to Edit
+              </button>
+            </div>
+          }
+
+          <!-- Cancel Button -->
+          @if(editStatus === 'pending'){
+
+            <div class="col-md-6">
+              <button
+              class="btn btn-danger w-100"
+              (click)="updateEditStatus(userId, 'cancel')"
+              >
+              Cancel Request
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  }
+    </form>
+  </div>
+
+
+}
+
+<!-- Displaying the Editable Form after Request is Approved -->
+@if(activeTab === 'personal' && (role === 'INSTRUCTOR' || role === 'ADMIN' || (role === 'STUDENT' && editStatus === 'approved'))){
+
+  <div class="card mt-4 p-4 shadow">
+
+    <form [formGroup]="personalForm" class="form-container">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name: *</label>
+          <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          formControlName="firstName"
+          required
+          class="form-control"
+          [ngClass]="{'is-invalid': personalForm.get('firstName')?.invalid && personalForm.get('firstName')?.touched}">
+        @if(personalForm.get('firstName')?.invalid && personalForm.get('firstName')?.touched){
+
+          <div class="invalid-feedback">
+            First Name is required.
+          </div>
+        }
+      </div>
+      <div class="col-md-6">
+        <label for="lastName" class="form-label">Last Name: *</label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          formControlName="lastName"
+          required
+          class="form-control"
+          [ngClass]="{'is-invalid': personalForm.get('lastName')?.invalid && personalForm.get('lastName')?.touched}">
+        @if(personalForm.get('lastName')?.invalid && personalForm.get('lastName')?.touched){
+
+          <div class="invalid-feedback">
+            Last Name is required.
+          </div>
+        }
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="email" class="form-label">Email Id:</label>
+        <input
+          type="email"
+          value="{{ email }}"
+          disabled
+          required
+          class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="mobileno" class="form-label">Mobile no. *</label>
+        <input
+          type="number"
+          id="mobileno"
+          formControlName="mobileno"
+          class="form-control"
+          [ngClass]="{'is-invalid': personalForm.get('mobileno')?.invalid && personalForm.get('mobileno')?.touched}">
+        @if(personalForm.get('mobileno')?.invalid && personalForm.get('mobileno')?.touched){
+
+          <div class="invalid-feedback">
+            Mobile number is required.
+          </div>
+        }
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="parentsmobileno" class="form-label">Parents Mobile No:</label>
+        <input
+          type="number"
+          id="parentsmobileno"
+          formControlName="parentsmobileno"
+          class="form-control"
+          [ngClass]="{'is-invalid': personalForm.get('parentsmobileno')?.invalid && personalForm.get('parentsmobileno')?.touched}">
+        @if(personalForm.get('parentsmobileno')?.invalid && personalForm.get('parentsmobileno')?.touched){
+
+          <div class="invalid-feedback">
+            @if(personalForm.get('parentsmobileno')?.errors?.['required']){
+
+              mobile number is required.
+            }@else if (personalForm.get('parentsmobileno')?.errors?.['pattern']) {
+
+              Enter a valid 10-digit mobile number.
+            }
+          </div>
+        }
+      </div>
+      <div class="col-md-6">
+        <label for="dob" class="form-label">Date of Birth: *</label>
+        <input
+          type="date"
+          id="dob"
+          name="dob"
+          formControlName="dob"
+          required
+          class="form-control"
+          [ngClass]="{'is-invalid': personalForm.get('dob')?.invalid && personalForm.get('dob')?.touched}">
+        @if(personalForm.get('dob')?.invalid && personalForm.get('dob')?.touched){
+
+          <div class="invalid-feedback">
+            Date of Birth is required.
+          </div>
+        }
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="address" class="form-label">Address:</label>
+        <textarea
+          id="address"
+          name="address"
+          formControlName="address"
+          rows="3"
+          class="form-control"
+          placeholder="Enter your address"
+          [ngClass]="{'is-invalid': personalForm.get('address')?.invalid && personalForm.get('address')?.touched}"></textarea>
+          @if(personalForm.get('address')?.invalid && personalForm.get('address')?.touched){
+
+            <div class="invalid-feedback">
+              Address is required.
+            </div>
+          }
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <button
+          type="button"
+          (click)="savePersonalInfo()"
+          class="btn btn-primary w-100"
+          [disabled]="personalForm.invalid">
+          Save
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-secondary w-100">Next</button>
+      </div>
+    </div>
+  </form>
+</div>
+}
+
+
+
+<!-- Academic Info -->
+@if(activeTab === 'academic'){
+  <div class="card mt-4 p-4 shadow">
+    <h3>Academic Information</h3>
+    <!-- Ensure showData logic is correct -->
+    @if(showData){
+
+      <div class="card-body d-flex flex-wrap">
+        @for(section of ['ssc', 'hsc', 'ug', 'pg'];track section){
+
+          <div class="card m-2 p-3 shadow-sm" style="width: 18rem;">
+            <h4>{{ section | uppercase }}</h4>
+            <p><strong>College Name:</strong> {{ academicData[section + 'Clg'] || "NA" }}</p>
+            <p><strong>Year of Passing:</strong> {{ academicData[section + 'Yop'] || "NA" }}</p>
+            <p><strong>Percentage:</strong> {{ academicData[section + 'Per'] || "NA" }}</p>
+          </div>
+        }
+      </div>
+    }
+    @if(!showData){
+
+      <div class="card-body">
+        <p>No academic information available.</p>
+      </div>
+    }
+
+    <!-- Education Experience Form -->
+    <form [formGroup]="academicForm">
+      <div formArrayName="educationExperiences">
+        @for(education of educationExperiences; track education ;let i = $index){
+
+          <div [formGroupName]="i" class="mb-3">
+            <label for="educationLevel">Education Level:</label>
+            <select
+              id="educationLevel"
+              formControlName="educationLevel"
+              class="form-select mb-2"
+              [ngClass]="{'is-invalid': academicForm.get('educationExperiences.' + i + '.educationLevel')?.invalid && academicForm.get('educationExperiences.' + i + '.educationLevel')?.touched}">
+              <option value="">Select</option>
+              <option value="ssc">SSC</option>
+              <option value="hsc">HSC / DIPLOMA</option>
+              <option value="ug">UG</option>
+              <option value="pg">PG</option>
+            </select>
+            @if(academicForm.get('educationExperiences.' + i + '.educationLevel')?.invalid && academicForm.get('educationExperiences.' + i + '.educationLevel')?.touched){
+
+              <div class="invalid-feedback">
+                Please select an education level.
+              </div>
+            }
+
+
+            @if(academicForm.get('educationExperiences.' + i + '.educationLevel')?.value){
+
+              <div>
+                <label for="collegeName">College Name: *</label>
+                <input
+                  type="text"
+                  id="collegeName"
+                  name="collegeName"
+                  formControlName="collegeName"
+                  class="form-control mb-2"
+                  [ngClass]="{'is-invalid': academicForm.get('educationExperiences.' + i + '.collegeName')?.invalid && academicForm.get('educationExperiences.' + i + '.collegeName')?.touched}">
+                @if(academicForm.get('educationExperiences.' + i + '.collegeName')?.invalid && academicForm.get('educationExperiences.' + i + '.collegeName')?.touched){
+
+                  <div class="invalid-feedback">
+                    College Name is required.
+                  </div>
+                }
+
+                <label for="yop">Year of Passing: *</label>
+                <input
+                  type="text"
+                  id="yop"
+                  name="yop"
+                  formControlName="yop"
+                  class="form-control mb-2"
+                  [ngClass]="{'is-invalid': academicForm.get('educationExperiences.' + i + '.yop')?.invalid && academicForm.get('educationExperiences.' + i + '.yop')?.touched}">
+                @if(academicForm.get('educationExperiences.' + i + '.yop')?.invalid && academicForm.get('educationExperiences.' + i + '.yop')?.touched){
+
+                  <div class="invalid-feedback">
+                    Year of Passing is required.
+                  </div>
+                }
+
+                <label for="per">Percentage: *</label>
+                <input
+                  type="number"
+                  id="per"
+                  name="per"
+                  formControlName="per"
+                  class="form-control mb-2"
+                  [ngClass]="{'is-invalid': academicForm.get('educationExperiences.' + i + '.per')?.invalid && academicForm.get('educationExperiences.' + i + '.per')?.touched}">
+                @if(academicForm.get('educationExperiences.' + i + '.per')?.invalid && academicForm.get('educationExperiences.' + i + '.per')?.touched){
+
+                  <div class="invalid-feedback">
+                    Percentage is required.
+                  </div>
+                }
+                <!-- Save Button Moved Here -->
+                <button
+                  type="button"
+                  class="btn btn-success mt-2"
+                  (click)="saveAcademicInfo()"
+                  [disabled]="academicForm.get('educationExperiences.' + i)?.invalid">
+                  Save Academic Info
+                </button>
+              </div>
+            }
+          </div>
+        }
+        </div>
+        <button type="button" class="btn btn-outline-primary mt-2" (click)="addEducationExperience()">Add Education Experience</button>
+      </form>
+    </div>
+
+}
+
+
+
+  <!-- Account Settings -->
+  @if(activeTab === 'accountSetting'){
+    <div class="card mt-2 p-4 shadow text-center mx-auto w-50">
+      <form [formGroup]="changePasswordForm" (ngSubmit)="onSubmit()" class="form">
+        <div>
+          <h2>Change Password</h2>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="form-group mt-3 text-start">
+                <label for="oldPassword" class="form-label">Old Password</label>
+                <input
+                  type="password"
+                  id="oldPassword"
+                  formControlName="oldPassword"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': changePasswordForm.get('oldPassword')?.invalid && changePasswordForm.get('oldPassword')?.touched}">
+                <div *ngIf="changePasswordForm.get('oldPassword')?.invalid && changePasswordForm.get('oldPassword')?.touched" class="invalid-feedback">
+                  Old Password is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="form-group mt-3 text-start">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  formControlName="newPassword"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched}">
+                @if(changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched){
+                  <div class="invalid-feedback">
+                    @if(changePasswordForm.get('newPassword')?.hasError('required')){
+
+                      New Password is required.
+                    }@else if (changePasswordForm.get('newPassword')?.hasError('minlength')) {
+
+                      Password must be at least 8 characters.
+                    }
+                  </div>
+                }
+
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <div class="form-group mt-3 text-start">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': changePasswordForm.get('confirmPassword')?.invalid &&
+                    changePasswordForm.get('confirmPassword')?.touched
+                  }"
+                >
+                @if(changePasswordForm.get('confirmPassword')?.touched){
+
+                  <div class="invalid-feedback">
+                    @if(changePasswordForm.get('confirmPassword')?.hasError('required')){
+
+                      Confirm Password is required.
+                    }@else if (changePasswordForm.hasError('mismatch') && changePasswordForm.get('confirmPassword')?.dirty) {
+
+                      Passwords do not match.
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-primary mt-4 w-100" [disabled]="changePasswordForm.invalid">Change Password</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  }
+</div>

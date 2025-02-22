@@ -1,0 +1,244 @@
+/* Form Structure */
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.invalid-feedback {
+  color: #d9534f;
+  font-size: 0.875em;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.loader {
+  font-size: 1.2em;
+  color: #e9eef5;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mcq-container {
+  margin-top: 20px;
+}
+
+.mcq-question {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.question {
+  font-weight: bold;
+}
+
+.options {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.option {
+  padding: 5px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: block;
+  width: 100px;
+  margin: 20px auto 0;
+}
+
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.common-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  /* Increased padding for a more spacious look */
+  background-color: #ffffff;
+  /* White background for the form */
+  border-radius: 10px;
+  /* Rounded corners for a softer appearance */
+  border: 2px solid #007bff;
+  /* Blue border for the outermost section */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for depth */
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #007bff;
+  /* Blue border for input fields */
+  transition: border-color 0.3s;
+  /* Transition effect for interaction */
+}
+
+.form-control:focus {
+  border-color: #0e60b9;
+  /* Darker blue on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* Glow effect */
+}
+
+/* Buttons */
+.form-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  /* Space below each button */
+}
+
+.ml-3 {
+  margin-left: 15px;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+  /* Darker blue for hover effect */
+  color: white;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: #6c757d;
+  /* Secondary color */
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  /* Darker gray on hover */
+  color: white;
+}
+
+/* General Layout */
+.bold-text {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* Background Color */
+body {
+  background-color: #0056b3;
+  /* Blue background for the entire page */
+}
+
+.background-color {
+  background-color: #007bff;
+  /* Blue background for the container */
+  padding: 30px;
+  border-radius: 10px;
+  /* Rounded corners for the container */
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-top: 50px;
+  margin-left: 17rem;
+  transition: all 0.4s;
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}
+
+/* Additional Styles for Validation */
+.invalid-feedback {
+  color: #dc3545;
+  /* Bootstrap's danger color for errors */
+}
+
+.custom-li {
+  display: block;
+  /* Ensures proper display of options */
+}
+
+/* Button Styles for Add Manually and Add by LLM */
+.add-method-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  /* Spacing between buttons */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add Manually Button */
+.add-method-button.add-manually {
+  background-color: #007bff;
+  /* Primary blue color */
+  color: #ffffff;
+  border: 2px solid #0056b3;
+  /* Darker blue border */
+}
+
+.add-method-button.add-manually:hover {
+  background-color: #0056b3;
+  /* Darker blue on hover */
+  color: #ffffff;
+}
+
+/* Add by LLM Button */
+.add-method-button.add-llm {
+  background-color: #6c757d;
+  /* Secondary gray color */
+  color: #ffffff;
+  border: 2px solid #5a6268;
+  /* Darker gray border */
+}
+
+.add-method-button.add-llm:hover {
+  background-color: #5a6268;
+  /* Darker gray on hover */
+  color: #ffffff;
+}
+
+/* Alignment */
+.add-method-buttons-container {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

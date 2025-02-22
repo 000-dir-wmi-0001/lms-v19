@@ -1,0 +1,76 @@
+.app-component {
+  width: 98%;
+}
+
+.mr-2 {
+  margin-left: 25px;
+
+}
+
+.menu-box {
+  height: 650px;
+  background-color: #8080801f;
+  width: 65px;
+  overflow: hidden;
+}
+
+.menu-box:hover {
+  width: 215px;
+  transition: 0.3s;
+}
+
+.menu-items {
+  list-style: none;
+  line-height: 60px;
+  padding-left: 0px;
+  height: 100%;
+}
+
+.menu-items li {
+  font-size: 18px;
+  font-weight: 600;
+  padding-left: 25px;
+  cursor: pointer;
+  display: flex;
+}
+
+.menu-items li:hover {
+  background-color: white;
+  color: #7d7d7d;
+  -webkit-box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+  box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+
+
+}
+
+.onActive {
+  color: #fcfcfc;
+  background-color: rgba(50, 150, 233, 0.692);
+  -webkit-box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+  -moz-box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+  box-shadow: 10px 10px 15px -9px rgba(0, 0, 0, 0.34);
+
+}
+
+.onActive:hover {
+  color: #fcfcfc !important;
+  background-color: rgba(50, 150, 233, 0.692) !important;
+
+}
+
+.menu-items li i {
+  margin-left: 25px;
+  font-size: 26px;
+  margin: 0px 20px 0px 0px;
+  position: relative;
+  top: 15px;
+  width: 35px;
+}
+
+.tabs {
+  font-size: 22px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin-top: 50px;
+}

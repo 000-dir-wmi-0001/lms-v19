@@ -1,0 +1,91 @@
+/* Style for the overall section */
+section {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Input field styling */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Button styling */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for MCQ questions and options */
+p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+ul div {
+  margin-bottom: 8px;
+}
+
+/* Styling for radio buttons and options */
+input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+label input[type="radio"]+span {
+  font-size: 16px;
+}
+
+
+
+/* For responsive design */
+@media (max-width: 768px) {
+  section {
+    width: 90%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 14px;
+  }
+}

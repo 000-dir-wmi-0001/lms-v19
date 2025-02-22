@@ -1,0 +1,51 @@
+<section class="app-component">
+  <div class="row">
+      <div class="col-lg-2">
+          <div class="menu-box">
+              <div class="side-menu-list">
+                  <ul class="menu-items">
+                      <li (click)="goTo('Home')" [ngClass]="{'onActive':selectedMenu == 'Home'}">
+                        <fa-icon [icon]="home"></fa-icon>Home</li>
+                      <li (click)="goTo('Profile')" [ngClass]="{'onActive':selectedMenu == 'Profile'}">
+                        <fa-icon [icon]="profile"></fa-icon> Profile</li>
+                      <li (click)="goTo('Contact')" [ngClass]="{'onActive':selectedMenu == 'Contact'}">
+                        <fa-icon [icon]="contact"></fa-icon>Admin</li>
+                      <li (click)="goTo('Add_category')" [ngClass]="{'onActive':selectedMenu == 'Add_category'}">
+                          <fa-icon [icon]="add_category"></fa-icon>Add Category</li>
+                      <li (click)="goTo('View_Category')" [ngClass]="{'onActive':selectedMenu == 'View_category'}">
+                          <fa-icon [icon]="view_Category"></fa-icon>View Category</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <div clas="col-lg-10">
+          <div class="side-menu-context">
+            @if(selectedMenu == 'Home'){
+
+              <div class="tabs">
+                This is home
+
+              </div>
+            }@else if (selectedMenu == 'Profile') {
+
+              <div class="tabs">
+                This is home
+
+              </div>
+            }@else if (selectedMenu == 'Contact') {
+
+              <div class="tabs">
+                This is home
+
+              </div>
+            }@else if(selectedMenu == 'Add_category'){
+
+              <div class="tabs">
+                This is home
+
+              </div>
+            }
+          </div>
+      </div>
+  </div>
+</section>

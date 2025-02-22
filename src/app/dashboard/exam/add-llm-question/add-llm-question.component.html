@@ -1,1 +1,47 @@
-<p>add-llm-question works!</p>
+<section>
+  <!-- Input fields for topic and difficulty -->
+  <label for="topic">Topic:</label>
+  <input type="text" id="topic" [(ngModel)]="topic" placeholder="Enter topic" />
+
+
+  <label for="difficulty">Difficulty Level:</label>
+  <select id="difficulty" [(ngModel)]="difficulty">
+    <option value="" disabled selected>Select difficulty level</option>
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+
+
+
+    <!-- Show submit button only when all questions are answered -->
+    <button (click)="generateQuestions()">Generate MCQs</button>
+    @if(loading){
+      <div class="loader">Loading...</div>
+    }
+    <!-- Show questions only after they have been generated -->
+    @if(!loading && mcqResult.length > 0){
+      <div>
+        @for(mcq of mcqResult; let i = $index;track mcq){
+          <div>
+            <p>{{ mcq.question }}</p>
+            <ul>
+              @for( option of mcq.options; track option){
+
+                <li>{{ option }}</li>
+              }
+
+            </ul>
+          </div>
+        }
+
+        <!-- Show submit button only when all questions are answered -->
+        <div>
+          <button (click)="saveMcqsToBackend()">Save</button>
+
+
+        </div>
+      </div>
+    }
+
+</section>

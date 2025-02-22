@@ -1,1 +1,198 @@
-<p>stud-dashboard works!</p>
+<div class="page-content" id="content">
+  <div class="container p-1">
+      <div class="row mb-3">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-10 col-12 header">
+                      <h5><strong>Welcome Back!</strong></h5>
+                      <p>You have completed 60% of your goal this week! <br>
+                          Start a new goal and improve your result</p>
+                      <button class="btn btn-info">Learn More</button>
+                  </div>
+                  <div class="col-sm-2 col-12 header text-center">
+                      <div class="floating-img ">
+                          <img src="stud_header.svg" class="img-fluid image-shape" alt="">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Live Classes Section -->
+      <div class="row  ">
+          <div class="col-md-8">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h5>Live Classes</h5>
+                      <div class="row justify-content-center">
+                          <div class="col-lg-4 col-md-6 mb-4">
+                              <div class="card  card-shadow">
+                                  <img src="java.svg" alt="Java">
+                                  <div class="card-body">
+                                      <h5 class="card-title">Java</h5>
+                                      <p class="card-text">infoinfoinfo</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-4 col-md-6 mb-4">
+                              <div class="card  card-shadow">
+                                  <img src="java.svg" alt="MEAN Stack">
+                                  <div class="card-body">
+                                      <h5 class="card-title">MEAN STACK</h5>
+                                      <p class="card-text">infoinfoinfo</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-4 col-md-6 mb-4">
+                              <div class="card  card-shadow">
+                                  <img src="java.svg" alt="CPP">
+                                  <div class="card-body">
+                                      <h5 class="card-title">CPP</h5>
+                                      <p class="card-text">infoinfoinfo</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Enrolled Courses Section -->
+              <div class="row  card-shadow">
+                  <div class="col-md-12">
+                      <div class="header2 mb-4">
+                          <h5 class="text-left">Enrolled Courses</h5>
+                          <a href="#" [routerLink]="['course/']">See all</a>
+                      </div>
+                      <div class="row my-2 cards">
+                          <div class="col-lg-6 my-2">
+                              <div class="course-card">
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <h5 class="course-title h5">Object oriented programming</h5>
+                                          <button class="view-button">View</button>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <img src="PC.svg" alt="OOP">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 my-2">
+                              <div class="course-card">
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <h5 class="course-title h5">Fundamentals of database systems</h5>
+                                          <button class="view-button">View</button>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <img src="PC.svg" alt="DB">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row my-2">
+                          <div class="col-lg-6 my-2">
+                              <div class="course-card">
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <h5 class="course-title h5">Object oriented programming</h5>
+                                          <button class="view-button">View</button>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <img src="PC.svg" alt="OOP">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-lg-6 my-2">
+                              <div class="course-card">
+                                  <div class="row">
+                                      <div class="col-md-8">
+                                          <h5 class="course-title h5">Fundamentals of database systems</h5>
+                                          <button class="view-button">View</button>
+                                      </div>
+                                      <div class="col-md-4">
+                                          <img src="PC.svg" alt="DB">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Right Section: Course Instructor and Notices -->
+            <div class="col-md-4">
+              <h5 class="header2 ">Course Instructor</h5>
+              <div class="row">
+                  <div class="col-md-12">
+
+                      <div>
+                        @for(instructor of instructors; track instructors ){
+                          <img class="rounded-circle img-fluid" [src]="instructor.profileImageUrl || 'stud_header.svg'" [alt]="instructor.name">
+                        }
+                          <!-- <img class="rounded-circle img-fluid" *ngFor="let instructor of instructors" [src]="instructor.profileImageUrl || 'stud_header.svg'" [alt]="instructor.name"> -->
+                          <div class="row">
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 1">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 2">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 3">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 4">
+                              </div>
+
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 1">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 2">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 3">
+                              </div>
+                              <div class="col-md-3">
+                                  <img class="img-fluid fluid-1" src="stud_header.svg" alt="Image 4">
+                              </div>
+                          </div>
+
+
+                          <br><br>
+
+                          <!-- Daily Notice Section -->
+
+                          <div class="card-shadow mb-5">
+                              <div class="nots">
+                                  <div class="header2">
+                                      <h5 class="text-left">Daily notice</h5>
+                                      <a href="#" [routerLink]="['student-dailynotice/']">See all</a>
+                                  </div>
+                                  <div
+                                      class="notice-container"
+                                      *ngIf="topNotices.length > 0">
+                                      <div *ngFor="let notice of topNotices" class="notice-item">
+                                          <h6>{{ notice.title }}</h6>
+                                          <p class="text-secondary">{{ notice.description }}</p>
+                                      </div>
+                                  </div>
+                                  <div *ngIf="topNotices.length === 0">
+                                      <p class="text-secondary">No notices available at the moment.</p>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+      </div>
+</div>

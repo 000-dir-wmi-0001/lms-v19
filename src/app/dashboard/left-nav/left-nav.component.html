@@ -1,1 +1,235 @@
-<p>left-nav works!</p>
+<div class="left" [ngClass]="{'collapsed': !isSidebarExpanded}">
+  <div class="sidebar" [ngClass]="{'collapsed': !isSidebarExpanded}">
+    <div class="sidebar-header d-flex align-items-center justify-content-between">
+      @if(isSidebarExpanded){
+
+        <a href="#">
+          <img src="linkcodelogo.png" alt="..." width="180" height="40" class="mt-2"/>
+        </a>
+      }
+      <button (click)="toggleSidebar()" class="sidebar-toggle-btn mt-2 d-flex align-items-center">
+        <i class="fa" [ngClass]="{
+          'fa-bars': !isSidebarExpanded,
+          'fa-chevron-left': isSidebarExpanded,
+          'fa-chevron-right': isMobile
+        }"></i>
+      </button>
+    </div>
+
+
+
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link"  [routerLink]="['']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'dashboard'}" (click)="setActiveLink('home')">
+          <img src="home.png" alt="Home" width="40" class="px-2 py-2" />
+          @if(isSidebarExpanded){
+
+            <span>Home</span>
+          }
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/dashboard/exam/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'exam'}" (click)="setActiveLink('exam')">
+          <img src="Test.png" alt="Exam Portal" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+
+            <span>Exam Portal</span>
+          }
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" [routerLink]="['/dashboard/course/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'course'}" (click)="setActiveLink('course')">
+          <img src="Books.png" alt="Course" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+
+            <span>Course</span>
+          }
+
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+           [routerLink]="getRole() === 'STUDENT' ? ['/dashboard/batch/userbatches'] : ['batch']"
+           [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === (getRole() === 'STUDENT' ? 'student-class' : 'batch')}"
+           (click)="setActiveLink(getRole() === 'STUDENT' ? 'batch/userbatches' : 'batch')">
+          <img src="Test.png" alt="Batch" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+            <span>{{ getRole() === 'STUDENT' ? 'Student Class' : 'Batch' }}</span>
+          }
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link bg-light" [routerLink]="['/dashboard/code-sharing/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'code-sharing'}" (click)="setActiveLink('code-sharing')">
+          <img src="sharee.png" alt="Code Sharing" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+
+            <span>Code Sharing</span>
+          }
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link bg-light" [routerLink]="['/dashboard/task/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'task'}" (click)="setActiveLink('task')">
+          <img src="tasks.png" alt="Work Report" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+
+            <span>Work Report</span>
+          }
+        </a>
+      </li>
+
+      @if(getRole() === 'STUDENT'){
+
+          <li class="nav-item">
+            <a href="#" class="nav-link bg-light" [routerLink]="['/dashboard/student-dailynotice/']">
+              <img src="notice.png" alt="Notice Icon" width="40" class="px-2 py-2" />
+              <span *ngIf="isSidebarExpanded">Daily Notice</span>
+            </a>
+          </li>
+        <!-- }
+      @if(getRole()=='STUDENT'){ -->
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/fee/fee-receipt']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'fee-receipt'}" (click)="setActiveLink('fee-receipt')">
+            <img src="receipts_lms.png" alt="Fee Receipts" width="35" class="px-2 py-2" />&nbsp;
+            @if (isSidebarExpanded) {
+
+              <span>Fee Receipts</span>
+            }
+          </a>
+        </li>
+      }
+      @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/get-enquiry/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'get-enquiry'}" (click)="setActiveLink('get-enquiry')">
+            <img src="enquiry.png" alt="Enquiry" width="40" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>Enquiry</span>
+            }
+          </a>
+        </li>
+      <!-- }
+      @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+
+        <li class="nav-item" >
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/user/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'user'}" (click)="setActiveLink('user')">
+            <img src="solid_users.png" alt="View All Users" width="42" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>View All Users</span>
+            }
+          </a>
+        </li>
+      <!-- } -->
+
+<!--       <li class="nav-item" *ngIf="getRole()=='ADMIN' || getRole()=='SUPERADMIN'">
+        <a class="nav-link bg-light" [routerLink]="['user/add']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'user/add'}" (click)="setActiveLink('user/add')">
+          <img src="user.png" alt="Add User" width="42" class="px-2 py-2" />
+          <span *ngIf="isSidebarExpanded">Add User</span>
+        </a>
+      </li> -->
+      <!-- @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+
+        <li class="nav-item" *ngIf="">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/fee/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'fee'}" (click)="setActiveLink('fee')">
+            <img src="cart.png" alt="Fee Register" width="40" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>Fee Register</span>
+            }
+          </a>
+        </li>
+      <!-- } -->
+
+      <!-- @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/admission/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'admission'}" (click)="setActiveLink('admission')">
+            <img src="cart.png" alt="Admission" width="40" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>Admission</span>
+            }
+          </a>
+        </li>
+      <!-- }
+
+      @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/alumni-list/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'auth/alumni'}" (click)="setActiveLink('auth/alumni')">
+            <img src="user.png" alt="Alumni" width="42" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>Alumni</span>
+            }
+          </a>
+        </li>
+      <!-- }
+      @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/Placements/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'Placements'}" (click)="setActiveLink('Placements')">
+            <img src="cart.png" alt="Placements" width="40" class="px-2 py-2" />
+            @if (isSidebarExpanded) {
+
+              <span>Placements</span>
+            }
+          </a>
+        </li>
+
+      <!-- }
+      @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'){ -->
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['/dashboard/Reviews/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'Reviews'}" (click)="setActiveLink('Reviews')">
+            <img src="cart.png" alt="Reviews" width="40" class="px-2 py-2" />
+            <span *ngIf="isSidebarExpanded">Reviews</span>
+          </a>
+        </li>
+      }
+      <!--  <li class="nav-item">
+        <a href="#"
+        class="nav-link bg-light"
+        [routerLink]="getRole() === 'STUDENT' ? ['Live-class/stud'] : ['Live-class/host']"
+        [ngClass]="{'active-link': activeLink === (getRole() === 'STUDENT' ? 'Live-class/stud' : 'Live-class/host')}"
+        (click)="setActiveLink(getRole() === 'STUDENT' ? 'Live-class/stud' : 'Live-class/host')">
+        <img src="online-meeting.png" alt="Online Meeting" width="40" class="px-2 py-2" />
+        <span *ngIf="isSidebarExpanded">{{ getRole() === 'STUDENT' ? 'Student Class' : 'Live Class' }}</span>
+
+      </a>
+    </li> -->
+
+
+    @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN'  || getRole()=='INSTRUCTOR'){
+
+      <li class="nav-item" *ngIf="">
+        <a class="nav-link bg-light" [routerLink]="['/dashboard/admin-dailynotice/']" [ngClass]="{'collapse ':!isSidebarExpanded, 'active-link': activeLink === 'admin-dailynotice'}">
+          <img src="notice.png" alt="..." width="40" class="px-2 py-2" />
+          <span *ngIf="isSidebarExpanded">Daily Notice</span>
+        </a>
+      </li>
+    }
+    @if(getRole()=='ADMIN' || getRole()=='SUPERADMIN' || getRole()=='STUDENT' && !pendingFee){
+      <li class="nav-item">
+        <a class="nav-link bg-light" [routerLink]="['/dashboard/certificate/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'certificate'}" (click)="setActiveLink('certificate')">
+          <img src="trophy.png" alt="Request Certificate" width="40" class="px-2 py-2" />
+          @if (isSidebarExpanded) {
+
+            <span>Request Certificate</span>
+          }
+        </a>
+      </li>
+    }
+    </ul>
+  </div>
+  @if(!isSidebarExpanded && isMobile){
+
+    <div class="sidebar-overlay sidebar-toggle-btn" (click)="toggleSidebar()">
+      <i class="fa" [ngClass]="{'fa-chevron-right': isSidebarExpanded, 'fa-chevron-left': !isSidebarExpanded}"></i>
+    </div>
+  }
+</div>

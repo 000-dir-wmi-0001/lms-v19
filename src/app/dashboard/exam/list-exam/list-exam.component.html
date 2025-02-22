@@ -1,1 +1,117 @@
-<p>list-exam works!</p>
+<!-- Page Content -->
+<div class="p-4" id="content">
+  <!-- Search -->
+  <div class="input-group my-4 mt-5 justify-content-center">
+    <input
+      type="text"
+      class="form-control w-50 search-input"
+      placeholder="Search Exams by Course Name"
+      [(ngModel)]="searchQuery"
+      (ngModelChange)="onSearch()"
+      #searchExam
+    />
+    <button class="btn btn-primary search-btn" type="button" (click)="onSearch()">
+      <i class="fa fa-search pr-2"></i> Search
+    </button>
+  </div>
+
+  <div class="text-center">
+    @if(!setvalue){
+
+      <button [routerLink]="'./add'" class="btn btn-primary btn-lg mt-3 add-exam-btn">
+        + Add New Exam
+      </button>
+    }
+    <br /><br />
+
+    @if(isLoading){
+
+      <div class="loader-container">
+        <div class="spinner-border" role="status">
+          <span class="sr-only" id="loading"></span>
+        </div>
+      </div>
+    }
+
+    <nav class="navbar navbar-light bg-light exam-navbar">
+      <a class="navbar-brand">Exams</a>
+      <button type="button" class="btn btn-link">See All</button>
+    </nav>
+
+    <ul class="nav nav-tabs exam-tabs justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Scheduled Exam</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">History</a>
+      </li>
+    </ul>
+
+    <!-- List of Exams (Filtered by Role) -->
+    <div class="row">
+      @for(exam of filteredExams;track exam){
+        <div class="col-md-6">
+          <div class="card mt-5 mb-5 exam-card">
+            <div class="card-header main">
+              <h5 class="course-name mb-1"><b>Course:</b> {{ exam?.course?.description }}</h5>
+              <h6 class="topic-name mb-1"><b>Topic:</b> {{ exam?.name }}</h6>
+              <p class="exam-type mb-1"><b>Type:</b> {{ exam?.type }}</p>
+            </div>
+
+            <div class="card-body">
+              <div class="exam-schedule mb-2">
+                <i class="fa fa-calendar mr-2" aria-hidden="true"></i>&nbsp;
+                <span><b>Date: </b> {{ exam?.startDate | date:'shortDate' }}</span>
+              </div>
+              <div class="exam-time">
+                <i class="fa fa-clock mr-2" aria-hidden="true"></i>&nbsp;
+                <span><b>Time:</b> {{ exam?.startTime }} - {{ exam?.endTime }}</span>
+              </div>
+            </div>
+
+            <div class="card-footer text-center button-group">
+              <!-- Instructor Buttons -->
+              @if(getRole() === 'INSTRUCTOR' || 'ADMIN'){
+
+                <ng-container>
+                  <button (click)="examDetails(exam, 'view')" class="btn btn-outline-primary">View Questions</button>
+                  @if(exam?.instructor === userId){
+
+                    <button (click)="examDetails(exam, 'add')" class="btn btn-outline-secondary">Add Questions</button>
+                  }
+                  @if(exam?.instructor === userId){
+
+                    <button (click)="deleteExam(exam?._id)" class="btn btn-outline-danger">Delete</button>
+                  }
+                  @if(exam?.instructor === userId && exam?.type === 'VERBAL'){
+
+                    <button (click)="gotocheckVerbalresult(exam?._id)" class="btn btn-outline-dark">Check Result</button>
+                  }
+                </ng-container>
+              }
+
+              <!-- Student Buttons -->
+              @if(getRole() === 'STUDENT'){
+
+                <ng-container>
+                  @if(exam?.type === 'MCQ'){
+
+                    <button (click)="attemptexam(exam,exam?._id)" class="btn btn-primary">Attempt MCQ Exam</button>
+                  }
+                  @if(exam?.type === 'CODING'){
+                    <button (click)="attemptCODINGexam(exam)" class="btn btn-primary">Attempt Coding Exam</button>
+                  }
+                  @if(exam?.type === 'VERBAL'){
+                    <button (click)="attemptVERBALexam(exam)" class="btn btn-primary">Attempt Verbal Exam</button>
+                  }
+                </ng-container>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
