@@ -1,0 +1,94 @@
+<!-- Tabs for Verified & Unverified Users -->
+<div class="tabs mt-3">
+  <button (click)="activeTab = 'verified'" class="btn btn-outline-primary me-2" [class.active]="activeTab === 'verified'">
+    Verified Users
+  </button>
+  <button (click)="activeTab = 'unverified'" class="btn btn-outline-primary" [class.active]="activeTab === 'unverified'">
+    Unverified Users
+  </button>
+</div>
+
+<!-- USERS SECTION (Verified Users) -->
+<div *ngIf="activeTab === 'verified'" class="mt-4">
+  <h3>Verified Users</h3>
+  <div class="table-container mt-3" *ngIf="!isLoading">
+    <table class="table table-bordered table-hover text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th *ngFor="let data of userList">{{ data.name | titlecase }}</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.type }}</td>
+          <td>
+            <div class="dropdown">
+                  <button class="dropdown-item text-danger" (click)="deleteUser(user._id)">
+                      Delete
+                  </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- LOGIN ACCESS SECTION (Unverified Users) -->
+<div *ngIf="activeTab === 'unverified'" class="mt-4">
+  <h3>Unverified Users</h3>
+  <div class="table-container mt-3" *ngIf="!isLoading">
+    <table class="table table-bordered table-hover text-center align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th *ngFor="let data of userList">{{ data.name | titlecase }}</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of loginAccessUsers">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.type }}</td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <button class="dropdown-item text-success" (click)="approveUser(user._id)">
+                    <i class="bi bi-check-circle"></i> Approve
+                  </button>
+                </li>
+                <li>
+                  <!-- <button class="dropdown-item text-warning" (click)="rejectUser(user._id)">
+                    <i class="bi bi-x-circle"></i> Reject
+                  </button> -->
+                </li>
+                <li>
+                  <button class="dropdown-item text-danger" (click)="openModal(template,user)">
+                    <i class="bi bi-trash"></i> Reject
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #template>
+    <div class="modal-body">
+      <p>Are you sure you want to reject {{ selectedUser?.firstName }}? This action will also remove user from the database.</p>
+      <button class="btn btn-danger" (click)="deleteUser(selectedUser?._id)">Yes</button>
+      <button class="btn btn-secondary" (click)="closeModal()">No</button>
+    </div>
+  </ng-template>
+</div>
+

@@ -1,0 +1,192 @@
+.header {
+  background-color: rgba(211, 242, 253, 0.975);
+  position: relative;
+  padding: 10px;
+  /* Adjust padding as needed */
+  top: 5px;
+  /* Moves the background 5px down */
+  padding-bottom: 1.4rem;
+}
+
+.floating-img {
+  position: absolute;
+  top: -1rem;
+  /* Moves the image 5px above the top of the background */
+  left: 0;
+  margin-top: 1rem;
+  margin-left: 3rem;
+
+
+}
+
+img.image-shape {
+  height: 10.4rem;
+}
+
+@media (max-width: 768px) {
+  .floating-img {
+    /* position: absolute;
+      text-align: center;
+      margin-bottom: 10px; */
+    display: none;
+
+  }
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .header {
+    padding: 10px;
+    top: 0;
+  }
+
+  .floating-img {
+    position: static;
+    text-align: center;
+    margin-bottom: 10px;
+
+  }
+}
+
+
+.card {
+  border: none;
+  text-align: center;
+  transition: transform 0.3s;
+
+}
+
+.card:hover {
+  border: solid;
+  border-color: blueviolet;
+  transform: scale(1.05);
+
+}
+
+.card img {
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+
+.course-card {
+  border: 2px solid #d3d3f3;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s;
+
+}
+
+.course-card:hover {
+  transform: scale(1.05);
+}
+
+.course-card img {
+  width: auto;
+  height: auto;
+}
+
+.course-title {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #0056b3;
+}
+
+.view-button {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+
+.view-button:hover {
+  background-color: #0056b3;
+}
+
+.header2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+
+}
+
+.nots {
+
+  height: 440px;
+}
+
+.header2 a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.header2 a:hover {
+  text-decoration: underline;
+}
+
+.card-shadow {
+  margin-top: 2rem;
+  background-color: #ffffff;
+  /* White background for contrast */
+  border-radius: 10px;
+  /* Smooth corners for a polished look */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  /* Universal shadow for all cards */
+  padding: 2px 2px;
+  /* Inner padding for consistent spacing */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  /* Smooth transitions */
+}
+
+.card-shadow:hover {
+  transform: translateY(-5px);
+  /* Lift card slightly on hover */
+  box-shadow: 0 10px 15px rgba(180, 242, 253, 0.975);
+  /* Enhanced shadow for hover */
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.2rem 1rem;
+}
+
+.info {
+  display: flex;
+}
+
+.fluid-1 {
+
+  height: 95px;
+
+}
+
+.notice-container {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.notice-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.notice-item:last-child {
+  border-bottom: none;
+}

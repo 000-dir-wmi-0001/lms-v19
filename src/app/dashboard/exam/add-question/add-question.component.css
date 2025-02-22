@@ -1,0 +1,64 @@
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+  overflow-x: hidden;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+textarea.form-control,
+input.form-control {
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+}
+
+input.form-check-input {
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+hr {
+  border: 1px solid #ccc;
+}
+
+.custom-margin {
+  margin-left: 20px;
+  /* Adjust the value as needed */
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+
+  }
+}

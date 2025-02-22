@@ -1,0 +1,124 @@
+<!-- Page Content -->
+<div class="">
+  <h2 class="text-center">Add New Lecture</h2>
+  <div class="lecture-form">
+    <form [formGroup]="lectureForm" (ngSubmit)="uploadFileToS3()">
+      <div class="form-group title">
+        <label>Title</label>
+        <input
+          type="text"
+          placeholder="Lecture title"
+          formControlName="title"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && formControls['title'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && formControls['title'].errors"
+          class="invalid-feedback"
+          style="color: #e90f0f"
+        >
+          <div *ngIf="formControls['title'].errors['required']">
+            Title is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          type="text"
+          placeholder="Lecture description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && formControls['description'].errors
+          }"
+        ></textarea>
+        <div
+          *ngIf="submitted && formControls['description'].errors"
+          class="invalid-feedback"
+          style="color: #e90f0f"
+        >
+          <div *ngIf="formControls['description'].errors['required']">
+            Description is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group radiobutton">
+        <label>Status</label>
+        <input type="radio" value="Free" formControlName="status" />Free
+        &nbsp;&nbsp;
+        <input type="radio" value="Paid" formControlName="status" />Paid
+        <div
+          *ngIf="submitted && formControls['status'].errors"
+          class="invalid-feedback"
+          style="color: #e90f0f"
+        >
+          <div *ngIf="formControls['status'].errors['required']">
+            Status is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group thumbnail">
+        <label>Thumbnail</label>
+        <input
+          type="file"
+          class="form-control"
+          formControlName="thumbnail"
+          (change)="processThumbnail($event)"
+          [ngClass]="{
+            'is-invalid': submitted && formControls['thumbnail'].errors
+          }"
+        />
+      </div>
+
+      <div class="form-group video">
+        <label>Video </label>
+        <input
+          type="file"
+          class="form-control"
+          formControlName="video"
+          (change)="processVideo($event)"
+          [ngClass]="{
+            'is-invalid': submitted && formControls['video'].errors
+          }"
+        />
+        <div
+          *ngIf="submitted && formControls['video'].errors"
+          class="invalid-feedback"
+          style="color: #e90f0f"
+        >
+          <div *ngIf="formControls['video'].errors['required']">
+            Video is required
+          </div>
+          <div *ngIf="formControls['video'].errors['urlError']">
+            failed to upload video
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <!-- <button type="submit" class="btn btn-secondary">Add</button> -->
+
+        <button
+          [disabled]="isLoading"
+          type="submit"
+          class="btn btn-primary submitButton"
+        >
+          <ng-container *ngIf="!isLoading"> Add </ng-container>
+          <div *ngIf="isLoading" class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </button>
+
+        <button type="submit" class="btn btn-secondary" [routerLink]="'../'">
+          Back
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

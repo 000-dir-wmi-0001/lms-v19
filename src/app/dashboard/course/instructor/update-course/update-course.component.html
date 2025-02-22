@@ -1,0 +1,150 @@
+<!-- Page Content -->
+<div class="p-4" id="content">
+  <div class="update-course-container">
+    <h2>Update Course Details</h2>
+    <div class="course-form">
+      <div class="update-course-form">
+        <form [formGroup]="courseForm" (ngSubmit)="uploadFileToS3()">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              placeholder="Course title"
+              formControlName="name"
+              required
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['name'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formControls['name'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls['name'].errors['required']">
+                title is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+            <input
+              type="text"
+              placeholder="Course category"
+              formControlName="category"
+              required
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['category'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formControls['category'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls['category'].errors['required']">
+                Category is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              type="text"
+              placeholder="Course description"
+              formControlName="description"
+              required
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['description'].errors
+              }"
+            ></textarea>
+            <div
+              *ngIf="submitted && formControls['description'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls['description'].errors['required']">
+                Description is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Price</label>
+            <input
+              type="text"
+              placeholder="Course price"
+              formControlName="price"
+              required
+              min="true"
+              pattern="[0-9]*"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['price'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formControls['price'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls['price'].errors['required']">
+                Price is required
+              </div>
+              <div *ngIf="formControls['price'].errors['min']">
+                Price Can't be Negative
+              </div>
+              <div *ngIf="formControls['price'].errors['pattern']">
+                Price should be Integer
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Thumbnail</label>
+            <input
+              type="file"
+              class="form-control"
+              formControlName="thumbnail"
+              required
+              (change)="processImage($event)"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['thumbnail'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formControls['thumbnail'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formControls['thumbnail'].errors['required']">
+                Thumbnail is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <!-- <button type="submit" class="btn btn-primary">Update</button> -->
+            <button
+              [disabled]="isLoading"
+              type="submit"
+              class="btn btn-primary submitButton"
+            >
+              <ng-container *ngIf="!isLoading"> Update </ng-container>
+              <div *ngIf="isLoading" class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
+            <button
+              type="submit"
+              class="btn btn-secondary"
+              routerLink="/dashboard/course"
+            >
+              Back
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

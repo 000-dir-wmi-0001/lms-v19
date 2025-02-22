@@ -1,0 +1,320 @@
+
+
+#sidebar.active{
+  margin-left: -17rem;
+}
+
+#content.active{
+  width: 100%;
+  margin-left: 0;
+}
+
+.lecture-form {
+  width: 60%;
+  /* height: 40; */
+  max-width: 100%;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  /* padding: 20px; */
+  height: auto;
+  background-color: #cbeaf8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.lecture-form{
+  width:500px;
+  align-items: center;
+  border: medium solid rgba(214, 211, 211, 0.196);
+  padding:20px;
+  background-color:#cbeaf8;
+
+}
+
+.update-lecture-container h2 {
+  text-align: center;
+  color: rgb(35, 76, 157);
+  margin-top: 40px;
+}
+
+.lecture-form .form-group {
+  margin-top: 15px;
+  font-size: 18px;
+  width: auto;
+  /* display: flex; */
+  align-items: center;
+}
+
+.lecture-form label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  transition: color 0.3s;
+  margin-right: 2%;
+}
+
+.lecture-form textarea {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.lecture-form .form-group.title {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.lecture-form .form-group.radiobutton {
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.lecture-form .form-group.video {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.lecture-form .invalid-feedback {
+  color: #e90f0f;
+  font-size: 14px;
+}
+
+.lecture-form .btn-primary {
+  background-color: #0d0e0d;
+  border: none;
+  margin-top: 10px;
+  width: 45%;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.lecture-form .btn-secondary {
+  background-color: #0362aa;
+  border: none;
+  margin-top: 10px;
+  width: 45%;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.lecture-form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  #sidebar{
+    margin-left: -17rem;
+  }
+
+  #sidebar.active{
+    margin-left: 0;
+  }
+
+  #content{
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 0;
+  }
+
+  #content.active{
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .horizontal_nav{
+    margin: 0;
+  }
+
+
+  #sidebar.active{
+    margin-left: 0;
+  }
+
+  .horizontal_nav{
+    margin: 0;
+  }
+
+  .lecture-form {
+    width: 100%;
+  }
+
+  .lecture-form .btn-primary {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .lecture-form .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lecture-form [type="radio"] {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+}
+
+/* Hover Effects */
+.lecture-form input:hover,
+.lecture-form textarea:hover {
+  border-color: #0362aa;
+}
+
+.lecture-form [type="radio"] + label:hover:before {
+  border-color: #0362aa;
+}
+
+.lecture-form .btn-primary:hover {
+  box-shadow: 0 0 5px #595a5c;
+}
+
+.lecture-form .btn-secondary:hover {
+  box-shadow: 0 0 5px #08395f;
+}
+
+/* Focus Effects */
+.lecture-form input:focus,
+.lecture-form textarea:focus {
+  border-color: #0362aa;
+}
+
+.lecture-form [type="radio"] + label:focus:before {
+  border-color: #0362aa;
+}
+
+.lecture-form .btn-primary:focus,
+.lecture-form .btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0362aa;
+}
+
+.lecture-form [type="radio"]:focus + label {
+  outline: none;
+  box-shadow: 0 0 5px #0362aa;
+}
+
+/* Radio Button Styling */
+
+.lecture-form .radiobutton [type="radio"] + label {
+  position: relative;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.lecture-form [type="radio"] + label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.lecture-form [type="radio"]:checked + label:before {
+  background-color: #0362aa;
+}
+
+/* Update Lecture Styles */
+
+.lecture-form.update-lecture-form {
+  margin-top: 30px;
+}
+
+.lecture-form.update-lecture-form h2 {
+  color: rgb(233, 126, 54);
+  margin-top: 40px;
+}
+
+.lecture-form.update-lecture-form .btn-primary,
+.lecture-form.update-lecture-form .btn-secondary {
+  background-color: #0d0e0d;
+}
+
+.lecture-form.update-lecture-form .form-group.title,
+.lecture-form.update-lecture-form .form-group.radiobutton,
+.lecture-form.update-lecture-form .form-group.video {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.lecture-form.update-lecture-form .btn-primary {
+  background-color: #21331e;
+  border: #425664;
+  margin-left: 60px;
+  margin-right: 60px;
+  margin-left:40px;
+  margin-right:60px;
+  margin-top: 10px;
+}
+
+.lecture-form.update-lecture-form .btn-primary:hover {
+  box-shadow: 0 0 5px #595a5c;
+}
+
+.lecture-form.update-lecture-form .btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 5px #0362aa;
+}
+
+.lecture-form.update-lecture-form [type="radio"]:focus + label {
+  outline: none;
+  box-shadow: 0 0 5px #0362aa;
+}
+
+.lecture-form.update-lecture-form [type="radio"] + label:focus:before {
+  border-color: #0362aa;
+}
+
+.lecture-form.update-lecture-form .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.lecture-form.update-lecture-form input:hover,
+.lecture-form.update-lecture-form textarea:hover {
+  border-color: #0362aa;
+}
+
+.lecture-form.update-lecture-form [type="radio"] + label:hover:before {
+  border-color: #0362aa;
+}
+
+.lecture-form.update-lecture-form .btn-primary:hover {
+  box-shadow: 0 0 5px #595a5c;
+}
+
+.lecture-form.update-lecture-form .btn-secondary:hover {
+  box-shadow: 0 0 5px #08395f;
+}
+
+.lecture-form.update-lecture-form .form-group.title,
+.lecture-form.update-lecture-form .form-group.radiobutton,
+.lecture-form.update-lecture-form .form-group.video {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}

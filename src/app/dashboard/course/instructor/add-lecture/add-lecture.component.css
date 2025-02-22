@@ -1,0 +1,76 @@
+
+.form-group .btn-primary,
+.btn-secondary{
+margin:1vh;
+}
+.btn-primary {
+  background-color: #0972b4;
+  width: 33%;
+  float: left;
+}
+
+.btn-secondary {
+  background-color: #0d0e0d;
+  width: 33%;
+  float: right;
+}
+
+/* Add a media query for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .vertical-nav {
+    width: 100%;
+    min-width: auto;
+    padding-left: 0;
+  }
+
+  .horizontal_nav {
+    margin-left: 0;
+  }
+
+  .page-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.lecture-form {
+  max-width: 50%;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 40px;
+  margin-top: 30px;
+  padding: 20px;
+  height: auto;
+  background-color: #cbeaf8;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Add media queries for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .lecture-form {
+    max-width: 100%;
+  }
+}
+
+/* Add media queries for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .lecture-form .btn-primary,
+  .lecture-form .btn-secondary {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+    margin: 10px;
+  }
+
+  .lecture-form .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lecture-form [type="radio"] {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,154 @@
+<div *ngIf="isLoading" class="loader-overlay">
+  <div class="loader-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading...</p>
+  </div>
+</div>
+
+<!-- Page Content -->  
+<div class="p-4" id="content">
+  <div class="container">
+    <!-- search Course -->
+    <div class="input-group my-4 align-items-center">
+      <input 
+        type="text" 
+        id="searchInput" 
+        class="form-control mr-2" 
+        placeholder="Search any Course"
+        [(ngModel)]="searchQuery" 
+        (ngModelChange)="onSearch()" 
+        #searchBox 
+      />
+      <button class="btn btn-primary" type="button" id="searchButton" (click)="onSearch()">
+        <i class="fa fa-search pr-2"></i>search
+      </button>
+      <button 
+        type="button" 
+        id="resetFilterButton" 
+        class="btn btn-secondary" 
+        *ngIf="shouldFilter"
+        (click)="resetFilter()"
+      >
+        x
+      </button>
+    </div>
+
+    <!-- Add Course Button -->
+    <button
+      id="add-button"
+      type="button"
+      class="btn btn-primary mb-4"
+      *ngIf="getRole() == 'INSTRUCTOR'"
+      [routerLink]="['add']"
+    >
+      Add new course
+    </button>
+
+    <!-- Display course -->
+    <div class="row">
+      <div *ngIf="courses.length === 0" class="col-12">No courses found.</div>
+      <div class="row w-100">
+        <div *ngFor="let course of courses; let i = index" class="col-md-4 col-sm-6 col-12 mb-4">
+          
+          <!-- Card -->
+          <div class="card bg-light h-100 p-4 text-dark text-center">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <img class="card-img-top img-fluid default-image-size" [src]="course.url" alt="Image not found" />              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+              </a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ course["name"] }}</h5>
+              <p class="card-text">Category : {{ course["category"] }}</p>
+              <p class="card-text">Rs. {{ course["price"] }}</p>
+            </div>
+            <div class="mt-auto">
+              <button [routerLink]="course._id" class="btn btn-primary">View</button>&nbsp;&nbsp;&nbsp;
+              <button 
+                *ngIf="getRole() == 'STUDENT' && !checkAccessibility(course._id)" 
+                class="btn btn-success" 
+                (click)="addToCart(course._id)"
+              >
+                Add to Cart
+              </button>
+              <button 
+                *ngIf="userId == course.instructor" 
+                [routerLink]="course._id + '/update'" 
+                class="btn btn-secondary"
+              >
+                Update
+              </button>&nbsp;&nbsp;
+              <button 
+                *ngIf="userId == course.instructor" 
+                class="btn btn-danger" 
+                (click)="openModal(template)"
+              >
+                Delete
+              </button>
+            </div>
+            <ng-template #template>
+              <div class="modal-body text-center">
+                <p>Are you sure you want to delete this course?</p>
+                <button type="button" class="btn btn-default" (click)="deleteCourse(course._id)">Yes</button>
+                <button type="button" class="btn btn-primary" (click)="cancel()">No</button>
+              </div>
+            </ng-template>
+          </div>
+            <!--End Card -->
+          </div>
+        </div>
+      </div>
+      <!-- End Display course -->
+    </div>
+    <!-- End Page Content -->
+  <!-- End Page Content -->
+  <!-- 
+  <div class="py-5 container">
+  <div class="container1">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search..." [(ngModel)]="searchQuery" (ngModelChange)="onSearch()"
+        #searchBox>
+      <button type="button" id="searchButton" class="btn btn-primary" (click)="onSearch()">Search</button>
+      <button type="button" id="resetFilterButton" class="btn btn-secondary" *ngIf="shouldFilter"
+        (click)="resetFilter()">x</button>
+    </div>
+    <button id="add-button" type="button" class="btn btn-primary" *ngIf="getRole()=='INSTRUCTOR'"
+      [routerLink]="['add']">Add new course</button>
+  </div>
+  <div class="container2">
+    <div class="row hidden-md-up">
+      <div *ngIf="courses.length === 0">No courses found.</div>
+      <div class="col-md-4" *ngFor="let course of courses; let i = index">
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+            <img src="{{course['url']}}" class="img-fluid" />
+            <a href="#!">
+              <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{course['name']}}</h5>
+            <p class="card-text">Category : {{course['category']}}</p>
+            <p class="card-text"> Rs. {{course['price']}}</p>
+            <button [routerLink]="course['_id']" class="btn btn-info">View</button>
+            <button *ngIf="getRole()=='STUDENT' && !checkAccessibility(course['_id'])" class="btn btn-outline-success"
+              (click)="addToCart(course['_id'])">Add to Cart</button>
+            <button style="width: fit-content;" *ngIf="userId==course['instructor']"
+              [routerLink]="course['_id'] + '/update'" class="btn btn-secondary">Update</button>
+            <button style="width: fit-content;" *ngIf="userId==course['instructor']" class="btn btn-danger"
+              (click)="openModal(template)">Delete</button>
+          </div>
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Are you sure you want to delete this course ?</p>
+              <button type="button" class="btn btn-default" (click)="deleteCourse(course['_id'])">Yes</button>
+              <button type="button" class="btn btn-primary" (click)="cancel()">No</button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> -->
+</div>

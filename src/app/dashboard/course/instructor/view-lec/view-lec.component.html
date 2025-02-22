@@ -1,0 +1,27 @@
+<!-- Page Content -->
+<div class="p-4" id="content">
+  <h3>Current Lecture</h3>
+  <div class="iframe-container embed-responsive embed-responsive-16by9">
+    <video
+      class="embed-responsive-item"
+      preload="auto"
+      controls
+      poster="{{ thumbnail }}"
+      controlsList="nodownload"
+      controls
+      src="{{ videoUrl }}"
+      frameborder="0"
+      oncontextmenu="return false;"
+      style="object-fit: contain"
+    ></video>
+  </div>
+  <div class="form-group text-center">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [routerLink]="'../' + '../' + '../'"
+    >
+      Back
+    </button>
+  </div>
+</div>

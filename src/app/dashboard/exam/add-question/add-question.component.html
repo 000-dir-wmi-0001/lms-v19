@@ -1,1 +1,122 @@
-<p>add-question works!</p>
+<!-- Page Content -->
+<div class="page-content px-5 pt-5" id="content">
+  @if(type=='MCQ'){
+  <div class="card mt-5">
+    <form [formGroup]="reactform">
+      <!-- Enter Question -->
+      <div class="form-group ml-3 mr-3">
+        <label for="question">Enter Question</label>
+        <textarea type="text" formControlName="question" [ngClass]="{'is-invalid': submitted && reactform.controls['question'].errors}" class="form-control"></textarea>
+        @if(submitted && reactform.controls['question'].errors){
+          <div class="invalid-feedback">
+            @if(reactform.controls['question'].errors['required']){
+              Question is required
+            }
+          </div>
+        }
+      </div>
+
+      <hr class="my-4"/>
+
+      <!-- Four Blank Options -->
+      <div class="form-group ml-3 mr-3">
+        <label for="options">Enter Options</label>
+        @for(option of initialOptions; let i = $index;track option){
+          <div class="mb-3">
+            <input type="text" class="form-control" [formControlName]="'initialOption' + i" placeholder="Option {{i+1}}">
+            @if(submitted && reactform.controls['initialOption' + i]?.errors){
+              <div class="invalid-feedback">
+                @if(reactform.controls['initialOption' + i]?.errors?.['required']){
+
+                  Option {{i+1}} is required
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <hr class="my-4"/>
+
+      <!-- Add New Option Button
+      <button class="btn btn-primary ml-3 mb-3" (click)="addnewrow($event)" id="addoption">Add New Option</button>
+
+      <div class="ml-3" formArrayName="options">
+        <div *ngFor="let item of addOptionRow.controls; let i = index" [formGroupName]="i" class="form-group d-flex align-items-center">
+          <input class="form-control" formControlName="optionvalue" type="text">
+          <button class="btn btn-secondary ml-3" (click)="Removeitem(i)">(-)</button>
+        </div>
+      </div>
+
+      <hr class="my-4"/> -->
+
+      <!-- Select Correct Answer -->
+      <!-- <button class="btn btn-primary ml-3 mb-3" (click)="addanswer()" id="addAns">Select Correct Answer</button>
+
+      <div class="ml-3">
+        <ul class="list-unstyled">
+          <li *ngFor="let data of optionarraytemp" class="d-flex align-items-center">
+            <input #inputEl class="form-check-input" (change)="onChange(data['optionvalue'], inputEl?.checked)" type="checkbox">
+            <label class="form-check-label ml-2">{{data['optionvalue']}}</label>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="my-4"/> -->
+      <!-- Select Correct Answer -->
+<button class="btn btn-primary ml-3 mb-3" (click)="addanswer()" id="addAns">Select Correct Answer</button>
+
+<div class="ml-3">
+  <ul class="list-unstyled">
+    @for(data of optionarraytemp; let i = $index; track data){
+
+      <li class="d-flex align-items-center mb-2">
+        <input
+        #inputEl
+        class="form-check-input"
+        (change)="onChange(data['optionvalue'], inputEl.checked)"
+        type="checkbox"
+        id="option{{i}}"
+        >
+        <label class="form-check-label ml-2" for="option{{i}}">
+          {{data['optionvalue']}} <!-- This will show the option value -->
+        </label>
+      </li>
+    }
+  </ul>
+</div>
+
+<hr class="my-4"/>
+
+
+
+      <!-- Marks -->
+      <div class="form-group ml-3">
+        <label for="marks">Marks:</label>
+        <input class="form-control" type="number" min="2" formControlName="Marks" [ngClass]="{'is-invalid': submitted && reactform.controls['Marks'].errors}">
+        @if(submitted && reactform.controls['Marks'].errors){
+
+          <div class="invalid-feedback">
+            @if(reactform.controls['Marks'].errors['required']){
+              Marks is required
+            }@else if (reactform.controls['Marks'].errors['min']) {
+            Marks cannot be less than 2
+          }
+          </div>
+        }
+      </div>
+
+      <!-- Submit and Back Buttons -->
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-primary" id="submit" (click)="saveFormDataToBackend()">Submit</button>
+        @if(type=='VERBAL'){
+
+          <button class="btn btn-primary text-center mb-3" id="submit"  (click)="addVerbalquestion()">Submit</button>
+        }
+        <button class="btn btn-secondary custom-margin" (click)="gotoexamdetail()">Back</button>
+
+      </div>
+    </form>
+  </div>
+  }
+</div>
