@@ -14,14 +14,18 @@
               'is-invalid': submitted && formControls['firstName'].errors
             }"
           />
-          <div
-            *ngIf="submitted && formControls['firstName'].errors"
+          @if(submitted && formControls['firstName'].errors){
+
+            <div
             class="invalid-feedback"
-          >
-            <div *ngIf="formControls['firstName'].errors['required']">
+            >
+            @if(formControls['firstName'].errors['required']){
+
               First Name is required
-            </div>
+            }
+
           </div>
+        }
         </div>
 
         <div class="form-group">
@@ -34,14 +38,17 @@
               'is-invalid': submitted && formControls['lastName'].errors
             }"
           />
-          <div
-            *ngIf="submitted && formControls['lastName'].errors"
+          @if(submitted && formControls['lastName'].errors){
+
+            <div
             class="invalid-feedback"
-          >
-            <div *ngIf="formControls['lastName'].errors['required']">
+            >
+            @if(formControls['lastName'].errors['required']){
+
               Last Name is required
-            </div>
+            }
           </div>
+        }
         </div>
         <div class="form-group">
           <label>Email</label>
@@ -53,17 +60,21 @@
               'is-invalid': submitted && formControls['email'].errors
             }"
           />
-          <div
-            *ngIf="submitted && formControls['email'].errors"
+          @if(submitted && formControls['email'].errors){
+
+            <div
             class="invalid-feedback"
-          >
-            <div *ngIf="formControls['email'].errors['required']">
+            >
+            @if(formControls['email'].errors['required']){
+
               Email is required
-            </div>
-            <div *ngIf="formControls['email'].errors['email']">
+            }@else if(formControls['email'].errors['email']){
+
               Email is invalid
-            </div>
+            }
+
           </div>
+        }
         </div>
 
         <div class="form-group">
@@ -76,7 +87,10 @@
             }"
           >
             <option value="">Select Role</option>
-            <option *ngIf="getRole() == 'SUPERADMIN'">ADMIN</option>
+            @if(getRole() == 'SUPERADMIN'){
+
+              <option>ADMIN</option>
+            }
             <option>STUDENT</option>
             <option>INSTRUCTOR</option>
           </select>
@@ -84,9 +98,12 @@
             *ngIf="submitted && formControls['role'].errors"
             class="invalid-feedback"
           >
-            <div *ngIf="formControls['role'].errors['required']">
+          @if(formControls['role'].errors['required']){
+
+            <div>
               Role is required
             </div>
+          }
           </div>
         </div>
 
@@ -96,10 +113,16 @@
             type="submit"
             class="btn btn-primary submitButton"
           >
-            <ng-container *ngIf="!isLoading"> Add User </ng-container>
-            <div *ngIf="isLoading" class="spinner-border" role="status">
+          @if(!isLoading){
+
+            <ng-container> Add User </ng-container>
+          }
+          @if(isLoading){
+
+            <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
             </div>
+          }
           </button>
           <!-- <button type="submit" class="btn btn-primary bg-dark">Back</button> -->
         </div>
@@ -116,13 +139,13 @@
     <div class="modal-body">
       <label>Email id :</label>
 <p>{{student.response.email}}   </p>
-      
-      <label>Password : </label>  
+
+      <label>Password : </label>
       <p>
-        {{student.pass}} 
+        {{student.pass}}
       </p>
       <button class="btn btn-primary btn-sm" (click)="copyPassword(student?.pass)">{{ this.toolTip?"Copied":"Copy"}}</button>
-         
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="nextpg()">Next</button>

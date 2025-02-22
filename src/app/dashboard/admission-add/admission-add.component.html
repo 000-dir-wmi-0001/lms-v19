@@ -1,1 +1,126 @@
-<p>admission-add works!</p>
+<div class="card" >
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" >
+    <div>
+      <label for="firstName">First Name:</label>
+      <input type="text" formControlName="firstName" id="firstName">
+      @if(myForm.get('firstName')?.invalid && myForm.get('firstName')?.touched){
+
+        <div class="error-message">
+          First name is required.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input type="text" formControlName="lastName" id="lastName">
+      @if(myForm.get('lastName')?.invalid && myForm.get('lastName')?.touched){
+
+        <div class="error-message">
+          Last name is required.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="type">Type:</label>
+      <select formControlName="type" id="type">
+        <option value="" disabled selected>Select Type</option>
+        <option value="STUDENT">STUDENT</option>
+        <option value="INSTRUCTOR">INSTRUCTOR</option>
+      </select>
+      @if(myForm.get('type')?.invalid && myForm.get('type')?.touched){
+
+        <div class="error-message">
+          Type is required.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" formControlName="email" id="email">
+      @if(myForm.get('email')?.invalid && myForm.get('email')?.touched){
+
+        <div class="error-message">
+          Please enter a valid email address.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="batchno">Batch No:</label>
+      <input type="text" formControlName="batchno" id="batchno">
+      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
+
+        <div class="error-message">
+          Batch No. is required.
+        </div>
+      }
+    </div>
+
+    <div>
+      <label for="status">Status:</label>
+      <select formControlName="status" id="status">
+        <option value="" disabled selected hidden>Select Status</option>
+        <option value="Neutral">Neutral</option>
+        <option value="Prospect">Prospect</option>
+        <option value="Enrolled">Enrolled</option>
+        <option value="Follow Up">Follow Up</option>
+        <option value="Closed">Closed</option>
+
+      </select>
+      @if(myForm.get('type')?.invalid && myForm.get('type')?.touched){
+
+        <div class="error-message">
+          Type is required.
+        </div>
+      }
+    </div>
+
+    <div >
+      <label for="courses">Courses:</label>
+      <select formControlName="courses" id="courses"  class="user-name" >
+        <option value="" disabled selected hidden>Select Course</option>
+     @for(module of staticCourses; let i= $index; track module){
+
+       <option [value]="module.name">{{module.name}}</option>
+      }
+    </select>
+    @if(myForm.get('courses')?.invalid && myForm.get('courses')?.touched){
+
+      <div class="error-message">
+        Type is required.
+      </div>
+    }
+    </div>
+
+      <div class="button-container">
+        <button type="submit" [disabled]="myForm.invalid">Submit</button>
+        <button type="button" style="background-color: rgb(30, 27, 27); padding:10px 35px;" class="back-btn" (click)="goBack()">Back</button>
+      </div>
+
+  </form>
+  </div>
+
+
+
+  <ng-template #modalTemplate>
+    <div class="modal-header">
+      Share Credentials with Student
+    </div>
+    <div class="modal-body">
+      <label>Email id :</label>
+  <p>{{student.response.email}}   </p>
+
+      <label>Password : </label>
+      <p>
+        {{student.pass}}
+      </p>
+      <button class="btn btn-primary btn-sm" (click)="copyPassword(student?.pass)">{{ this.toolTip?"Copied":"Copy"}}</button>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">Close</button>
+    </div>
+  </ng-template>

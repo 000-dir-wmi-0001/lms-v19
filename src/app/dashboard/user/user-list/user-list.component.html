@@ -9,48 +9,61 @@
 </div>
 
 <!-- USERS SECTION (Verified Users) -->
-<div *ngIf="activeTab === 'verified'" class="mt-4">
+@if(activeTab === 'verified'){
+
+
+<div class="mt-4">
   <h3>Verified Users</h3>
   <div class="table-container mt-3" *ngIf="!isLoading">
     <table class="table table-bordered table-hover text-center align-middle">
       <thead class="table-dark">
         <tr>
-          <th *ngFor="let data of userList">{{ data.name | titlecase }}</th>
-         
+          @for(data of userList;track data){
+            <th>{{ data.name | titlecase }}</th>
+          }
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.firstName }}</td>
-          <td>{{ user.lastName }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.type }}</td>
-          <td>
-            <div class="dropdown">
-                  <button class="dropdown-item text-danger" (click)="deleteUser(user._id)">
-                      Delete
-                  </button>
-            </div>
-          </td>
-        </tr>
+        @for( user of users;track user){
+
+          <tr>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.type }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="dropdown-item text-danger" (click)="deleteUser(user._id)">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
 </div>
+}
 
 <!-- LOGIN ACCESS SECTION (Unverified Users) -->
-<div *ngIf="activeTab === 'unverified'" class="mt-4">
+@if(activeTab === 'unverified'){
+<div class="mt-4">
   <h3>Unverified Users</h3>
   <div class="table-container mt-3" *ngIf="!isLoading">
     <table class="table table-bordered table-hover text-center align-middle">
       <thead class="table-dark">
         <tr>
-          <th *ngFor="let data of userList">{{ data.name | titlecase }}</th>
-          
+          @for(data of userList;track data){
+
+            <th>{{ data.name | titlecase }}</th>
+          }
+
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of loginAccessUsers">
+        @for(user of loginAccessUsers;track user){
+        <tr>
           <td>{{ user.firstName }}</td>
           <td>{{ user.lastName }}</td>
           <td>{{ user.email }}</td>
@@ -80,6 +93,7 @@
             </div>
           </td>
         </tr>
+      }
       </tbody>
     </table>
   </div>
@@ -91,4 +105,5 @@
     </div>
   </ng-template>
 </div>
+}
 

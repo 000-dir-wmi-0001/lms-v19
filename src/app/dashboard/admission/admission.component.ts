@@ -18,10 +18,11 @@ import { FollowUp, FollowUpService } from '../../services/follow-up.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RouterLink } from '@angular/router';
+// import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admission',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgMultiSelectDropDownModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgMultiSelectDropDownModule, RouterLink,],
   templateUrl: './admission.component.html',
   styleUrl: './admission.component.css'
 })
