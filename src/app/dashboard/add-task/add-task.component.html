@@ -1,1 +1,43 @@
-<p>add-task works!</p>
+<!-- Page Content -->
+<div class="p-4" id="content">
+    <div class="centered-content">
+      <div class="model-box">
+        <h1 class="title">Add new work report</h1>
+        <br />
+        <input
+          #taskTitle
+          class="input has-background-light is-medium"
+          type="text"
+          placeholder="Enter Task"
+        />
+        <br />
+        <button
+          class="button btn btn-primary mr-2 is-medium"
+          style="margin-top: 50px"
+          routerLink="/dashboard/task"
+        >
+          Go Back
+        </button>
+        <!-- <button class="button btn btn-primary is-primary has-text-white is-medium" style="margin-top: 50px;" (click)="createTask(taskTitle.value)" >Create</button> -->
+        <button
+          (click)="createTask(taskTitle.value)"
+          [disabled]="isLoading"
+          type="submit"
+          style="margin-top: 50px"
+          class="button btn btn-primary is-primary has-text-white is-medium"
+        >
+        @if (!isLoading) {
+
+            <ng-container> Create </ng-container>
+        }
+        @else if (isLoading) {
+
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        }
+        </button>
+      </div>
+    </div>
+  </div>
+  

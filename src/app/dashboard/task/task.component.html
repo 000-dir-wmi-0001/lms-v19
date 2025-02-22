@@ -1,1 +1,154 @@
-<p>task works!</p>
+<div class="p-4" id="content">
+    <!-- Loader -->
+     @if (isLoading) {
+
+         <div  class="loader-container">
+             <div class="spinner-border" role="status">
+                 <span class="sr-only"></span>
+                </div>
+            </div> 
+        }
+  
+    <!-- Main Content -->
+     @else {
+
+         <div class="task-manager">
+             <div class="task-manager-container pt-5">
+                 <div class="tasks-list-container">
+                     <div>
+                         <!-- Header -->
+                         <h1 class="title">Work Report</h1>
+                         
+                         <!-- Search Bar Section -->
+                         <div class="input-group-container row align-items-center my-4 mt-5 w-100 container">
+                             <!-- Search Bar Section -->
+                             <div class="col-12 col-md-9 mb-2 mb-md-0">
+                                 <div class="input-group">
+                                     <input
+                                     type="text"
+                                     id="searchInput"
+                                     class="form-control"
+                    placeholder="Search any Work Report"
+                    #searchBox
+                    [(ngModel)]="searchQuery"
+                    (ngModelChange)="onSearch()"
+                    />
+                    <button
+                    class="btn btn-primary ms-2"
+                    type="button"
+                    id="searchButton"
+                    (click)="onSearch()"
+                    >
+                    <i class="fa fa-search"></i> Search
+                </button>
+                @if (shouldFilter) {
+
+                    <button
+                    type="button"
+                    id="resetFilterButton"
+                    class="btn btn-secondary ms-2"
+                    (click)="resetFilter()"
+                    >
+                    <i class="fa fa-times"></i>
+                </button>
+            }
+                </div>
+              </div>
+              
+              <!-- Add Button Section -->
+              <div class="col-12 col-md-1  ">
+                  <button (click)="addWork()" class="btn btn-light add-button">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            
+            
+            
+            <!-- Task List Section -->
+            <div class="task-list-container-scroll bg-light p-3 rounded">
+                <ul class="task-list">
+                    @for (t of displayedTasks;  track $index) {
+
+                        <li class="task" >
+                            <span>{{ t.title }}</span>
+                            <div class="task-buttons">
+                                <button class="button" (click)="popup(t['_id'])">
+                                    <div class="icon">
+                                        <i class="fa fa-edit"></i>
+                                    </div>
+                                </button>
+                                <button class="button" (click)="onDeleteTaskClick(t['_id'])">
+                                    <div class="icon">
+                                        <i class="fa fa-trash"></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </li>
+                    }
+            </ul>
+            </div>
+  
+            <!-- Empty State Message -->
+             @if (displayedTasks.length === 0) {
+
+                 <h3 class="empty-state-text" >
+                     No work reports added! Click the add button to add new work report.
+                    </h3>
+                    
+            }
+            <div class="tasks-list-footer">
+                @if (totalItems > itemsPerPage) {
+
+                    <nav aria-label="Page navigation" class="pagination-container">
+                        <div class="pagination-wrapper">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <button class="pagination-btn prev" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+                                        &laquo;
+                                    </button>
+                                </li>
+                                @for (page of getPages(); track $index) {
+
+                                    <li class="page-item" >
+                                        @if (page === '...') {
+
+                                            <ng-container >
+                                                <span class="dots">...</span>
+                                            </ng-container>
+                                        }
+                                        @else if (isNumber(page)) {
+
+                                            <ng-container >
+                                                <button
+                                                class="pagination-btn number"
+                                                [class.active]="page === currentPage"
+                                                (click)="onPageChange(page)"
+                                                >
+                                                {{ page }}
+                                                </button>
+                                            </ng-container>
+                                        }
+                                </li>
+                                
+                            }
+                            <li class="page-item">
+                                <button class="pagination-btn next" [disabled]="currentPage === totalPages" (click)="onPageChange(currentPage + 1)">
+                                    &raquo;
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div class="total-count-container">
+                            <p class="total-count">Total: {{ totalItems }}</p>
+                        </div>
+                    </div>
+                </nav>
+            }
+    </div>
+    
+</div>
+</div>
+</div>
+</div>
+}
