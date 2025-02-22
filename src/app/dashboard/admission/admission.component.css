@@ -1,0 +1,13 @@
+ul {
+  list-style-type: none;
+  /* Remove bullets */
+  padding-left: 0;
+  /* Remove default padding */
+}
+
+li {
+  cursor: pointer;
+  /* Add a cursor pointer to show it's clickable */
+  padding: 5px;
+  /* Optional: Adds some spacing to each list item */
+}

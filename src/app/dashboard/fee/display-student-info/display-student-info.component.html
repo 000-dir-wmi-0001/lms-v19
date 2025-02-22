@@ -1,1 +1,283 @@
-<p>display-student-info works!</p>
+<div class="p-4" id="content">
+    <div class="row ">
+     
+       <label>Student Details</label> <br><br>
+       <div class="col-md-6">
+         <div class="form-group row">
+           <div class="col-md-6 mb-3">
+             <label>Name</label>
+             <input type="text" class="form-control" id="totalFees" [value]="name" disabled>
+           </div>
+           <div class="col-md-6 mb-3">
+             <label>Mobile</label>
+             <input type="text" class="form-control" id="totalFees" [value]="mobileno" disabled>
+           </div>
+           <div class="col-md-6 mb-3">
+             <label>mail id</label>
+             <input type="text" class="form-control" id="totalFees" [value]="mailid" disabled>
+           </div>
+           <div class="col-md-6 mb-3">
+             <label>Dob</label>
+             <input type="text" class="form-control" id="totalFees" [value]="dob" disabled>
+           </div>
+           <div class="col-md-6 mb-3">
+             <label>SSC %</label>
+             <input type="text" class="form-control" id="totalFees" [value]="sscpercent" disabled>
+           </div>
+           <div class="col-md-6 mb-3">
+             <label>HSC %</label>
+             <input type="text" class="form-control" id="totalFees" [value]="hscpercent" disabled>
+           </div>
+         </div>
+   
+       </div>
+   
+      <div class="col-md-6">
+       <div class="form-group row">
+         
+         <div class="col-md-6 mb-3">
+           <label>Admission date</label>
+           <input type="text" class="form-control" id="totalFees" [value]="2" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Graduation year</label>
+           <input type="text" class="form-control" id="totalFees" [value]="gradYear" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>College Name</label>
+           <input type="text" class="form-control" id="totalFees" [value]="ugcollege" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Degree with major</label>
+           <input type="text" class="form-control" id="totalFees" [value]="2" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Degree aggregate % (till now)</label>
+           <input type="text" class="form-control" id="totalFees" [value]="degreeAgr" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Current Address</label>
+           <input type="text" class="form-control" id="totalFees" [value]="address" disabled>
+         </div>
+         
+         
+       </div>
+      </div>
+   
+       <div class="form-group form-row">
+         <button class="btn btn-primary" (click)="toggleVerified()">Toggle verified</button>
+       </div>
+     
+    </div>
+     <!-- STUDENT INNTO ENDS -->
+   
+   
+   
+     <!-- ONLINE COURSES DETAILS -->
+   
+   
+     Online Courses Enrolled:
+     @for (course of coursesDetail.courseName; let i = $index; track $index) {
+
+         <div class="coursesSection" >
+             Course {{i+1}} <br><br>
+             <div class="form-group form-row">
+         <div class="col-md-6 mb-3">
+             <label>course name</label>
+             <input type="text" class="form-control" id="totalFees" [value]="course" disabled>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Course access last till</label>
+           <input type="text" class="form-control" id="courseValid" [value]="courseAccessValidity[course]" disabled>
+           @if (!isEditing || editCourse !== course) {
+
+               <button class="btn" (click)="editCourseAccess(course)">Edit access</button>
+            }@else {
+
+                <ng-template>
+                    <input type="number" placeholder="Enter access limit in year" #tempVar>
+                    @if (isEditing) {
+                        <button class="btn btn-primary" (click)="saveEdit(tempVar.value)">save</button>
+                    } 
+                    &nbsp;&nbsp;
+                    @if (isEditing) {
+
+                        <button class="btn btn-warning" (click)="cancelEdit()">cancel</button>
+                    }
+                </ng-template>
+            }
+           <!-- <button class="btn" (click)="editCourseAccess(course)"
+             *ngIf="!isEditing || editCourse !== course; else elseBlock">Edit access</button>
+   
+             <ng-template #elseBlock>
+                 <input type="number" placeholder="Enter access limit in year" #tempVar>
+                 <button class="btn btn-primary" (click)="saveEdit(tempVar.value)" *ngIf="isEditing">save</button>
+                 &nbsp;&nbsp;
+                 <button class="btn btn-warning" (click)="cancelEdit()" *ngIf="isEditing">cancel</button>
+                </ng-template> -->
+                
+            </div>
+        </div>
+    </div>
+}
+     <!-- ONLINE COURSES DETAILS ENDS -->
+   
+   
+     <!-- OFFLINE MODULES DETAILS START -->
+     Offline Modules Enrolled:
+   
+     <br><br>
+     <button class="btn" (click)="enrollToStaticCourse()">Add to offline batch</button> &nbsp;&nbsp;
+     @if (isopenModuleForm) {
+
+
+       <div class="custom-form">
+           
+           <div class="form-group form-row">
+               
+               <div class="col-md-6 mb-3">
+                   <label for="college">Select Module</label>
+                   <select [(ngModel)]="module" id="module" class="custom-select mr-sm-2" (ngModelChange)="displayTotalFees()">
+                       <option>Choose module</option>
+                       @for (module of staticCourses; let i = $index; track $index) {
+
+                           <option>{{module.name}}</option>
+                        }
+                    </select>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="Total Fee">Total Fee</label>
+                    <input type="text" class="form-control" id="totalFees" [value]="totalFees" disabled>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="installments">Installments allowed</label>
+                    <input type="number" class="form-control" id="totalFees" [value]=2 disabled><br>
+                    @if (!isInstEditing || editInstforModule !== module) {
+
+                        <button class="btn" (click)="editModuleInstallment(module)">Edit</button>
+                    }@else {
+
+                        
+                        <ng-template >
+                            <input type="number" placeholder="Enter installments allowed" #tempVar3>
+                            @if (isInstEditing) {
+
+                                <button class="btn btn-primary" (click)="saveEditInst(+tempVar3.value)">save</button>
+                            }
+                            &nbsp;&nbsp;
+                            @if (isInstEditing) {
+
+                                <button class="btn btn-warning" (click)="cancelEditInst()" >cancel</button>
+                            }
+                        </ng-template>
+                    }
+                </div>
+                
+            </div>
+            @for (course of moduleDetails.moduleName; let i = $index; track course) {
+
+            
+                <div class="modulesSection" >
+                    Module {{i+1}} <br><br>
+         <div class="form-group form-row">
+             <div class="col-md-6 mb-3">
+             <label>Module name</label>
+             <input type="text" class="form-control" id="totalFees"
+               [value]="course+'&nbsp;'+moduleDetails.modulePrice[i]+'/-'" disabled>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>installments</label>
+                <input type="text" class="form-control" id="totalFees" [value]="moduleDetails.installments[i]" disabled>
+                <button class="btn" (click)="getInstallments(modal,course)">see record</button>
+                @if (!isInstEditing || editforModule !== i) {
+
+                    <button class="btn" (click)="editInstallments(i)"
+                    
+                 >Edit Installments</button>
+                }@else {
+
+                    
+                    <ng-template #elseBlock2>
+                        <input type="number" placeholder="Enter installments number allowed" #tempVar>
+                        @if (isInstEditing) {
+
+                            <button class="btn btn-primary" (click)="saveInstEdit(tempVar.value,i)" >save</button>
+                        }
+                    &nbsp;&nbsp;
+                    @if (isInstEditing) {
+
+                        <button class="btn btn-warning" (click)="cancelInstEdit()" >cancel</button>
+                    }
+                </ng-template>
+            }
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <label>pending fees</label>
+                <input type="text" class="form-control" id="totalFees" [value]="moduleDetails.pendingFees[i]" disabled>
+                @if (!isfeesEditing || editFeeforModule !== i) {
+
+                    <button class="btn" (click)="editModulesPendingFees(i)">Edit fees</button>
+                }@else {
+                    <ng-template #elseBlock3>
+                        <input type="number" placeholder="Enter new pending fees" #tempVar>
+                        @if (isfeesEditing) {
+
+                            <button class="btn btn-primary" (click)="saveFeeEdit(tempVar.value,i)" >save</button>
+                        }
+                        &nbsp;&nbsp;
+                        @if (isfeesEditing) {
+
+                            <button class="btn btn-warning" (click)="cancelEdit()" >cancel</button>
+                        }
+                    </ng-template>
+   
+                }
+           </div>
+         </div>
+       </div>
+    }
+     </div>
+    }
+     <br><br>
+     <button class="btn btn-warning" (click)="goBack()">Go Back</button>
+   
+   
+     <ng-template #modal>
+       <div class="modal-content">
+         <div class="modal-body">
+           <table class="table">
+             <thead>
+               <tr>
+                 <th scope="col">#</th>
+                 <th scope="col">amount</th>
+                 <th scope="col">payment mode</th>
+                 <th scope="col">paid on</th>
+                 <th scope="col">transactionId</th>
+                 <th scope="col">fee status</th>
+               </tr>
+             </thead>
+             <tbody>
+                @for (item of installmentRecord; let i = $index; track item) {
+
+                    <tr>
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{item.thisInstallmentAmount}}</td>
+                        <td>{{item.paymentMode}}</td>
+                        <td>{{item.paymentDate}}</td>
+                        <td>{{item.transactionId}}</td>
+                        @if (item.feeComplete) {
+                            <td>Complete</td>
+                        }
+                        
+                        
+                    </tr>
+                }
+             </tbody>
+           </table>
+         </div>
+       </div>
+     </ng-template>
+   </div>

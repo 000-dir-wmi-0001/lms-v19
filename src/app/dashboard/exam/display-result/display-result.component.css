@@ -1,0 +1,149 @@
+.my-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #41c6e1;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.card-title {
+  text-align: center;
+}
+
+/* Heading Styles with Different Colors */
+h1 {
+  font-size: 2rem;
+  color: #ff5722;
+  /* Deep Orange */
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #009688;
+  /* Teal */
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.6rem;
+  color: #3f51b5;
+  /* Indigo */
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.4rem;
+  color: #9c27b0;
+  /* Purple */
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1.2rem;
+  color: #ff9800;
+  /* Orange */
+  font-weight: bold;
+}
+
+.card-text {
+  margin-left: 100px;
+  font-size: 1.1rem;
+}
+
+.result-section {
+  border: 2px solid #fff;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.result-section p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Highlight Colors for Percentage, Obtained Marks, and Total Marks */
+.highlight-green {
+  color: #4caf50;
+  font-weight: bold;
+  background-color: rgba(76, 175, 80, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.highlight-yellow {
+  color: #ff9800;
+  font-weight: bold;
+  background-color: rgba(255, 152, 0, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.highlight-red {
+  color: #f44336;
+  font-weight: bold;
+  background-color: rgba(244, 67, 54, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-top: 50px;
+  margin-left: 17rem;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+
+.unattempted-questions,
+.attempted-questions {
+  margin-top: 20px;
+  padding-left: 30px;
+}
+
+.unattempted-questions p,
+.attempted-questions p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .page-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .my-card {
+    margin: 20px;
+  }
+
+  .result-section {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .result-section p {
+    font-size: 1rem;
+  }
+
+  .card-text {
+    margin-left: 0;
+    text-align: center;
+  }
+}

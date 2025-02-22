@@ -28,22 +28,28 @@
                         <label for="Total Fee">Total Fee</label>
                         <input type="text" class="form-control" id="totalFees" [value]="totalFees" disabled>
                     </div>
-                    
-                    <div *ngIf="!lastInstallment" class="col-md-4 mb-3" >
-                        <label for="installments">Installments</label>
-                        <select id="installments" formControlName="installments" id="installments" class="custom-select mr-sm-2"  (change)="displayFeesToBePaid()" >
-             </select>
-            </div>
-            
-            <div *ngIf="lastInstallment" class="col-md-4 mb-3" >
-                <label for="installments">Installments</label>
-                <input type="text" class="form-control" id="totalFees" [value]=2 disabled >
-            </div>
-            
-            <div *ngIf="lastInstallment && feeComplete" class="col-md-4 mb-3" >
-                <label for="installments">Fee Status</label>
-                <input type="text" class="form-control" id="totalFees" [value]="feeStatus" disabled >
-            </div>
+                    @if (!lastInstallment) {
+
+                        <div class="col-md-4 mb-3" >
+                            <label for="installments">Installments</label>
+                            <select id="installments" formControlName="installments" id="installments" class="custom-select mr-sm-2"  (change)="displayFeesToBePaid()" >
+                            </select>
+                        </div>
+                    }
+            @if (lastInstallment) {
+
+                <div  class="col-md-4 mb-3" >
+                    <label for="installments">Installments</label>
+                    <input type="text" class="form-control" id="totalFees" [value]=2 disabled >
+                </div>
+            }
+            @if (lastInstallment && feeComplete) {
+
+                <div class="col-md-4 mb-3" >
+                    <label for="installments">Fee Status</label>
+                    <input type="text" class="form-control" id="totalFees" [value]="feeStatus" disabled >
+                </div>
+            }
             
         </div>   
         <div class="form-group form-row">
@@ -82,17 +88,25 @@
                         </tr>
                     </thead>
       <tbody>
-        <tr *ngFor="let item of allReceipts; index as i">
-            <th scope="row">{{i+1}}</th>
-            <th scope="row">{{item.module}}</th>
-            <td>{{item.thisInstallmentAmount}}</td>
-          <td>{{item.paymentMode}}</td>
-          <td>{{item.paymentDate}}</td>
-          <td>{{item.transactionId}}</td>
-          <td *ngIf="item.feeComplete; else elseblock">Complete</td>
-          <ng-template #elseblock><td>pending</td></ng-template>
-          <td><button class="btn" (click)="printReceipt()">Print</button></td>
-        </tr>    
+        @for (item of allReceipts;let i =$index ; track $index) {
+
+            <tr >
+                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{item.module}}</th>
+                <td>{{item.thisInstallmentAmount}}</td>
+                <td>{{item.paymentMode}}</td>
+                <td>{{item.paymentDate}}</td>
+                <td>{{item.transactionId}}</td>
+                @if (item.feeComplete) {
+
+                    <td >Complete</td>
+                    <ng-template #elseblock><td>pending</td></ng-template>
+                    <td><button class="btn" (click)="printReceipt()">Print</button></td>
+                }@else {
+                    elseblock;
+                }
+            </tr>    
+        }
     </tbody>
 </table>
 </div>

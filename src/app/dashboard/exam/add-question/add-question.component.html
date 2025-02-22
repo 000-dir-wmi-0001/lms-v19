@@ -24,9 +24,9 @@
         @for(option of initialOptions; let i = $index;track option){
           <div class="mb-3">
             <input type="text" class="form-control" [formControlName]="'initialOption' + i" placeholder="Option {{i+1}}">
-            @if(submitted && reactform.controls['initialOption' + i]?.errors){
+            @if(submitted && reactform.controls['initialOption' + i].errors){
               <div class="invalid-feedback">
-                @if(reactform.controls['initialOption' + i]?.errors?.['required']){
+                @if(reactform.controls['initialOption' + i].hasError('required')){
 
                   Option {{i+1}} is required
                 }

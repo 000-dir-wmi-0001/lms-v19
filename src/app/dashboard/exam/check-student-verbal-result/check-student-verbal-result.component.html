@@ -1,1 +1,20 @@
-<p>check-student-verbal-result works!</p>
+<div card class="profile-container">
+  <h3>Student Recording</h3>
+
+  @for(recordarray of recordarray;track recordarray){
+    <div class="card mt-5 mb-5 ml-5">
+      <h5>Question: {{recordarray?.['questionName']}}</h5>
+      <audio controls>
+        <source [src]="recordarray?.['questionName']" type="audio/mp3">
+      </audio>
+      <br>
+      <div>total Marks:</div><br>
+      <div class=" ml-3 mr-3">
+        <label for="question" >Marks: </label>
+        <input type="text" formControlName="Marks">
+      </div>
+
+    </div>
+  }
+</div>
+

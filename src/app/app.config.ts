@@ -13,6 +13,5 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()), provideAnimationsAsync('noop'), // This should work as intended
     BsModalService 
-
   ]
 };

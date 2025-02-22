@@ -1,1 +1,22 @@
-<p>check-verbal-result works!</p>
+<table class="table">
+  <thead>
+    <tr class="color-box">
+      @for( data of studentList;track data){
+
+        <th>{{ data.name | titlecase }}</th>
+      }
+    </tr>
+  </thead>
+  @for( studentarray of studentarray;track studentarray){
+  <tbody>
+    <tr>
+      <td>{{ studentarray?.firstName }}</td>
+      <td>{{ studentarray?.lastName }}</td>
+      <td >
+        <button class="color-box1" (click)="goTocheckstudentresult(studentarray?._id)">Check Recording</button>
+      </td>
+    </tr>
+  </tbody>
+}
+</table>
+
