@@ -1,1 +1,69 @@
-<p>add-fee works!</p>
+<div class="container mt-3">
+
+    <form [formGroup]="addFeeForm">
+      <div class="form-container d-flex flex-column text-center p-3">
+        <!-- <div class="ng-autocomplete form-group mb-2">
+        
+           <ng-autocomplete formControlName="studentName" [data]="filteredStudents" [searchKeyword]="keyword"
+            placeholder="Select Student" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)'
+            (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete> 
+  
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.firstName +' '+ item.lastName"></a>
+          </ng-template>
+  
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div> -->
+        <div class="mat-autocomplete form-group mb-2">
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Select Student</mat-label>
+                <input 
+                  type="text" 
+                  matInput 
+                  formControlName="studentName" 
+                  [matAutocomplete]="auto" 
+                  (input)="onChangeSearch($event)" 
+                />
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectEvent($event.option.value)">
+                  <mat-option *ngFor="let student of filteredStudents" [value]="student">
+                    {{ student.firstName }} {{ student.lastName }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+  
+        <div class="form-group mb-2">
+          <label for="inputEmail4">Total fee</label>
+          <input type="text" class="form-control" formControlName="totalFee">
+        </div>
+  
+  
+        <div class="form-group mb-2">
+          <label for="inputCity">Payment Mode</label>
+          <select class="form-control" formControlName="paymentMode">
+            <option>CASH</option>
+            <option>CARD</option>
+            <option>UPI</option>
+          </select>
+          <!-- <input type="text" class="form-control" formControlName = "paymentMode"> -->
+        </div>
+  
+        <div class="form-group mb-2">
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary" (click)="saveStudent()">
+            @if (!isLoading) {
+
+                <ng-container > Save </ng-container>
+            }
+            @else if (isLoading) {
+
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            }
+          </button>
+        </div>
+        <div class="form-group mb-2">
+          <button type="submit" class="btn btn-danger" (click)="cancelStudent()">Cancel</button>
+        </div>

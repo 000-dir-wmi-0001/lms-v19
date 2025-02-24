@@ -8,7 +8,9 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+
+import { Router, RouterLink } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { FeeService } from '../../../services/fee.service';
 
@@ -16,9 +18,12 @@ import { StorageService } from '../../../services/storage.service';
 import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { ReceiptService } from '../../../services/receipt.service';
+import { provideHttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-student-feeList',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule , RouterLink],
+  providers: [
+    BsModalService],
   templateUrl: './student-fee-list.component.html',
   styleUrls: ['./student-fee-list.component.css'],
 })

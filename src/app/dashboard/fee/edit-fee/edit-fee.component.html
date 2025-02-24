@@ -1,1 +1,61 @@
-<p>edit-fee works!</p>
+<!-- Page Content -->
+<div class="p-4" id="content">
+    <div class="add-user-container">
+      <h2>Student Details</h2>
+      <div class="user-form">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="Name" [(ngModel)]="userFirstName"
+              [readOnly]="true" />
+          </div>
+  
+          <div class="form-group">
+            <label>Total Fees</label>
+            <input type="text" class="form-control" [(ngModel)]="totalFees" formControlName="TotalFees"
+              [readOnly]="true" />
+  
+          </div>
+          <div class="form-group">
+            <label>Pending Fees</label>
+            <input type="text" class="form-control" [(ngModel)]="pendingFees" formControlName="PendingFees"
+              [readOnly]="true" />
+          </div>
+  
+          <div class="form-group">
+            <label>Total Installments</label>
+            <input type="text" class="form-control" [(ngModel)]="installment" formControlName="Installments" />
+          </div>
+          <div class="form-group">
+            <label>Mode of payment</label>
+            <select class="form-control" [(ngModel)]="paymentMode" formControlName="Mode">
+              <option value="CASH">CASH</option>
+              <option value="CARD">CARD</option>
+              <option value="UPI">UPI</option>
+            </select>
+          </div>
+  
+  
+          <div class="form-group">
+            <label>Amount of fees </label>
+            <input type="number" class="form-control" formControlName="Amount" />
+          </div>
+  
+          <button [disabled]="isLoading" type="submit" class="btn btn-primary" (click)="editFees()">
+            @if (!isLoading) {
+
+                <ng-container > Edit </ng-container>
+            }
+            @else if (isLoading) {
+
+                <div class="spinner-border">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            }
+          </button>
+  
+          
+        </form>
+      </div>
+    </div>
+  </div>

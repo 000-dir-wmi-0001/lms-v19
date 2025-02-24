@@ -1,1 +1,170 @@
-<p>print-receipt works!</p>
+<div class="p-4" id="content">
+    <section class="top-form" #contentToConvert>
+        <div class="container">
+            <div class="col-md-12">
+                <div class="invoice">
+                    LinkCode Technologies Pvt.Ltd.
+                    <div class="invoice-header">
+
+                        <div class="invoice-to">
+                            <small>Module name</small>
+                            <address class="m-t-5 m-b-5">
+                                <strong class="text-inverse">{{formEntries.module}}</strong><br>
+                            </address>
+                        </div>
+
+                        <div class="invoice-from">
+                            <small>Student</small>
+                            <address class="m-t-5 m-b-5">
+                                <small class="text-inverse">{{formEntries.userId}}</small><br> 
+                                <!-- HC stands for HArd Coded -->
+                            </address>
+                        </div>
+                       
+                        <div class="invoice-date">
+                            <small>Receipt Id</small>
+                            <div class="date text-inverse m-t-5">B10JV080</div>
+                        </div>
+                    </div>
+                    <!-- end invoice-header -->
+                    <!-- begin invoice-content -->
+                    <div class="invoice-content">
+                        <!-- begin table-responsive -->
+
+                        <div class="table-responsive">
+                            <!-- <label>Student details</label> -->
+                            <!-- studd name 
+email
+number
+college
+admission date
+dob
+module enrolled
+installemnt number
+Fees remained to be paid
+prev receipt option -->
+                            <table class="table table-invoice">
+
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left" width="20%"><small>Student Name</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.studentInfoObj.firstName +" "+formEntries.studentInfoObj.lastName}}</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><small>Email</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.studentInfoObj.email}}</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><small>Contact No.</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.studentInfoObj.mobileno}}</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left"><small>College Name</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.studentInfoObj.clg}}</small>
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td class="text-left"><small>Admission date</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.admissionDate}}</small>
+                                        </td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="text-left"><small>Date of Birth</small></td>
+                                        <td class="text-left">
+                                            <small>{{formEntries.studentInfoObj.dob}}</small>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+                        <div class="table-responsive">
+                            <label>Installments record</label>
+                            <table class="table table-invoice">
+                                <thead>
+                                    <tr>
+                                        <th>Installent</th>
+                                        <th>Payment mode</th>
+                                        <th class="text-center">Trs. Id</th>
+                                        <th class="text-center">Paid on</th>
+                                        <th class="text-center">Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            <small>{{formEntries.paymentMode}}</small>
+                                        </td>
+                                        <td class="text-center">{{formEntries.transactionId}}</td>
+                                        <td class="text-center">{{formEntries.paymentDate}}</td>
+                                        <td class="text-center">{{formEntries.thisInstallmentAmount}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end table-responsive -->
+                        <!-- begin invoice-price -->
+                        <div class="invoice-price">
+                            <div class="invoice-price-left">
+                                <div class="invoice-price-row">
+                                    <div class="sub-price">
+                                        <small>SUBTOTAL</small>
+                                        <span class="text-inverse">{{formEntries.thisInstallmentAmount}}</span>
+                                    </div>
+                                    <div class="sub-price">
+                                        <i class="fa fa-plus text-muted"></i>
+                                    </div>
+                                    <div class="sub-price">
+                                        <small>CGST (9.0%)</small>
+                                        <span class="text-inverse">{{formEntries.thisInstallmentAmount * 9/100}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-price-right">
+                                <small>TOTAL</small> <span class="f-w-600">{{formEntries.thisInstallmentAmount + formEntries.thisInstallmentAmount*9/100}}</span>
+                            </div>
+                        </div>
+                        <!-- end invoice-price -->
+                    </div>
+                    <!-- end invoice-content -->
+                    <!-- begin invoice-note -->
+                    <div class="invoice-note">
+                        * Make all cheques payable to Linkcode Technologies Pvt. Ltd.<br>
+                        * Payment is due within 30 days<br>
+                        * If you have any questions concerning this invoice, contact [Name, Phone Number, Email]
+                    </div>
+                    <!-- end invoice-note -->
+                    <!-- begin invoice-footer -->
+                    <div class="invoice-footer">
+                        <p class="text-center m-b-5 f-w-600">
+                            THANK YOU FOR YOUR BUSINESS
+                        </p>
+                        <p class="text-center">
+                            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> Linkcode.in</span>
+                            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone-volume"></i> T:016-18192302</span>
+                            <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> admin&#64;linkcode.in</span>
+                        </p>
+                    </div>
+                    <!-- end invoice-footer -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <button class="btn btn-primary" (click)="captureScreen()">Print</button>
+    <button class="btn btn-primary" [routerLink]="['../../profile']">Edit personal info</button>
+</div>

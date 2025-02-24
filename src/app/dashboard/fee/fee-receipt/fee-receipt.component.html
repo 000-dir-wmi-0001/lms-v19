@@ -1,1 +1,117 @@
-<p>fee-receipt works!</p>
+@if (!isLoading) {
+
+
+    <div class="p-4" id="content" >
+        
+        <p>This entries will be printed on receipt</p>
+        
+        <div class="custom-form">
+            
+            <form [formGroup]="receiptForm" (ngSubmit)="submitReceipt()">
+                
+                <button class="btn btn-info" type="button" (click)="prevReceipts(modal)">Previous Rec.</button>&nbsp;
+                <br><br>
+                
+                <div class="form-group form-row">
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="college">Select Module</label>
+                        <select formControlName="module" id="module" class="custom-select mr-sm-2" (change)="displayTotalFees()" >
+                            <option>Choose module</option>
+                            @for (module of staticCourses;let i = $index; track $index) {
+                                <option  >{{module.name}}</option>
+                            }
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="Total Fee">Total Fee</label>
+                        <input type="text" class="form-control" id="totalFees" [value]="totalFees" disabled>
+                    </div>
+                    @if (!lastInstallment) {
+
+                        <div class="col-md-4 mb-3" >
+                            <label for="installments">Installments</label>
+                            <select id="installments" formControlName="installments" id="installments" class="custom-select mr-sm-2"  (change)="displayFeesToBePaid()" >
+                            </select>
+                        </div>
+                    }
+            @if (lastInstallment) {
+
+                <div  class="col-md-4 mb-3" >
+                    <label for="installments">Installments</label>
+                    <input type="text" class="form-control" id="totalFees" [value]=2 disabled >
+                </div>
+            }
+            @if (lastInstallment && feeComplete) {
+
+                <div class="col-md-4 mb-3" >
+                    <label for="installments">Fee Status</label>
+                    <input type="text" class="form-control" id="totalFees" [value]="feeStatus" disabled >
+                </div>
+            }
+            
+        </div>   
+        <div class="form-group form-row">
+            <div class="col-md-4 mb-3">
+                <label for="FeesToBePaid">Fees to be paid</label>
+                <input type="text" class="form-control" id="FeesToBePaid" [value]="FeesToBePaid" disabled>
+            </div>
+        </div>
+        
+        
+        <!-- <button class="btn btn-light" type="button" disabled>Go for Payment</button> <br><br> -->
+        <!-- <button class="btn btn-light" type="submit" [routerLink]="['../print-receipt']" [state]=formEntries>Go for Payment</button>&nbsp; -->
+        <!-- <button class="btn btn-light" type="submit"> Next </button>&nbsp; -->
+        
+        <button class = "btn btn-sm btn-light" (click)="openFeesModal()"></button>
+        
+        <div class="rawtext">
+            (Payment API yet building, request admin to verify the payment)
+        </div>
+    </form>
+    
+    <ng-template #modal>
+        <div class="modal-content">
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">module</th>
+                            <th scope="col">amount</th>
+                            <th scope="col">payment mode</th>
+                            <th scope="col">paid on</th>
+                            <th scope="col">transactionId</th>
+                            <th scope="col">fee status</th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+      <tbody>
+        @for (item of allReceipts;let i =$index ; track $index) {
+
+            <tr >
+                <th scope="row">{{i+1}}</th>
+                <th scope="row">{{item.module}}</th>
+                <td>{{item.thisInstallmentAmount}}</td>
+                <td>{{item.paymentMode}}</td>
+                <td>{{item.paymentDate}}</td>
+                <td>{{item.transactionId}}</td>
+                @if (item.feeComplete) {
+
+                    <td >Complete</td>
+                    <ng-template #elseblock><td>pending</td></ng-template>
+                    <td><button class="btn" (click)="printReceipt()">Print</button></td>
+                }@else {
+                    elseblock;
+                }
+            </tr>    
+        }
+    </tbody>
+</table>
+</div>
+</div>
+</ng-template>
+</div>
+    </div>
+}

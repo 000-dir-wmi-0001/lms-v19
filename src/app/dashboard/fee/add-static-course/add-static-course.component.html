@@ -1,1 +1,36 @@
-<p>add-static-course works!</p>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="centered-form">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" />
+@if (productForm.get('name')?.touched && productForm.get('name')?.hasError('required')) {
+
+    <div class="error-message">
+        Name is required.
+    </div>
+}
+</div>
+  
+    <div>
+      <label for="price">Price:</label>
+      <input type="text" id="price" formControlName="price" />
+      @if (productForm.get('price')?.touched && productForm.get('price')?.hasError('required')) {
+
+          <div class="error-message">
+              Price is required.
+            </div>
+        }
+        @if (productForm.get('price')?.hasError('pattern')) {
+
+            <div class="error-message">
+                Invalid price format. (e.g., 10 or 10.99)
+            </div>
+        }
+        </div>
+  
+    <div class="buttons">
+      <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">Submit</button>
+      <button type="button" class="btn btn-warning" routerLink="/dashboard/fee/editCourseFee">Back</button>
+    </div>
+  </form>
+  
