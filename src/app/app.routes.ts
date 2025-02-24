@@ -95,6 +95,7 @@ import { ModuleComponent } from './dashboard/module/module.component';
 import { StudDailynoticeComponent } from './dashboard/stud-dailynotice/stud-dailynotice.component';
 import { IsSuperAdminOrAdminGuard } from './guards/is-admin.guard';
 import { RegisterStudentComponent } from './pos/register-student/register-student.component';
+import { CodeSharingComponent } from './dashboard/code-sharing/code-sharing.component';
 
 export const routes: Routes = [
 
@@ -176,7 +177,7 @@ export const routes: Routes = [
             { path: 'add-fee', component: AddFeeComponent },
             { path: 'displayStudentInfo/:id', component: DisplayStudentInfoComponent },
             { path: 'edit/:id', component: EditFeeComponent },
-            { path: 'editCourseFee', component: CourseEditFeeComponent },
+            // { path: 'editCourseFee', component: CourseEditFeeComponent },
             { path: 'fee-receipt', component: FeeReceiptComponent },
             { path: 'print-receipt', component: PrintReceiptComponent },
             { path: 'addStaticCourse', component: AddStaticCourseComponent }
@@ -185,7 +186,10 @@ export const routes: Routes = [
           ]
       },
       {
-        path: 'module', component: ModuleComponent
+        path: 'module', component: ModuleComponent, children: [
+          { path: 'editCourseFee', component: CourseEditFeeComponent },
+
+        ]
       },
 
       {
@@ -224,7 +228,7 @@ export const routes: Routes = [
       // },
       { path: 'get-enquiry', component: GetEnquiryComponent },
       {
-        path: 'code-sharing', component: CompilerComponent, children:
+        path: 'code-sharing', component: CodeSharingComponent, children:
           [
             { path: '', component: ListCodeComponent },
             { path: ':fileId/:fileName/:thumbnail', component: ViewCodeComponent },
