@@ -1,1 +1,105 @@
-<p>certificate-request works!</p>
+<div class="p-4" id="content">
+
+    <div class="container-fluid">
+  
+      <div *ngIf="getRole() == 'STUDENT'" class="my-5 mt-5 align-items-center">
+  
+        <div class="">
+          <!--       
+          <div class="search-bar">
+              <label>Search by Name:</label>
+              <input type="text" [(ngModel)]="name" (input)="searchStudent()" />
+            </div> -->
+  
+          <div class="float-end my-4">
+            <button class="btn btn-info" [routerLink]="['certForm']">Request</button>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" *ngFor="let data of listTitles">{{ data.name | titlecase }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of request; index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{ record.Name }}</td>
+                  <td>{{ record.Email }}</td>
+                  <td>{{ record.Mobile }}</td>
+                  <td>{{ record.CourseName }}</td>
+                  <td>{{ record.CourseStartDate }}</td>
+                  <td>{{ record.CourseEndDate }}</td>
+                  <td>{{ record.BatchCode }}</td>
+                  <td *ngIf="record.isApproved">
+                    <button class="btn btn-warning" (click)="downloadCert(record.user._id,record._id)">Download</button>
+                  </td>
+                  <td *ngIf="!record.isApproved">
+                    <i class="fa-solid fa-clock"></i>
+                  </td>
+                </tr>
+              </tbody>         
+            </table>
+            <div *ngIf="request.length === 0" class="d-flex justify-content-center">
+              <p>No records Found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  
+  
+    <div class="container-fluid">
+      <div *ngIf="getRole() == 'ADMIN'" class="my-4 mt-5 align-items-center">
+        <div class="row mb-3">
+          <div class="col-md-5">
+            <label>Search by Name:</label>
+            <input type="text" class="form-control" [(ngModel)]="name" (input)="searchEntries()" />
+          </div>
+          <div class="col-md-5">
+            <label for="filterDate">Filter by Date:</label>
+            <input type="date" id="filterDate" class="form-control" [(ngModel)]="selectedDate" (change)="filterByDate()">
+          </div>
+          <div class="col-md-2">
+            <!-- <button class="btn btn-info " (click)="export()">Export</button> -->
+            <button class="btn btn-outline-success" (click)="export()"> <img src="excel-icon.png" alt="" style="width: 1rem;height: 1rem;margin-right: 0.3rem;">Download Report</button>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let data of listTitles">{{ data.name | titlecase }}</th>
+                <th colspan="2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of request; index as i" (dblclick)="handleDoubleClick(record._id)"
+                title="Upload Certificate by double clicking">
+                <th scope="row">{{ i+1 }}</th>
+                <td>{{ record.Name }}</td>
+                <td>{{ record.Email }}</td>
+                <td>{{ record.Mobile }}</td>
+                <td>{{ record.CourseName }}</td>
+                <td>{{ record.CourseStartDate }}</td>
+                <td>{{ record.CourseEndDate }}</td>
+                <td>{{ record.BatchCode }}</td>
+                <td *ngIf="record.isApproved"><i class="fa-solid fa-share-from-square"></i></td>
+                <td *ngIf="!record.isApproved"><i class="fa-solid fa-clock"></i></td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="delete(record.user._id, record._id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="request.length === 0" class="d-flex justify-content-center">
+            <p>No records Found</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
