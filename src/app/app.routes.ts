@@ -91,6 +91,10 @@ import { JoinMeetingComponent } from './dashboard/live-class/join-meeting/join-m
 import { MeetingComponent } from './dashboard/live-class/meeting/meeting.component';
 import { StartMeetingComponent } from './dashboard/live-class/start-meeting/start-meeting.component';
 import { StudMeetingComponent } from './dashboard/live-class/stud-meeting/stud-meeting.component';
+import { ModuleComponent } from './dashboard/module/module.component';
+import { StudDailynoticeComponent } from './dashboard/stud-dailynotice/stud-dailynotice.component';
+import { IsSuperAdminOrAdminGuard } from './guards/is-admin.guard';
+import { RegisterStudentComponent } from './pos/register-student/register-student.component';
 
 export const routes: Routes = [
 
@@ -180,6 +184,9 @@ export const routes: Routes = [
 
           ]
       },
+      {
+        path: 'module', component: ModuleComponent
+      },
 
       {
         path: 'user', component: UserComponent, children:
@@ -243,7 +250,7 @@ export const routes: Routes = [
       { path: 'Placements', component: PlacementComponent },
       { path: 'Review', component: ReviewComponent },
       { path: 'admin-dailynotice', component: AdminDailynoticeComponent },
-      { path: 'sutdent-dailynotice', component: AdminDailynoticeComponent },
+      { path: 'student-dailynotice', component: StudDailynoticeComponent },
       {
         path: 'batch', component: BatchComponent, children:
           [
@@ -273,7 +280,16 @@ export const routes: Routes = [
   //Pos Components routes
   {
     path: 'pos', component: PosComponent, children: [
-
+      {
+        path: '',
+        redirectTo: 'register',
+        pathMatch: 'full',
+      },
+      {
+        path: 'register',
+        component: RegisterStudentComponent,
+        canActivate: [IsSuperAdminOrAdminGuard],
+      }
     ], canActivate: [AuthGuard]
   },
 

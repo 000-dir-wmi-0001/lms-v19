@@ -1,0 +1,68 @@
+<div class="" id="content">
+
+  <div class="table-container">
+    <div class="float-end">
+      <button class="btn btn-warning" [routerLink]="['editCourseFee']">Edit Course Fees</button>
+    </div><br><br>
+
+
+    <div class="float-end"><button class="btn btn-info" [routerLink]="['add-fee']">Create Fee</button></div><br><br>
+    @if (isLoading) {
+
+
+        <div class="loader-container">
+            <div class="spinner-border" role="status">
+                <span class="sr-only" id="loading"></span>
+              </div>
+          </div>
+      }
+    @else if (!isLoading) {
+
+        <table class="table table-bordered table-hover" >
+            <thead>
+                <tr>
+                  @for (data of listTitles; track $index) {
+
+                      <th >{{ data.name | titlecase }}</th>
+                  }
+                  </tr>
+              </thead>
+              <tbody>
+                  @for (student of studentList; let i = $index; track $index) {
+
+                      <tr (dblclick)="handleDoubleClick(student._id)">
+                          <td>{{i+1}}</td>
+                          <td>{{ student.firstName + " " + student.lastName }}</td>
+                          <!-- <td>{{ student.totalFee }}</td> -->
+                          <!-- <td>{{ student.pendingFee }}</td> -->
+                          <td>
+                              <button class="btn btn-primary" (click)="editFee(student._id)">Edit Fee</button>
+                          </td>
+                          <td>
+                              <button class="btn btn-primary" (click)="writeReminderMsg(modal,student._id)">Send a reminder</button>
+                          </td>
+                      </tr>
+                  }
+  </tbody>
+</table>
+}
+
+    <ng-template #modal>
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <div class="receiver">
+            Write a Reminder message to send "studentname"
+            Mobile no.: {{toWAnumber}}
+          </div>
+          <br><br>
+          <div class="form-outline" data-mdb-input-init>
+            <label class="form-label" for="textAreaExample">Message</label>
+            <textarea class="form-control" id="textAreaExample" rows="4" #tempvar></textarea>
+          </div>
+         <button class="btn" (click)="sendReminder(tempvar.value)">Send</button>&nbsp;
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
