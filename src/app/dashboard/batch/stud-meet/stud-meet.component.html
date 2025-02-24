@@ -1,1 +1,25 @@
-<p>stud-meet works!</p>
+<section>
+  <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xlg-4 g-4 py-5">
+          <div class="col" *ngFor="let meet of allMeetings">
+              <div class="card-container">
+                  <div class="card" style="width: 20rem;">
+                      <div class="card-body">
+                          <a><h5 class="card-title custom-link">{{meet.topic}}</h5></a>
+                          <strong>StartTime: <i class="bi bi-calendar3"></i></strong>
+                          {{ meet.start_time | date: 'dd MMM YYYY' }},
+                          <strong><i class="bi bi-clock"></i></strong>
+                          {{ meet.start_time | date: 'shortTime' }} <br>
+                          <strong>Duration:</strong> {{ meet.duration }} min
+                          <p><strong>Agenda:</strong> {{ meet.agenda }}</p>
+                          <div class="card-footer">
+                              <button class="btn btn-primary start-btn" (click)="joinMeeting(meet.meeting_Id,meet.password)" >Join Now</button>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

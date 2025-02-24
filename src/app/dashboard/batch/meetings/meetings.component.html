@@ -1,1 +1,140 @@
-<p>meetings works!</p>
+<!-- Button to Open the Modal -->
+<div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+  <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Main Content (only shows if data is loaded) -->
+<!-- <div *ngIf="!loading">
+  <div class="d-flex justify-content-end">
+      <button class="btn btn-primary w-25" style="margin-top: 1%; margin-right: 1%;"
+              data-bs-toggle="modal" data-bs-target="#createMeetingModal">
+          <i class="bi bi-people-fill"></i> Create New Meeting
+      </button>
+  </div> -->
+<div  *ngIf="!loading" >
+  <div class="d-flex justify-content-end">
+      <button  type="button" class="btn btn-primary w-25" style="margin-top: 1%; margin-right: 1%;" (click)="openModal(false)">
+          Create New Meeting
+      </button>
+  </div>
+</div>
+
+<!-- Meeting Modal -->
+<div class="modal fade" #createMeetingModal tabindex="-1" aria-labelledby="createMeetingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createMeetingModalLabel">{{ isEditMode ? 'Edit Meeting' : 'Create Meeting' }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="createMeetForm" (ngSubmit)="createOrUpdateMeeting()" id="meetingForm">
+        <div class="modal-body">
+          <!-- Topic Field -->
+          <div class="mb-3">
+            <label for="topic" class="form-label">Topic</label>
+            <input type="text" id="topic" class="form-control" formControlName="topic" placeholder="Enter meeting topic">
+            <div *ngIf="createMeetForm.controls['topic'].invalid && createMeetForm.controls['topic'].touched" class="text-danger">
+              Topic is required.
+            </div>
+          </div>
+
+          <!-- Start Time Field -->
+          <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time </label>
+            <input type="datetime-local" id="start_time" class="form-control" formControlName="start_time">
+            <div *ngIf="createMeetForm.controls['start_time'].invalid && createMeetForm.controls['start_time'].touched" class="text-danger">
+              Start time is required.
+            </div>
+          </div>
+
+          <!-- Duration Field -->
+          <div class="mb-3">
+            <label for="duration" class="form-label">Duration (in minutes)</label>
+            <input type="number" id="duration" class="form-control" formControlName="duration" placeholder="Enter duration">
+            <div *ngIf="createMeetForm.controls['duration'].invalid && createMeetForm.controls['duration'].touched" class="text-danger">
+              Duration is required.
+            </div>
+          </div>
+
+          <!-- Timezone Field -->
+          <div class="mb-3">
+            <label for="timezone" class="form-label">Timezone</label>
+            <select id="timezone" class="form-control" formControlName="timezone">
+              <option value="" disabled>Select timezone</option>
+              <option value="UTC">UTC</option>
+              <option value="Asian/Kolkata">Asian/Kolkata</option>
+            </select>
+            <div *ngIf="createMeetForm.controls['timezone'].invalid && createMeetForm.controls['timezone'].touched" class="text-danger">
+              Timezone is required.
+            </div>
+          </div>
+
+
+          <!-- Agenda Field -->
+          <div class="mb-3">
+            <label for="agenda" class="form-label">Agenda</label>
+            <textarea id="agenda" class="form-control" formControlName="agenda" rows="3" placeholder="Enter agenda (optional)"></textarea>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" [attr.data-bs-dismiss]="createMeetForm.valid ? 'modal' : null" [disabled]="!createMeetForm.valid" class="btn btn-primary">
+            {{ isEditMode ? 'Update Meeting' : 'Create Meeting' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Meeting Cards (this part shows after data is loaded) -->
+<div class="container-fluid">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 py-5">
+    <div class="col" *ngFor="let meet of allMeetings">
+      <div class="card-container">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <!-- Meeting Topic -->
+            <a><h5 class="card-title custom-link">{{ meet.topic }}</h5></a>
+
+            <!-- Meeting Start Time -->
+            <strong>Start Time: <i class="bi bi-calendar3"></i></strong>
+            {{ meet.start_time | date: 'dd MMM YYYY' }},
+            <strong><i class="bi bi-clock"></i></strong>
+            {{ meet.start_time | date: 'shortTime' }} <br>
+
+            <!-- Meeting Duration -->
+            <strong>Duration:</strong> {{ meet.duration }} min <br>
+
+            <!-- Meeting Agenda -->
+            <p><strong>Agenda:</strong> {{ meet.agenda }}</p>
+
+            <!-- Action Buttons (Start, Delete, Edit) -->
+            <div class="card-footer">
+              <!-- Start Meeting Button -->
+              <button class="btn btn-primary start-btn" (click)="startMeeting(meet.meeting_Id, meet.password)">Start</button>
+
+              <!-- Delete Meeting Button -->
+              <button class="btn btn-danger delete-btn" (click)="deleteMeeting(meet.meeting_Id)">Delete</button>
+
+              <!-- Edit Meeting Button -->
+              <button class="btn btn-warning edit-btn" (click)="editMeeting(meet.meeting_Id)">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Display when no meetings are available -->
+<div *ngIf="!loading && allMeetings.length === 0" class="text-center">
+  No meetings available.
+</div>
+
+

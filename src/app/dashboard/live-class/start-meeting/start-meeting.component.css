@@ -1,0 +1,24 @@
+#meetingSDKElement {
+  width: 80%;
+  height: 500px;
+  position: fixed;
+  top: 10%;
+  right: 0;
+}
+
+/*   #meetingSDKChatElement {
+  position: fixed;
+  left: 20%;
+  margin-top: 5%;
+  top: 20%;
+}
+ */
+.row {
+  display: flex;
+}
+
+.column {
+  top: 40%;
+  flex: 3;
+  position: absolute;
+}

@@ -1,1 +1,100 @@
-<p>create-batch works!</p>
+<div class="container m-4 w-75">
+  <h4>Search Batch</h4>
+</div>
+<div class="d-flex flex-column flex-md-row align-items-center mb-3 m-3">
+  <!-- Search input and button container -->
+  <div class="search-container flex-grow-1">
+    <div class="d-flex">
+      <input
+        type="text"
+        class="form-control search-input"
+        placeholder="Search batches..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearch()"
+      />
+      <button
+        class="btn btn-outline-secondary search-button"
+        type="button"
+        (click)="onSearch()"
+      >
+        Search
+      </button>
+    </div>
+    <p *ngIf="searchResults.length === 0 && searchTerm" class="no-results">
+      No batch found.
+    </p>
+  </div>
+
+  <!-- Create button on the right -->
+  <div class="ms-md-3 mt-2 mt-md-0">
+    <button
+      type="button"
+      class="btn btn-success create-button"
+      (click)="openBatchModal(false)"
+    >
+      Create Batch
+    </button>
+  </div>
+</div>
+<div *ngIf="searchResults.length > 0" class="search-results mt-2">
+  <ul class="list-group ms-3">
+    <li *ngFor="let batch of searchResults" class="list-group-item">
+      {{ batch.name }}
+    </li>
+  </ul>
+</div>
+
+<!-- Add/Edit Batch Modal -->
+<div
+  #batchModal
+  class="modal fade"
+  tabindex="-1"
+  aria-labelledby="batchModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="batchModalLabel">
+          {{ isEditMode ? "Edit Batch" : "Add Batch" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmitBatch()">
+          <div class="mb-3">
+            <label for="batchName" class="form-label">Batch Name</label>
+            <input
+              type="text"
+              id="batchName"
+              [(ngModel)]="batchData.name"
+              name="batchName"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="batchDescription" class="form-label"
+              >Batch Description</label
+            >
+            <textarea
+              id="batchDescription"
+              [(ngModel)]="batchData.description"
+              name="batchDescription"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            {{ isEditMode ? "Update Batch" : "Create Batch" }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

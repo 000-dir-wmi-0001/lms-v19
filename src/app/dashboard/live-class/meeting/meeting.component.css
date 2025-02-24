@@ -1,0 +1,59 @@
+.fade {
+  background-color: rgba(173, 158, 158, 0.2);
+}
+
+
+.modal-backdrop.show {
+  opacity: 0.7;
+  /* Change this value for more or less opacity */
+}
+
+.start-btn,
+.delete-btn {
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.start-btn:hover,
+.delete-btn:hover {
+  background-color: black !important;
+  color: white;
+}
+
+.card-body a {
+  text-decoration: none;
+  /* Remove underline */
+  color: black;
+  /* Set text color to black */
+  transition: color 0.3s ease;
+  /* Smooth transition for hover */
+}
+
+.card-body a:hover {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1 1 60%;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex-grow: 1;
+}
+
+.card-footer {
+  display: flex;
+  padding: 10px;
+
+}
