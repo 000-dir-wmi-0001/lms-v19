@@ -1,1 +1,94 @@
-<p>add-coding-question works!</p>
+<!-- Page Content -->
+<div class="p-4" id="content">
+    <form class="card mt-5" [formGroup]="addquestionform" (ngSubmit)="onSubmit()">
+    
+      <br>
+    
+      <div class="form-group">
+        <h5 for="language">Select Language:</h5>
+        <select formControlName="language" class="form-control" required="required"
+        [ngClass]="{ 'is-invalid': submitted && formControls['language'].errors }">
+            <option disabled>Select Language</option>
+            @for (language of languageList; track $index) {
+
+                <option  [ngValue]="language">{{language}}</option>
+            }
+            </select>
+            @if (submitted && formControls['language'].errors) {
+
+                <div  class="invalid-feedback">
+                    @if (formControls['language'].errors['required']) {
+                        <span>Language is required</span>
+                    }
+                </div>
+            }
+        </div>
+        
+        <div>
+          <h5 >Enter Question</h5>
+        <textarea rows="3" class="form-control" formControlName="question">Question</textarea><br>
+        @if (question &&question.invalid) {
+
+            <span style="color:red">Input question is invalid</span>
+        }
+        </div><br>
+    
+      <div>
+        <h5 >Enter Question Description</h5>
+        <textarea rows="3" cols="120" class="form-control" formControlName="qest_description">Question</textarea><br>
+        @if (questiondescription &&questiondescription.invalid) {
+
+            <span style="color:red">
+                Input question description is invalid</span>
+            }
+            </div><br>
+    
+      <div>
+        <h5 >Enter Editable answer</h5>
+        <textarea rows="3" cols="120" rows="6"class="form-control" formControlName="editable_ans">Question</textarea><br>
+        @if (editable_ans &&editable_ans.invalid) {
+            <span style="color:red" >Input answer format is invalid</span>
+        }
+      </div><br>
+    
+      <div>
+        <h5 >Enter Non editable answer</h5>
+        <textarea rows="3" cols="120" rows="6"class="form-control" formControlName="non_editable_ans">Question</textarea><br>
+        @if (non_editable_ans &&non_editable_ans.invalid) {
+
+            <span style="color:red">Input answer format is invalid</span>
+        }
+      </div><br>
+    
+    
+      <div>
+        <h5 >Enter Marks<input class="form-control" type="number"
+          min="2" formControlName="marks"></h5>
+          @if (marks &&marks.invalid) {
+
+              <span style="color:red" >Input marks is invalid</span>
+            }
+      </div><br>
+    
+      <div  class="text-center mb-3">
+        <!-- <button class="btn btn-primary" >Submit</button> -->
+        <button [disabled]="isLoading" type="submit" class="btn btn-primary submitButton">
+            @if (!isLoading) {
+
+                <ng-container > Submit </ng-container>
+            }
+            @else if (isLoading) {
+
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            }
+            </button>
+            <br><br>
+        <button class="btn btn-primary" (click)="gotobackpage()">Back</button>
+      </div>
+    </form>
+    </div>
+    
+    
+    
