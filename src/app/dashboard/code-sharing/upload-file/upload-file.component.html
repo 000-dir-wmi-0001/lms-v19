@@ -1,1 +1,120 @@
-<p>upload-file works!</p>
+<div class="p-4" id="content">
+    <div class="add-file-container">
+      <h2>Add new File</h2>
+      <div class="file-form">
+        <form [formGroup]="fileForm" (ngSubmit)="uploadFileToS3()">
+          <div class="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              placeholder="title"
+              formControlName="title"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['title'].errors
+              }"
+            />
+            @if (submitted && formControls['title'].errors) {
+
+                <div class="invalid-feedback">
+                    @if (formControls['title'].errors['required']) {
+                            title is required
+                    }
+            </div>
+        }
+        </div>
+  
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              type="text"
+              placeholder="File description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['description'].errors
+              }"
+            />
+            @if (submitted && formControls['description'].errors) {
+
+                <div class="invalid-feedback">
+                    @if (formControls['description'].errors['required']) {
+                            Description is required
+                    }
+            </div>
+        }
+          </div>
+  
+          <div class="form-group">
+            <label>Language</label>
+            <select
+              formControlName="language"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['language'].errors
+              }"
+            >
+              <option value="" disabled>Select Language</option>
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+            </select>
+            @if (submitted && formControls['language'].errors) {
+
+                <div class="invalid-feedback">valid-feedback"
+                >
+                @if (formControls['language'].errors['required']) {
+                        Language is required
+                }
+            </div>
+        }
+          </div>        
+  
+          <div class="form-group">
+            <label>File</label>
+            <input
+              type="file"
+              class="form-control"
+              formControlName="file"
+              (change)="processFile($event)"
+              [ngClass]="{
+                'is-invalid': submitted && formControls['file'].errors
+              }"
+            />
+            @if (submitted && formControls['file'].errors) {
+
+                <div class="invalid-feedback">
+                    @if (formControls['file'].errors['required']) {
+                            File is required
+                    }
+            </div>
+        }
+          </div>
+  
+          <div class="form-group text-center">
+            <button [disabled]="isLoading" type="submit" class="btn btn-primary">
+                @if (!isLoading) {
+
+                    <ng-container> Add </ng-container>
+                }
+                @if (isLoading) {
+
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                }
+          </button>
+            <button
+              type="submit"
+              class="btn btn-secondary"
+              routerLink="/dashboard/code-sharing"
+            >
+              Back
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

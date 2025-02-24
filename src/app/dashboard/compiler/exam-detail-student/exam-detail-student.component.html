@@ -1,1 +1,32 @@
-<p>exam-detail-student works!</p>
+<!-- Page Content -->
+<div class="p-4" id="content">
+    <div class="py-5">
+        @for (exam of examdetail; track $index) {
+
+        
+      <div class="card border border-dark mt-3"  >
+        <div class="card-header">
+          <div class="text-right">Marks : {{exam?.['marks']}}</div>
+          <div class="card-title bold">question  : {{exam?.['question']}}</div>
+          <div class="card-title bold">Language : {{exam?.['language']}}</div>
+    
+          <div class="text-center">
+            <!-- <button class="btn btn-primary" >Attempt Exam</button> -->
+            <button (click)="gotoattemptexam(exam?.['_id'])" [disabled]="isLoading" type="submit" class="btn btn-primary submitButton">
+                @if (!isLoading) {
+
+                    <ng-container> Attempt Exam </ng-container>
+                }@else {
+
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                }
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+    </div>
+    </div>
+    
