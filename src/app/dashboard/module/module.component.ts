@@ -19,9 +19,10 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { ReceiptService } from '../../services/receipt.service';
 import { provideHttpClient } from '@angular/common/http';
+import { CourseEditFeeComponent } from "../fee/course-edit-fee/course-edit-fee.component";
 @Component({
   selector: 'app-module',
-  imports: [CommonModule, RouterLink, RouterOutlet, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, RouterLink, RouterOutlet, ReactiveFormsModule, FormsModule, CourseEditFeeComponent],
   templateUrl: './module.component.html',
   styleUrl: './module.component.css'
 })

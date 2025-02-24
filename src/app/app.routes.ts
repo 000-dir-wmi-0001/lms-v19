@@ -174,7 +174,7 @@ export const routes: Routes = [
         path: 'fee', component: FeeComponent, children:
           [
             { path: '', component: FeeListComponent },
-            { path: 'add-fee', component: AddFeeComponent },
+            // { path: 'add-fee', component: AddFeeComponent },
             { path: 'displayStudentInfo/:id', component: DisplayStudentInfoComponent },
             { path: 'edit/:id', component: EditFeeComponent },
             // { path: 'editCourseFee', component: CourseEditFeeComponent },
@@ -188,6 +188,8 @@ export const routes: Routes = [
       {
         path: 'module', component: ModuleComponent, children: [
           { path: 'editCourseFee', component: CourseEditFeeComponent },
+          { path: 'add-fee', component: AddFeeComponent },
+
 
         ]
       },

@@ -21,7 +21,7 @@ import { ReceiptService } from '../../../services/receipt.service';
 import { provideHttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-student-feeList',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   providers: [
     BsModalService],
   templateUrl: './student-fee-list.component.html',

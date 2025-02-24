@@ -2,25 +2,25 @@
 
 <div class="p-4" id="content">
 
- <div class="table-container">   
-   <button class="btn btn-warning "routerLink="/dashboard/fee/addStaticCourse">new course</button>    
-   <button class="btn btn-info "routerLink="/dashboard/fee/">Back to fee</button>    
-        
+ <div class="table-container">
+   <button class="btn btn-warning "routerLink="/dashboard/fee/addStaticCourse">new course</button>
+   <!-- <button class="btn btn-info "routerLink="/dashboard/module/">Back to Module</button> -->
+
    <table class="table table-bordered table-hover">
          <thead>
            <tr class="text-center text-justify">
              <th class="bg-primary text-light">Index</th>
-             <th class="bg-primary text-light">Course</th>          
-             <th class="bg-primary text-light">Price</th>    
+             <th class="bg-primary text-light">Course</th>
+             <th class="bg-primary text-light">Price</th>
              <th class="bg-primary text-light">Action</th>
            </tr>
          </thead>
          <tbody>
             @for (course of coursesList; let i = $index; track $index) {
 
-                <tr   >          
+                <tr   >
                     <td>{{i+1}}</td>
-                    
+
                     <td>{{course?.['name']}}</td>
                     <td>{{course?.['price']}}</td>
                     <td>
@@ -31,16 +31,16 @@
                             </button>
                         }@else {
 
-                            
+
                             <ng-template #elseBlock>
                                 <input  type="number" placeholder="enter new price" #tempVar>
                                 <button (click)="editCoursePrice(course._id,tempVar.value)" class="btn btn-warning">Save changes</button>
                                 <button (click)="cancelEdit()" class="btn btn-danger">Cancel</button>
-                                
+
                             </ng-template>
                         }
-                    </td>      
-                </tr>        
+                    </td>
+                </tr>
             }
  </tbody>
  </table></div></div>

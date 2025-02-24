@@ -2,14 +2,14 @@
 
     <div class="table-container">
       <div class="float-end">
-        <button class="btn btn-warning" [routerLink]="['editCourseFee']">Edit Course Fees</button>
+        <!-- <button class="btn btn-warning" [routerLink]="['editCourseFee']">Edit Course Fees</button> -->
       </div><br><br>
 
       <div class="search-bar">
         <label>Search by Name:</label>
         <input type="text" [(ngModel)]="name" (input)="searchStudent()" />
       </div>
-      <div class="float-end"><button class="btn btn-info" [routerLink]="['add-fee']">Create Fee</button></div><br><br>
+      <!-- <div class="float-end"><button class="btn btn-info" [routerLink]="['add-fee']">Create Fee</button></div><br><br> -->
       @if (isLoading) {
 
 

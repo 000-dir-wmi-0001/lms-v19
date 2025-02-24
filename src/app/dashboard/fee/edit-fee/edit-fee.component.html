@@ -9,19 +9,19 @@
             <input type="text" class="form-control" formControlName="Name" [(ngModel)]="userFirstName"
               [readOnly]="true" />
           </div>
-  
+
           <div class="form-group">
             <label>Total Fees</label>
             <input type="text" class="form-control" [(ngModel)]="totalFees" formControlName="TotalFees"
               [readOnly]="true" />
-  
+
           </div>
           <div class="form-group">
             <label>Pending Fees</label>
             <input type="text" class="form-control" [(ngModel)]="pendingFees" formControlName="PendingFees"
               [readOnly]="true" />
           </div>
-  
+
           <div class="form-group">
             <label>Total Installments</label>
             <input type="text" class="form-control" [(ngModel)]="installment" formControlName="Installments" />
@@ -34,13 +34,13 @@
               <option value="UPI">UPI</option>
             </select>
           </div>
-  
-  
+
+
           <div class="form-group">
             <label>Amount of fees </label>
             <input type="number" class="form-control" formControlName="Amount" />
           </div>
-  
+
           <button [disabled]="isLoading" type="submit" class="btn btn-primary" (click)="editFees()">
             @if (!isLoading) {
 
@@ -53,8 +53,8 @@
                 </div>
             }
           </button>
-  
-          
+
+
         </form>
       </div>
     </div>
