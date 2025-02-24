@@ -1,1 +1,108 @@
-<p>exam-detail works!</p>
+<!-- Page Content -->
+<div class="page-content px-5 pt-5" id="content">
+  <div class="card mt-5 mb-5">
+    <div class="card-body">
+      <div class="title">
+        <h5 class="card-title">Course Name: &nbsp; {{course}}</h5>
+        <h5 class="card-title">Topic Name: &nbsp; {{topic}}</h5>
+        <h5 class="card-title">Exam Type: &nbsp; {{examtype}}</h5>
+        <h5 class="card-title">Start Date: &nbsp; {{ startDate| date}}</h5>
+      </div>
+
+      <div class="divider"></div> <!-- Divider line -->
+
+      <div *ngIf="buttonType == 'add'" class="mt-4 mb-4">
+        <a *ngIf="getExamType() == 'MCQ'" class="btn btn-primary" (click)="showAddQuestionButtons()">Add MCQ
+          Question</a>
+        <a *ngIf="getExamType()=='CODING'" class="btn btn-primary" (click)="gotoCODINGquestion()">Add Coding
+          Question</a>
+        <a *ngIf="getExamType()=='VERBAL'" class="btn btn-primary" (click)="gotoVERBALquestion()">Add Verbal
+          Question</a>
+
+        <div class="center-container mt-3" *ngIf="showAddButtons">
+          <button (click)="addManually()" class="btn btn-outline-primary me-2">
+            Add Manually
+          </button>
+          <button (click)="addByLLM()" class="btn btn-outline-success">
+            Add by LLM
+          </button>
+        </div>
+      </div>
+
+      <h5>Question List</h5>
+
+      <!-- MCQ Questions -->
+      <div class="card mb-4" *ngIf="getExamType() == 'MCQ'">
+        <div *ngFor="let question of questionarray" class="question-section">
+          <div class="card-header">
+            <div class="question-item">
+              <b>Question:</b> <span>{{question?.['name']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Options:</b> <span>{{question?.['options']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Answers:</b> <span>{{question?.['answers']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Marks:</b> <span>{{question?.['mark']}}</span>
+            </div>
+          </div>
+          <div class="card-action mt-2" *ngIf="buttonType == 'add'">
+            <button class="btn btn-update"
+              (click)="gotoUpdateQuestion(question?.['_id'], course?.['type'])">Update</button>
+            <button class="btn btn-danger" (click)="deleteLLMQuestion(question?.['_id'])">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coding Questions -->
+      <div class="card mb-4" *ngIf="getExamType() == 'CODING'">
+        <div *ngFor="let question of codingquestionarray" class="question-section">
+          <div class="card-header">
+            <div class="question-item">
+              <b>Language:</b> <span>{{question?.['language']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Question:</b> <span>{{question?.['question']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Description:</b> <span>{{question?.['description']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Editable Answer:</b> <span>{{question?.['editable']}}</span>
+            </div>
+            <div class="question-item">
+              <b>Marks:</b> <span>{{question?.['marks']}}</span>
+            </div>
+          </div>
+          <div class="card-action mt-2" *ngIf="buttonType == 'add'">
+            <button class="btn btn-update"
+              (click)="gotoUpdateQuestion(question?.['_id'], course?.['type'])">Update</button>
+            <button class="btn btn-danger" (click)="deletecodingQuestion(question?.['_id'])">Delete</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Verbal Questions -->
+      <div class="card mb-4" *ngIf="getExamType() == 'VERBAL'">
+        <div *ngFor="let question of questions" class="question-section">
+          <div class="card-header">
+            <div class="question-item">
+              <b>Question:</b> <span>{{question?.['name']}}</span>
+            </div>
+          </div>
+          <div class="card-action mt-2" *ngIf="buttonType == 'add'">
+            <button class="btn btn-update"
+              (click)="gotoUpdateQuestion(question?.['_id'], course?.['type'])">Update</button>
+            <button class="btn btn-danger" (click)="deleteQuestion(question?.['_id'])">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary mt-4" routerLink="/dashboard/exam/">BACK</button>
+    </div>
+  </div>
+</div>
+

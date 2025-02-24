@@ -1,0 +1,125 @@
+.title {
+  background-color: #4169E1;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  padding-bottom: 5px;
+}
+
+.divider {
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.btn-update {
+  background-color: #87CEEB;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-update:hover {
+  background-color: #4da6e5;
+}
+
+.btn-danger {
+  background-color: #ff5c5c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #e74c3c;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.question-section {
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.question-item {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  /* Space between label and field */
+  margin-bottom: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.question-item:last-child {
+  border-bottom: none;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.card-action {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.body {
+  background-color: #f8f9fa;
+  font-family: 'Satoshi Variable', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  padding: 20px;
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .title h5 {
+    font-size: 1rem;
+  }
+
+  .btn-update,
+  .btn-danger {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .question-section {
+    padding: 15px;
+  }
+
+  .question-item {
+    flex-direction: column;
+    /* Stack items vertically on smaller screens */
+    align-items: flex-start;
+    /* Align to the start */
+  }
+}

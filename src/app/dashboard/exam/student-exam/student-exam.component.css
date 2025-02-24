@@ -1,0 +1,124 @@
+/* Main wrapper for the MCQs */
+.mcq-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  /* Center the container */
+  padding: 20px;
+  background-color: #f0f0f5;
+  /* Light background color for the whole form */
+  border-radius: 5px;
+
+}
+
+/* Style the container for each MCQ */
+.mcq-container {
+  margin-bottom: 30px;
+  padding: 15px;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  /* Shadow to elevate each MCQ */
+}
+
+/* Style the question text */
+.mcq-question {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Style the options list */
+.mcq-options {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Style individual options */
+.mcq-option {
+  margin-bottom: 10px;
+}
+
+/* Style the radio buttons */
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Style labels for options */
+label {
+  font-size: 1em;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Add a hover effect for radio button labels */
+label:hover {
+  color: #007BFF;
+}
+
+/* Add a separator between questions */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: #3977E3;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card-content {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.student-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.start-quiz-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.start-quiz-button:hover {
+  background-color: #0056b3;
+}

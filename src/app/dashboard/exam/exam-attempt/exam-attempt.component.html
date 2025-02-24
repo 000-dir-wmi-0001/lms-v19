@@ -1,1 +1,71 @@
-<p>exam-attempt works!</p>
+<!-- Page Content -->
+<div class="page-content px-5 pt-5" id="content">
+  <div class="centered-div">
+ <!--    <button (click)="exitFullScreen()" class="btn btn-secondary mb-3">Exit Full Screen</button> -->
+    <div class="card mt-5 mb-5 exam-card">
+      <div class="card-header exam-header">
+        <h5 class="card-title"><b>Course Name:</b> {{examDeatails.courseName}}</h5>
+        <h5 class="card-title"><b>Topic Name:</b> {{ examDeatails.topic }}</h5>
+        <h5 class="card-title"><b>Exam Type:</b> {{ examDeatails.examType }}</h5>
+        <h5 class="card-title"><b>Start Date:</b> {{ examDeatails.startDate | date }}</h5>
+      </div>
+
+      <!-- Timer Display -->
+      <div class="text-center timer-display">
+        <h4>Time Remaining: {{ formatTime(timer) }}</h4>
+      </div>
+
+      <div class="ml-3" *ngFor="let question of questionarray; index as mcqIndex">
+        <div class="card ml-3 mr-3 mb-3 mt-3 question-card">
+          <div class="card-body">
+            <div class="marks text-right" style="font-weight: bold;">
+              Marks: {{ question?.['mark'] }}
+            </div>
+            <div class="ml-3 question-title" style="font-weight: bold;">
+              {{ mcqIndex + 1 }}. {{ question?.['name'] }}
+            </div>
+
+            <div class="container" *ngIf="examDeatails.examType === 'MCQ'">
+              <div class="ml-4 options-container" *ngFor="let option of question?.['options']; index as optIndex">
+                <div class="form-check">
+                  <input
+                    #inputEl
+                    class="form-check-input"
+                    (change)="onAnswerSelect(mcqIndex, option)"
+                    type="radio"
+                    [id]="'option' + question?.['_id'] + '-' + optIndex"
+                    [name]="'question' + question?.['_id']"
+                  />
+                  <label class="form-check-label" [for]="'option' + question?.['_id'] + '-' + optIndex">{{ option }}</label>
+                </div>
+
+
+
+                <!-- <div *ngIf="question?.['answerType'] === 'checkbox'" class="form-check">
+                  <input
+                    #inputEl
+                    class="form-check-input"
+                    (change)="onChange(question?.['_id'], question?.['id'], option, inputEl?.checked, 'checkbox')"
+                    type="checkbox"
+                    [id]="'option' + mcqIndex + '-' + optIndex"
+                  />
+                  <label class="form-check-label" [for]="'option' + mcqIndex + '-' + optIndex">{{ option }}</label>
+                </div> -->
+              </div>
+            </div>
+
+            <div *ngIf="type=='VERBAL'" class="container">
+              <!-- Add verbal question handling here if needed -->
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Exam button -->
+      <div class="text-center mb-3">
+        <button class="btn btn-primary submit-button" (click)="submitExam(questions?.['_id'])">SUBMIT EXAM</button>
+      </div>
+    </div>
+  </div>
+</div>

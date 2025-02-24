@@ -1,0 +1,109 @@
+.page-content {
+  width: calc(100% - 17rem);
+  margin-left: 17rem;
+  transition: all 0.4s;
+  overflow-x: hidden;
+}
+
+.exam-card {
+  border-radius: 10px;
+  /* Rounded corners for the card */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Shadow for depth */
+}
+
+.exam-header {
+  background-color: #4169E1;
+  /* Royal Blue */
+  color: white;
+  /* White text */
+  padding: 20px;
+  /* Padding inside header */
+  border-radius: 10px 10px 0 0;
+  /* Rounded corners at the top */
+}
+
+.timer-display {
+  background-color: #f8f9fa;
+  /* Light grey background */
+  border: 1px solid #ced4da;
+  /* Border for timer display */
+  padding: 15px;
+  /* Padding around the timer */
+  border-radius: 5px;
+  /* Rounded corners */
+  margin: 20px 0;
+  /* Margin above and below */
+}
+
+.question-card {
+  background: #ffffff;
+  /* White background */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Shadow effect */
+  transition: transform 0.2s;
+  /* Smooth hover effect */
+}
+
+.question-card:hover {
+  transform: translateY(-5px);
+  /* Hover effect: card moves up */
+}
+
+.marks {
+  margin: 0;
+  /* Remove default margins */
+  padding: 5px 0;
+  /* Padding between elements */
+}
+
+.question-title {
+  margin: 0;
+  /* Remove default margins */
+  padding: 5px 0;
+  /* Padding between elements */
+}
+
+.options-container {
+  margin: 10px 0;
+  /* Space between option sets */
+}
+
+.submit-button {
+  padding: 10px 20px;
+  /* Button padding */
+  font-weight: bold;
+  /* Bold button text */
+  border-radius: 5px;
+  /* Rounded button corners */
+}
+
+@media (max-width: 767px) {
+  #sidebar {
+    margin-left: -17rem;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+
+  #content.active {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .horizontal_nav {
+    margin: 0;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+}
