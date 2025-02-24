@@ -1,0 +1,86 @@
+
+.card-content{
+    margin-left: 0rem;
+  }
+  
+  @media( min-width: 1440px){
+    .card-content{
+      margin-left: 6rem;
+    }
+  }
+  @media (max-width: 767px) {
+  
+    #sidebar {
+      margin-left: 1rem;
+    }
+  
+    #sidebar.active {
+      margin-left: 0;
+    }
+  
+    #content {
+      width: 100%;
+      margin: 0;
+    }
+  
+    #content.active {
+      margin-left: 0;
+      width: 100%;
+    }
+  
+    .horizontal_nav {
+      margin: 0;
+    }
+  
+    #sidebar.active {
+      margin-left: 0;
+    }
+  
+    .horizontal_nav {
+      margin: 0;
+    }
+  }
+  
+  .details-actions {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  .details-actions label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .details-actions input[type="file"] {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .details-actions input[type="file"]:hover {
+    border-color: #666;
+  }
+  
+  .details-actions input[type="file"]:focus {
+    outline: none;
+    border-color: #3366ff;
+    box-shadow: 0 0 5px rgba(51, 102, 255, 0.5);
+  }
+  

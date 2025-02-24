@@ -1,1 +1,91 @@
-<p>certificate-approve works!</p>
+<div class="p-4" id="content">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="card mt-5" *ngIf="selectedRecord">
+            <div class="card-header text-center h2">
+              Details
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <div class="">
+                    <label>Course Name  : </label>
+                    <span> {{ selectedRecord. CourseName }}</span>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="row card-content justify-content-center">
+                <div class="col-md-6 mt-3">
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label>Name  : </label>
+                      <span>  {{  selectedRecord . Name }}</span>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label>Email  :</label>
+                      <span>  {{ selectedRecord.Email }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label>Course Start  : </label>
+                      <span>  {{ selectedRecord.CourseStartDate | date:'shortDate' }}</span>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="col-md-4 mt-3 text-md-start">
+                  <div class="row mb-3">
+                    <div class="col-md-12 ">
+                      <label>Mobile  :</label>
+                      <span>  {{ selectedRecord.Mobile }}</span>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-12">
+                      <label>Batch Code  :</label>
+                      <span>  {{ selectedRecord.BatchCode }}</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 ">
+                      <label>Course End  :</label>
+                      <span>  {{ selectedRecord. CourseEndDate | date:'shortDate' }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-8 text-center">
+                  <div class="my-3 details-actions">
+                    <label for="fileInput">Upload file</label>
+                    <span><input type="file" id="fileInput" (change)="onFileSelected($event)"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <div class="col-md-3">
+                  <div class="details-actions">
+                    <button routerLink="/dashboard/certificate">Back</button>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="details-actions">
+                    <button  (click)="save(selectedRecord._id)">Save</button>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+  
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

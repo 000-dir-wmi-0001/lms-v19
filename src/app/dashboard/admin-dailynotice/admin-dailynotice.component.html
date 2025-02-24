@@ -1,1 +1,67 @@
-<p>admin-dailynotice works!</p>
+<div class="notice-manager">
+    <div class="notice-manager-container">
+      <div class="notices-list-container">
+        <!-- Page Title -->
+        <h2 class="page-title">
+          <i class="fas fa-bullhorn"></i> Daily Notices
+        </h2>
+  
+        <!-- Add Notice Button -->
+        <div class="mb-3" style="padding: 0 1rem;">
+          <button class="btn btn-primary" (click)="showAddNoticeForm()">+ Add Notice</button>
+        </div>
+  
+        <!-- Notice Grid -->
+        <div class="notice-list">
+            @for (notice of notices; track $index) {
+
+            
+          <div class="notice-card" >
+              <div class="notice-header">
+                  <span class="notice-title">{{ notice.title }}</span>
+              </div>
+              <div class="notice-body">
+                  <p>{{ notice.description }}</p>
+              </div>
+              <div class="notice-footer">
+                @if (canEditNotice(notice)) {
+
+                    <button class="btn btn-primary" (click)="editNotice(notice._id)">Edit</button>
+                }
+                @if (canEditNotice(notice)) {
+
+                    <button class="btn btn-danger"  (click)="deleteNotice(notice._id)">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                }
+              </div>
+          </div>
+        }
+      </div>
+      <!-- Modal for Add/Edit Notice -->
+       @if (showForm) {
+      <div class="modal" tabindex="-1" [ngClass]="{'show': showForm}" style="display: block;" *ngIf="">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">{{ currentNotice.id ? 'Edit Notice' : 'Add Notice' }}</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="cancelEdit()"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input type="text" id="noticeTitle" class="form-control" [(ngModel)]="currentNotice.title" name="title"
+                  placeholder="Enter notice title">
+    
+                <textarea id="noticeDescription" class="form-control" [(ngModel)]="currentNotice.description"
+                  name="description" placeholder="Enter notice description"></textarea>
+    
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+              <button type="button" class="btn btn-primary" (click)="saveNotice()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+}

@@ -1,1 +1,75 @@
-<p>certificate-form works!</p>
+<div class="p-4" id="content">
+    <div *ngIf="getRole() == 'STUDENT'">
+  
+      <form class="custom-form" [formGroup]="form" (ngSubmit)="addEntry()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Name">Name :</label>
+              <input type="text" id="Name" formControlName="Name">
+              <div *ngIf="form.get('Name')?.hasError('required') && form.get('Name')?.touched" class="error-message">Name is required</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="Mobile">Mobile:</label>
+              <input type="text" id="Mobile" formControlName="Mobile">
+               <div *ngIf="form.get('Mobile')?.hasError('required') && form.get('Mobile')?.touched" class="error-message">Mobile is required</div>
+            </div>
+          
+            <div class="form-group">
+              <label for="Email">Email:</label>
+              <input type="text" id="Email" formControlName="Email">
+              <div *ngIf="form.get('Email')?.hasError('required') && form.get('Email')?.touched" class="error-message">Email is required</div>
+            </div>
+    
+          
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label >Course Name:</label>
+              <input type="text"  formControlName="Course">
+              <div *ngIf="form.get('Course')?.hasError('required') && form.get('Course')?.touched" class="error-message">Course Name is required</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="CourseStart">Course Start:</label>
+              <input type="date" id="CourseStart" formControlName="CourseStart">
+              <div *ngIf="form.get('CourseStart')?.hasError('required') && form.get('CourseStart')?.touched" class="error-message">Start date is required</div>
+            </div>
+        
+            <div class="form-group">
+              <label for="CourseEnd">Course End:</label>
+              <input type="date" id="CourseEnd" formControlName="CourseEnd">
+              <div *ngIf="form.get('CourseEnd')?.hasError('required') && form.get('CourseEnd')?.touched" class="error-message">End date is required</div>
+              <div *ngIf="form.hasError('dateRangeError')" class="error-message">End date should be greater than Start date</div>
+            </div>
+          
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            
+            <div class="form-group">
+              <label for="BatchCode">Batch Code:</label>
+              <input type="text" id="BatchCode" formControlName="BatchCode">
+              <div *ngIf="form.get('BatchCode')?.hasError('required') && form.get('BatchCode')?.touched" class="error-message">Batch code is required</div>
+            </div>
+          
+            
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-md-6 d-flex justify-content-center my-3">
+            <button type="submit">Submit</button>
+          </div>
+          <div class="col-md-6 d-flex justify-content-center my-3">
+            <button type="submit" routerLink='/dashboard/certificate'>Back</button>
+          </div>
+        </div>
+      </form>
+    
+    </div>
+  
+  </div>
+  
+  
