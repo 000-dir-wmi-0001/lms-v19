@@ -40,6 +40,7 @@
     "ngx-bootstrap": "^19.0.2",
     "ngx-online-status": "^2.0.0",
     "ngx-pagination": "^6.0.3",
+    "ngx-photo-editor": "^0.4.4",
     "recordrtc": "^5.6.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.17.2",
