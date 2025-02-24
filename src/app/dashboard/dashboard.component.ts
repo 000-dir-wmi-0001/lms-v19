@@ -15,7 +15,7 @@ import { LucideAngularModule, Bell, UserRound, ShoppingCart, CircleUserRound, Lo
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'], // Changed to .scss
+  styleUrls: ['./dashboard.component.css'], // Changed to .scss
   providers: [OnlineStatusService],
 })
 export class DashboardComponent implements OnInit {

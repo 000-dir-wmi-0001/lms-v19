@@ -11,9 +11,11 @@ export class SidebarService {
   constructor() { }
 
   toggleSidebar() {
-    console.log("this.isSidebarExpanded.value : ", this.isSidebarExpanded.value);
+   console.log("this.isSidebarExpanded.value : ", this.isSidebarExpanded.value);
 
     this.isSidebarExpanded.next(!this.isSidebarExpanded.value);
+   console.log("2 this.isSidebarExpanded.value : ", this.isSidebarExpanded.value);
+
   }
 
   setSidebarState(expanded: boolean) {
