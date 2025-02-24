@@ -1,7 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white container-fluid">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#">
-    <img class="img-fluid" src="logo-removebg.png" alt="Logo" style="max-width: 100%; width: 200px; padding: 3%;" />
+    <img
+      class="img-fluid"
+      src="logo-removebg.png"
+      alt="Logo"
+      style="max-width: 100%; width: 200px; padding: 3%"
+    />
   </a>
 
   <!-- Navbar Toggler for Mobile View -->
@@ -10,18 +15,29 @@
   </button>
 
   <!-- Collapsible Navbar Content -->
-  <div class="collapse navbar-collapse" [ngClass]="{'show': isNavExpanded}" id="navbarNav">
+  <div
+    class="collapse navbar-collapse"
+    [ngClass]="{ show: isNavExpanded }"
+    id="navbarNav"
+  >
     <ul class="navbar-nav ms-auto">
       <li class="nav-item m-2">
         <a class="nav-link active" routerLink="/auth/"><b>HOME</b></a>
       </li>
 
       <!-- Courses Dropdown -->
-      <li class="nav-item m-2 dropdown" [ngClass]="{'show': isCoursesDropdownOpen}">
-        <button class="nav-link dropdown-toggle" (click)="toggleCoursesDropdown($event)" aria-expanded="isCoursesDropdownOpen">
+      <li
+        class="nav-item m-2 dropdown"
+        [ngClass]="{ show: isCoursesDropdownOpen }"
+      >
+        <button
+          class="nav-link dropdown-toggle"
+          (click)="toggleCoursesDropdown($event)"
+          aria-expanded="isCoursesDropdownOpen"
+        >
           <b class="text-dark">COURSES</b>
         </button>
-        <ul class="dropdown-menu" [ngClass]="{'show': isCoursesDropdownOpen}">
+        <ul class="dropdown-menu" [ngClass]="{ show: isCoursesDropdownOpen }">
           <li><a class="dropdown-item" routerLink="/auth/c">C</a></li>
           <li><a class="dropdown-item" routerLink="/auth/cpp">C++</a></li>
           <li><a class="dropdown-item" routerLink="/auth/java">JAVA</a></li>
@@ -30,10 +46,14 @@
       </li>
 
       <li class="nav-item m-2">
-        <a class="nav-link active" routerLink="/auth/aboutUs"><b>ABOUT US</b></a>
+        <a class="nav-link active" routerLink="/auth/aboutUs"
+          ><b>ABOUT US</b></a
+        >
       </li>
       <li class="nav-item m-2">
-        <a class="nav-link active" routerLink="/auth/placement"><b>PLACEMENTS</b></a>
+        <a class="nav-link active" routerLink="/auth/placement"
+          ><b>PLACEMENTS</b></a
+        >
       </li>
       <li class="nav-item m-2">
         <a class="nav-link active" routerLink="/auth/contact"><b>ENQUIRY</b></a>
@@ -45,26 +65,26 @@
       <!-- Cart (Visible only to students) -->
       @if(getRole() === 'STUDENT'){
 
-        <li class="nav-item m-2" >
-          <a class="nav-link active" routerLink="/dashboard/course/cart">
-            <i class="fa-solid fa-cart-shopping fa-2x"></i>
-          </a>
-        </li>
+      <li class="nav-item m-2">
+        <a class="nav-link active" routerLink="/dashboard/course/cart">
+          <i class="fa-solid fa-cart-shopping fa-2x"></i>
+        </a>
+      </li>
       }
 
       <!-- Register/Login buttons for non-logged-in users -->
       @if(!isLoggedIn){
-        <li class="nav-item m-2">
-          <a class="nav-link" routerLink="/auth/register">
-            <button class="btn btn-outline-dark"><b>Register</b></button>
-          </a>
-        </li>
-      }@else if (!isLoggedIn) {
-        <li class="nav-item m-2" >
-          <a class="nav-link" routerLink="/auth/login">
-            <button class="btn btn-outline-dark"><b>Login</b></button>
-          </a>
-        </li>
+      <li class="nav-item m-2">
+        <a class="nav-link" routerLink="/auth/register">
+          <button class="btn btn-outline-dark"><b>Register</b></button>
+        </a>
+      </li>
+      } @if (!isLoggedIn) {
+      <li class="nav-item m-2">
+        <a class="nav-link" routerLink="/auth/login">
+          <button class="btn btn-outline-dark"><b>Login</b></button>
+        </a>
+      </li>
       }
     </ul>
   </div>

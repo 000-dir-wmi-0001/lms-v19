@@ -1,0 +1,15 @@
+.status {
+  background-color: #11d411;
+  text-align: center;
+  height: 5px;
+  color: #fff;
+  transition: background-color 1s ease;
+}
+
+.status.offline {
+  background-color: rgb(231, 14, 14);
+}
+
+* {
+  font-family: Poppins;
+}

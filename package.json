@@ -28,6 +28,7 @@
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
     "lms-linkcode": "file:",
+    "lucide-angular": "^0.475.0",
     "moment": "^2.30.1",
     "ng-multiselect-dropdown": "^1.0.0",
     "ngx-bootstrap": "^19.0.2",

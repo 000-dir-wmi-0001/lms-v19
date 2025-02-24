@@ -8,31 +8,46 @@ import { SidebarService } from '../services/sidebar.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LeftNavComponent } from './left-nav/left-nav.component';
+import { LucideAngularModule, Bell, UserRound, ShoppingCart, CircleUserRound, LogOut } from 'lucide-angular';
 
 @Component({
-  imports: [RouterOutlet, RouterLink, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
+  imports: [LucideAngularModule, RouterOutlet, RouterLink, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
-  providers: [OnlineStatusService], // Provide the service here
-
+  styleUrls: ['./dashboard.component.scss'], // Changed to .scss
+  providers: [OnlineStatusService],
 })
 export class DashboardComponent implements OnInit {
+  //lucide icons
+  account_circle = CircleUserRound;
+  logout_ic = LogOut;
+  user_ic = UserRound;
+  cart_ic = ShoppingCart;
+  bell_ic = Bell;
+
+
+
+
+
+
   status!: OnlineStatusType;
   onlineStatusCheck: any = OnlineStatusType;
-
-  token!: any;
-  userId!: any;
+  token!: string;
+  userId!: string;
   pendingFee: boolean = true;
-  Messages: any;
+  Messages: any[] = [];
+  userName: string = '';
+  userProfileImage?: string;
   activeLink: string = '';
   isSidebarExpanded: boolean = true;
   isNavbarCollapsed = false;
   isMobile: boolean = false;
-  isDropdownOpen: boolean = false;  // Track dropdown state
+  isDropdownOpen: boolean = false;
+
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
   @ViewChild('userIcon') userIcon!: ElementRef;
+
   constructor(
     private onlineStatusService: OnlineStatusService,
     private storageService: StorageService,
@@ -40,27 +55,51 @@ export class DashboardComponent implements OnInit {
     private feeService: FeeService,
     private notification: StudentNotificationService,
     private sidebarService: SidebarService
-  ) { }
+  ) {
+    this.checkIfMobile();
+  }
 
   ngOnInit() {
-    this.token = this.storageService.getToken();
-    if (this.token) {
-      this.userId = JSON.parse(atob(this.token.split('.')[1]))._id;
+    this.initializeUser();
+    this.setupSidebarSubscription();
+    this.setupMobileDetection();
+    if (this.userId) {
+      this.getAllNotifications();
+      this.checkFees();
     }
+  }
 
+  private initializeUser() {
+    this.token = this.storageService.getToken() || '';
+    if (this.token) {
+      const tokenData = JSON.parse(atob(this.token.split('.')[1]));
+      this.userId = tokenData._id;
+      this.userName = tokenData.name || 'User';
+      this.userProfileImage = tokenData.profileImage;
+    }
+  }
+
+  private setupSidebarSubscription() {
     this.sidebarService.isSidebarExpanded$.subscribe(expanded => {
       this.isSidebarExpanded = expanded;
     });
+  }
 
-    if (this.userId) {
-      this.getAllNotifications();
-    }
+  private setupMobileDetection() {
+    this.checkIfMobile();
+    window.addEventListener('resize', () => this.checkIfMobile());
+  }
 
+  private checkIfMobile() {
     this.isMobile = window.innerWidth <= 768;
+  }
 
-    window.onresize = () => {
-      this.isMobile = window.innerWidth <= 768;
-    };
+  @HostListener('document:click', ['$event'])
+  closeDropdownOnOutsideClick(event: Event) {
+    if (!this.userIcon?.nativeElement.contains(event.target) &&
+      !this.dropdownMenu?.nativeElement.contains(event.target)) {
+      this.isDropdownOpen = false;
+    }
   }
 
   toggleDropdown(event: Event) {
@@ -69,58 +108,52 @@ export class DashboardComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  @HostListener('document:click', ['$event'])
-  closeDropdownOnOutsideClick(event: Event) {
-    if (!this.userIcon.nativeElement.contains(event.target) &&
-      !this.dropdownMenu?.nativeElement.contains(event.target)) {
-      this.isDropdownOpen = false;
-    }
-  }
-
   closeNavbar() {
     this.isNavbarCollapsed = false;
+    this.isDropdownOpen = false;
   }
 
-  getRole() {
-    return this.storageService.getRole();
+  getRole(): string {
+    return this.storageService.getRole() ?? '';
   }
 
-  isLoggedIn() {
-    return this.storageService.isLoggedIn();
+  isLoggedIn(): boolean {
+    return this.storageService.isLoggedIn() === 'true';
   }
 
-  logout() {
+  async logout() {
     this.storageService.clear();
-    this.router.navigate(['../login']);
+    await this.router.navigate(['/auth/login']);
   }
 
-  checkFees() {
-    this.token = this.storageService.getToken();
-    if (this.token) {
-      this.userId = JSON.parse(atob(this.token.split('.')[1]))._id;
-      this.feeService.getFeesStud(this.userId).subscribe(
-        (result: any) => {
-          if (result[0]?.pendingFee == 0) {
-            this.pendingFee = false;
-          }
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
-    }
+  private checkFees() {
+    if (!this.userId) return;
+
+    this.feeService.getFeesStud(this.userId).subscribe({
+      next: (result: any) => {
+        this.pendingFee = result[0]?.pendingFee !== 0;
+      },
+      error: (error: any) => {
+        console.error('Error checking fees:', error);
+      }
+    });
   }
 
-  getAllNotifications() {
-    if (this.userId) {
-      this.notification.getAllNotifications(this.userId).subscribe({
-        next: (response: any) => {
-          this.Messages = response.Notifications;
-        },
-        error: (err: any) => {
-          console.log(err);
-        }
-      });
-    }
+  private getAllNotifications() {
+    if (!this.userId) return;
+
+    this.notification.getAllNotifications(this.userId).subscribe({
+      next: (response: any) => {
+        this.Messages = response.Notifications;
+      },
+      error: (error: any) => {
+        console.error('Error fetching notifications:', error);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // Cleanup resize listener
+    window.removeEventListener('resize', () => this.checkIfMobile());
   }
 }

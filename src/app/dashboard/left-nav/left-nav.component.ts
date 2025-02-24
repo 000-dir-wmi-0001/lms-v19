@@ -3,17 +3,20 @@ import { Router, RouterLink } from '@angular/router';
 import { StorageService } from '../../services/storage.service';
 import { FeeService } from '../../services/fee.service';
 import { StudentNotificationService } from '../../services/student-notification.service';
-import { SidebarService } from '../../services/sidebar.service';  // Import the service
+import { SidebarService } from '../../services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule,],
   selector: 'app-left-nav',
   templateUrl: './left-nav.component.html',
   styleUrls: ['./left-nav.component.css']
 })
 export class LeftNavComponent implements OnInit {
+
+
+
   Messages: any;
 
   activeLink: string = ''; // Property to track the active link
@@ -50,6 +53,8 @@ export class LeftNavComponent implements OnInit {
   }
 
   toggleSidebar() {
+    console.log("toggleSidebar: ", this.isSidebarExpanded);
+
     this.sidebarService.toggleSidebar();
     this.isSidebarExpanded = !this.isSidebarExpanded;
   }

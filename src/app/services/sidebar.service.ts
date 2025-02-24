@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -12,6 +11,8 @@ export class SidebarService {
   constructor() { }
 
   toggleSidebar() {
+    console.log("this.isSidebarExpanded.value : ", this.isSidebarExpanded.value);
+
     this.isSidebarExpanded.next(!this.isSidebarExpanded.value);
   }
 
