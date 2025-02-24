@@ -1,1 +1,25 @@
-<p>user-batch works!</p>
+<div *ngIf="batchDetails && batchDetails.length > 0" class="row m-3">
+  <div class="col-md-3 mb-4" *ngFor="let batch of batchDetails">
+    <div class="card h-100 shadow-sm border-0 hover-shadow transition">
+      <div class="card-header bg-primary text-white py-2">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-graduation-cap me-2"></i>{{ batch.batch.name || "No Name" }}
+        </h5>
+      </div>
+      <div class="card-body bg-light">
+        <p class="card-text text-muted">
+          <i class="fas fa-info-circle me-2"></i>{{ batch.batch.description || "No Description" }}
+        </p>
+        <div class="d-flex justify-content-between gap-2 mt-3">
+          <button class="btn btn-info btn-sm" (click)="viewBatch(batch.batch._id)">
+            <i class="fas fa-eye me-1"></i> View Meetings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="batchDetails && batchDetails.length === 0">
+  <p class="text-center">No batch details available.</p>
+</div>

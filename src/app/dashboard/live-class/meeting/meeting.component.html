@@ -1,1 +1,101 @@
-<p>meeting works!</p>
+<section>
+  <!-- Loader/Spinner -->
+  <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+      <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+      </div>
+  </div>
+
+  <!-- Main Content (only shows if data is loaded) -->
+  <div *ngIf="!loading">
+      <div class="d-flex justify-content-end">
+          <button class="btn btn-primary w-25" style="margin-top: 1%; margin-right: 1%;"
+                  data-bs-toggle="modal" data-bs-target="#createMeetingModal">
+              <i class="bi bi-people-fill"></i> Create New Meeting
+          </button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="createMeetingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="createMeetingLabel">Create Meeting</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                      <form [formGroup]="createMeetForm" id="meetingForm" #meetingForm="ngForm"
+                          (ngSubmit)="createMeeting()">
+                          <!-- Meeting Topic -->
+                          <div class="form-group">
+                              <label for="topic">Meeting Topic</label>
+                              <input type="text" id="topic" class="form-control" formControlName="topic" name="topic" required>
+                          </div>
+
+                          <!-- Start Time -->
+                          <div class="form-group">
+                              <label for="startTime">Start Time</label>
+                              <input type="datetime-local" id="startTime" class="form-control" formControlName="start_time" name="start_time" required>
+                          </div>
+
+                          <!-- Duration -->
+                          <div class="form-group">
+                              <label for="duration">Duration (minutes)</label>
+                              <input type="number" id="duration" class="form-control" formControlName="duration" name="duration" required>
+                          </div>
+
+                          <!-- Timezone -->
+                          <div class="form-group">
+                              <label for="timezone">Timezone</label>
+                              <input type="text" id="timezone" class="form-control" formControlName="timezone" name="timezone" required>
+                          </div>
+
+                          <!-- Agenda -->
+                          <div class="form-group">
+                              <label for="agenda">Agenda</label>
+                              <textarea id="agenda" class="form-control" formControlName="agenda" name="agenda"></textarea>
+                          </div>
+                      </form>
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" [attr.data-bs-dismiss]="createMeetForm.valid ? 'modal' : null"
+                          form="meetingForm" [disabled]="!createMeetForm.valid" class="btn btn-primary">Create
+                          Meeting</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Meeting Cards (this part shows after data is loaded) -->
+      <div class="container-fluid">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xlg-4 g-4 py-5">
+              <div class="col" *ngFor="let meet of allMeetings">
+                  <div class="card-container">
+                      <div class="card" style="width: 20rem;">
+                          <div class="card-body">
+                              <a><h5 class="card-title custom-link">{{meet.topic}}</h5></a>
+                              <strong>StartTime: <i class="bi bi-calendar3"></i></strong>
+                              {{ meet.start_time | date: 'dd MMM YYYY' }},
+                              <strong><i class="bi bi-clock"></i></strong>
+                              {{ meet.start_time | date: 'shortTime' }} <br>
+                              <strong>Duration:</strong> {{ meet.duration }} min
+                              <p><strong>Agenda:</strong> {{ meet.agenda }}</p>
+                              <div class="card-footer">
+                                  <button class="btn btn-primary start-btn" (click)="startMeeting(meet.meeting_Id, meet.password)">Start</button>
+                                  <button class="btn btn-danger delete-btn" (click)="deleteMeeting(meet.meeting_Id)">Delete</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

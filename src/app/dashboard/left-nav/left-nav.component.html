@@ -83,7 +83,7 @@
       @if(getRole()=='STUDENT'){
 
         <li class="nav-item">
-          <a class="nav-link bg-light" [routerLink]="['fee-receipt/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'fee-receipt'}" (click)="setActiveLink('fee-receipt')">
+          <a class="nav-link bg-light" [routerLink]="['fee/fee-receipt/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'fee-receipt'}" (click)="setActiveLink('fee-receipt')">
             <img src="receipts_lms.png" alt="Fee Receipts" width="35" class="px-2 py-2" />&nbsp;
             @if(isSidebarExpanded){
 
@@ -103,8 +103,7 @@
             }
           </a>
         </li>
-      }
-      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
+
 
         <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['user']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'user'}" (click)="setActiveLink('user')">
@@ -115,8 +114,7 @@
             }
           </a>
         </li>
-      }
-      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
+
 
         <!--       <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['user/add']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'user/add'}" (click)="setActiveLink('user/add')">
@@ -126,8 +124,7 @@
             </a>
             <span>Add User</span>
           </li> -->
-          @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
-      }
+
 
         <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['fee/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'fee'}" (click)="setActiveLink('fee')">
@@ -138,8 +135,7 @@
             }
           </a>
         </li>
-      }
-      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
+
 
         <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['module/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'module'}" (click)="setActiveLink('module')">
@@ -151,9 +147,9 @@
           </a>
         </li>
       }
-      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
+      @if( getRole()=='ADMIN' || getRole()=='SUPERADMIN' || getRole()=='STUDENT' && !pendingFee){
 
-        <li class="nav-item" *ngIf="getRole()=='ADMIN' || getRole()=='SUPERADMIN' || getRole()=='STUDENT' && !pendingFee">
+        <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['certificate/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'certificate'}" (click)="setActiveLink('certificate')">
             <img src="trophy.png" alt="Request Certificate" width="40" class="px-2 py-2" />
             @if(isSidebarExpanded){
@@ -163,6 +159,7 @@
           </a>
         </li>
       }
+      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
 
       <li class="nav-item">
         <a class="nav-link bg-light" [routerLink]="['admission/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'admission'}" (click)="setActiveLink('admission')">
@@ -183,7 +180,6 @@
           }
         </a>
       </li>
-      @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
 
         <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['Placements/']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'Placements'}" (click)="setActiveLink('Placements')">
@@ -221,10 +217,11 @@
               <span *ngIf="isSidebarExpanded">Reviews</span>
             }
           </a>
-        </li> @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
+        </li>
       }
+      @if( getRole()=='ADMIN' || getRole()=='SUPERADMIN'  || getRole()=='INSTRUCTOR'){
 
-        <li class="nav-item" *ngIf="getRole()=='ADMIN' || getRole()=='SUPERADMIN'  || getRole()=='INSTRUCTOR'">
+        <li class="nav-item">
           <a class="nav-link bg-light" [routerLink]="['admin-dailynotice']" [ngClass]="{'collapse ':!isSidebarExpanded, 'active-link': activeLink === 'admin-dailynotice'}">
             <img src="notice.png" alt="..." width="40" class="px-2 py-2" />
             @if(isSidebarExpanded){
@@ -233,17 +230,20 @@
             }
           </a>
         </li>
-      }')
+      }
 
-      <li class="nav-item" *ngIf="getRole() === 'STUDENT'">
-        <a href="#" class="nav-link bg-light" [routerLink]="['dailynotice/']">
-          <img src="notice.png" alt="Notice Icon" width="40" class="px-2 py-2" />
-          @if(isSidebarExpanded){
+      @if(getRole() === 'STUDENT'){
 
-            <span *ngIf="isSidebarExpanded">Daily Notice</span>
-          }
-        </a>
-      </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link bg-light" [routerLink]="['student-dailynotice/']">
+            <img src="notice.png" alt="Notice Icon" width="40" class="px-2 py-2" />
+            @if(isSidebarExpanded){
+
+              <span *ngIf="isSidebarExpanded">Daily Notice</span>
+            }
+          </a>
+        </li>
+      }
     </ul>
   </div>
 

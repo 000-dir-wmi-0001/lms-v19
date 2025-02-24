@@ -19,6 +19,7 @@ import { PythonComponent } from './auth/courses/python/python.component';
 import { GalleryComponent } from './auth/gallery/gallery.component';
 import { PlacementComponent } from './auth/placement/placement.component';
 import { ReviewComponent } from './auth/review/review.component';
+import { ReviewsComponent } from './dashboard/reviews/reviews.component';
 import { VerifyUserComponent } from './auth/verify-user/verify-user.component';
 import { ResetPasswordComponent } from './auth/resetpassword/resetpassword.component';
 import { PosComponent } from './pos/pos.component';
@@ -93,10 +94,11 @@ import { StartMeetingComponent } from './dashboard/live-class/start-meeting/star
 import { StudMeetingComponent } from './dashboard/live-class/stud-meeting/stud-meeting.component';
 import { ModuleComponent } from './dashboard/module/module.component';
 import { StudDailynoticeComponent } from './dashboard/stud-dailynotice/stud-dailynotice.component';
-import { IsSuperAdminOrAdminGuard } from './guards/is-admin.guard';
+import { IsSuperAdminOrAdminGuard, IsSuperAdminOrAdminOrInstructorGuard } from './guards/is-admin.guard';
 import { RegisterStudentComponent } from './pos/register-student/register-student.component';
 import { CodeSharingComponent } from './dashboard/code-sharing/code-sharing.component';
 import { AdmissionAddComponent } from './dashboard/admission-add/admission-add.component';
+import { PlacementsComponent } from './dashboard/placements/placements.component';
 
 export const routes: Routes = [
 
@@ -160,7 +162,7 @@ export const routes: Routes = [
           [
             { path: "add", component: AddCourseComponent },
             { path: "", component: CourseListComponent },
-            { path: "cart", component: CartComponent },
+            { path: "cart", component: CartComponent, canActivate: [AuthGuard] },
             { path: "my-learning", component: MyLearningsComponent },
             { path: ":courseId/update", component: UpdateCourseComponent },
             { path: ":courseId", component: ViewCourseComponent },
@@ -200,8 +202,8 @@ export const routes: Routes = [
           [
             { path: "add", component: AddUserComponent },
             { path: "", component: UserListComponent }
-          ]
-
+          ],
+        canActivate: [IsSuperAdminOrAdminOrInstructorGuard]
       },
 
       { path: 'profile', component: ProfileComponent },
@@ -254,8 +256,8 @@ export const routes: Routes = [
       { path: 'addAdmission', component: AdmissionAddComponent },
       { path: '', component: StudDashboardComponent },
       { path: 'alumni-list', component: AlumniListComponent },
-      { path: 'Placements', component: PlacementComponent },
-      { path: 'Review', component: ReviewComponent },
+      { path: 'Placements', component: PlacementsComponent, canActivate: [IsSuperAdminOrAdminGuard] },
+      { path: 'Reviews', component: ReviewsComponent, canActivate: [IsSuperAdminOrAdminGuard] },
       { path: 'admin-dailynotice', component: AdminDailynoticeComponent },
       { path: 'student-dailynotice', component: StudDailynoticeComponent },
       {
@@ -281,6 +283,7 @@ export const routes: Routes = [
           ]
       }
     ]
+    , canActivate: [AuthGuard]
   },
 
 
