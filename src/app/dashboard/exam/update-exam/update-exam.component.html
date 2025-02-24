@@ -1,1 +1,37 @@
-<p>update-exam works!</p>
+<div class="container">
+  <h2 class="mt-4">Update Question</h2>
+
+  <!-- Question Name -->
+  <div class="form-group ml-3 mr-3">
+    <label for="questionName">Question Name</label>
+    <input [(ngModel)]="question.name" class="form-control custom-input" type="text" id="questionName" required />
+  </div>
+
+  <!-- Update Options -->
+  <h5 class="ml-3 mt-4">Update Options</h5>
+  <div *ngFor="let option of question.options; let i = index;" class="form-group ml-3 mr-3">
+    <label for="option{{i}}">Option {{i + 1}}</label>
+    <input [(ngModel)]="question.options[i]" class="form-control custom-input" type="text" id="option{{i}}" required />
+  </div>
+
+  <!-- Update Answers -->
+  <h5 class="ml-3 mt-4">Update Answers</h5>
+  <div *ngFor="let answer of question.answers; let i = index;" class="form-group ml-3 mr-3">
+    <label for="answer{{i}}">Answer {{i + 1}}</label>
+    <input [(ngModel)]="question.answers[i]" class="form-control custom-input" type="text" id="answer{{i}}" required />
+  </div>
+
+  <!-- Mark Input -->
+  <div class="form-group ml-3 mr-3">
+    <label for="questionMark">Mark</label>
+    <input [(ngModel)]="question.mark" class="form-control custom-input" type="number" id="questionMark" required />
+  </div>
+
+  <!-- Update Button -->
+  <div class="form-group ml-3 mr-3">
+    <button class="btn btn-primary" (click)="updatellmQuestion()">Update Question</button>&nbsp;;&nbsp;
+    <button class="btn btn-primary"(click)="gotoAddQuestion()">Cancel</button>
+  </div>
+</div>
+
+

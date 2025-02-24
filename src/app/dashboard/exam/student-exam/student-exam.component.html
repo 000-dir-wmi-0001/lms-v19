@@ -1,1 +1,58 @@
-<p>student-exam works!</p>
+
+<div *ngIf="mcqData && !quizStarted" class="container">
+  <div class="card">
+    <div class="card-content">
+      <h3>Course Name: {{ mcqData.topic }}</h3>
+      <p>Exam Type: MCQ</p>
+      <p>Difficulty Level: {{ mcqData.difficulty }}</p>
+      <p>Total Questions: {{ mcqData.questions.length }}</p>
+    </div>
+    <div class="student-container">
+      <button (click)="getMcqs()" class="start-quiz-button">Start Quiz</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!quizStarted" class="container">
+  <div class="card">
+    <div class="card-content">
+      <h3>Course Name : MCQ Based Questions</h3>
+      <p>Exam Type : MCQ</p>
+      <p>Start Date : Feb 21, 2024</p>
+      <p>Total Questions : 10</p>
+
+      <!-- Topic input field for entering the topic name -->
+      <label for="topic">Enter Topic:</label>
+      <input type="text" id="topic" [(ngModel)]="topic" placeholder="Enter topic name" />
+
+      <!-- Start button to fetch MCQs -->
+      <div class="student-container">
+        <button (click)="getMcqs()" class="start-quiz-button">Start Quiz</button>
+      </div>
+  </div>
+</div>
+</div>
+<div  *ngIf="quizStarted" class="mcq-wrapper">
+  <div *ngIf="mcqs.length > 0">
+    <h3>MCQs for {{ topic }}</h3>
+    <div *ngFor="let mcq of mcqs" class="mcq-container">
+      <div *ngFor="let questionObj of mcq.questions; let i = index">
+        <p class="mcq-question">Question: {{ questionObj.question }}</p>
+        <ul class="mcq-options">
+          <li *ngFor="let option of questionObj.options" class="mcq-option">
+            <label for="">
+              <input type="radio" name="question-{{ i }}" [value]="option" (change)="onAnswerSelect(i, option)" />
+              {{ option }}
+            </label>
+          </li>
+        </ul>
+        <hr />
+
+      </div>
+      <div>
+        <button (click)="submitAnswers()" type="button">Submit Answers</button>
+      </div>
+    </div>
+  </div>
+</div>
+

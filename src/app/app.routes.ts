@@ -96,6 +96,7 @@ import { StudDailynoticeComponent } from './dashboard/stud-dailynotice/stud-dail
 import { IsSuperAdminOrAdminGuard } from './guards/is-admin.guard';
 import { RegisterStudentComponent } from './pos/register-student/register-student.component';
 import { CodeSharingComponent } from './dashboard/code-sharing/code-sharing.component';
+import { AdmissionAddComponent } from './dashboard/admission-add/admission-add.component';
 
 export const routes: Routes = [
 
@@ -250,7 +251,7 @@ export const routes: Routes = [
       },
 
       { path: 'admission', component: AdmissionComponent },
-      { path: 'addAdmission', component: AdmissionComponent },
+      { path: 'addAdmission', component: AdmissionAddComponent },
       { path: '', component: StudDashboardComponent },
       { path: 'alumni-list', component: AlumniListComponent },
       { path: 'Placements', component: PlacementComponent },
