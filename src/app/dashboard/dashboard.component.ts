@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 import { StorageService } from '../services/storage.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { FeeService } from '../services/fee.service';
 import { StudentNotificationService } from '../services/student-notification.service';
 import { SidebarService } from '../services/sidebar.service';
@@ -11,7 +11,7 @@ import { LeftNavComponent } from './left-nav/left-nav.component';
 import { LucideAngularModule, Bell, UserRound, ShoppingCart, CircleUserRound, LogOut } from 'lucide-angular';
 
 @Component({
-  imports: [LucideAngularModule, RouterOutlet, RouterLink, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
+  imports: [LucideAngularModule, RouterOutlet, RouterModule, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',

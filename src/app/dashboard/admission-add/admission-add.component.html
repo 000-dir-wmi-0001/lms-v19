@@ -11,6 +11,8 @@
       }
     </div>
 
+
+
     <div>
       <label for="lastName">Last Name:</label>
       <input type="text" formControlName="lastName" id="lastName">
@@ -25,9 +27,9 @@
     <div>
       <label for="type">Type:</label>
       <select formControlName="type" id="type">
-        <option value="" disabled selected>Select Type</option>
-        <option value="STUDENT">STUDENT</option>
-        <option value="INSTRUCTOR">INSTRUCTOR</option>
+        <!-- <option value="" disabled selected>Select Type</option> -->
+        <option selected value="STUDENT">STUDENT</option>
+        <!-- <option value="INSTRUCTOR">INSTRUCTOR</option> -->
       </select>
       @if(myForm.get('type')?.invalid && myForm.get('type')?.touched){
 
@@ -49,16 +51,122 @@
     </div>
 
     <div>
-      <label for="batchno">Batch No:</label>
-      <input type="text" formControlName="batchno" id="batchno">
-      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
-
+      <label for="phone">Phone No:</label>
+      <input type="tel" formControlName="phone" id="phone">
+      @if (myForm.controls['phone'].touched && myForm.controls['phone'].invalid) {
         <div class="error-message">
-          Batch No. is required.
+        @if(myForm.controls['phone'].hasError('pattern')){
+            Phone Number should be in digits.
+        }@else if (myForm.controls['phone'].hasError('minlength') || myForm.controls['phone'].hasError('maxlength')){
+            Phone number must be 10 digits.
+          }
         </div>
       }
     </div>
 
+
+
+
+    <div>
+    <label for="moduleno">Modules:</label>
+    <mat-form-field appearance="outline" id="moduleno" class="bg-white">
+
+      <mat-select formControlName="moduleno" multiple>
+        <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"  [ngModelOptions]="{standalone: true}"></mat-select-search> -->
+        @for(module of allModules_list; track module){
+
+        <mat-option  [value]="module._id">
+          {{ module.moduleName }}
+        </mat-option>
+      }
+      </mat-select>
+</mat-form-field>
+@if(myForm.get('moduleno')?.invalid && myForm.get('moduleno')?.touched){
+
+  <div class="error-message">
+    Please Select Module.
+  </div>
+}
+    </div>
+
+    <!-- <div>
+      <label for="batchno">Modules:</label>
+      <select formControlName="batchno" id="batchno">
+        <option disabled>Please Select Modules</option>
+
+        @for(module of allModules_list; track module){
+          <option value="{{module._id}}">{{ module.moduleName}}</option>
+
+        }
+      </select>
+      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
+
+        <div class="error-message">
+           Please Select Batch.
+        </div>
+      }
+    </div> -->
+
+    <div>
+      <label for="batchno">Batches:</label>
+      <mat-form-field appearance="outline" id="batchno" class="bg-white">
+
+      <mat-select formControlName="batchno" multiple>
+        <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"></mat-select-search> -->
+        @for(batch of allBacthecs_list; track batch){
+
+        <mat-option  [value]="batch._id">
+          {{ batch.name }}
+        </mat-option>
+      }
+      </mat-select>
+</mat-form-field>
+@if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
+
+  <div class="error-message">
+    Please Select Batch.
+  </div>
+}
+    </div>
+
+    <!-- <div>
+      <label for="batchno">Batch:</label>
+      <select formControlName="batchno" id="batchno">
+        <option disabled>Please Select Batch</option>
+
+        @for(batch of allBacthecs_list; track batch){
+          <option value="{{batch._id}}">{{ batch.name}}</option>
+
+        }
+      </select>
+      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
+
+        <div class="error-message">
+           Please Select Batch.
+        </div>
+      }
+    </div> -->
+
+    <div>
+    <label for="status">Status:</label>
+    <mat-form-field appearance="outline" id="status" class="bg-white">
+
+      <mat-select appearance="outline" formControlName="status" id="status">
+        <mat-option  value="Neutral">Neutral</mat-option>
+        <mat-option  value="Prospect">Prospect</mat-option>
+        <mat-option  value="Enrolled">Enrolled</mat-option>
+        <mat-option  value="Follow Up">Follow Up</mat-option>
+        <mat-option  value="Closed">Closed</mat-option>
+      </mat-select>
+</mat-form-field>
+      @if(myForm.get('status')?.invalid && myForm.get('status')?.touched){
+
+      <div class="error-message">
+        Please Select Status.
+      </div>
+    }
+    </div>
+<!--
     <div>
       <label for="status">Status:</label>
       <select formControlName="status" id="status">
@@ -76,23 +184,41 @@
           Type is required.
         </div>
       }
-    </div>
+    </div> -->
 
     <div >
-      <label for="courses">Courses:</label>
-      <select formControlName="courses" id="courses"  class="user-name" >
+      <label for="stCourse">Courses:</label>
+      <mat-form-field appearance="outline" id="courses" class="bg-white">
+        <mat-select formControlName="stCourse" id="stCourse">
+          @for(stCourse of staticCourses; let i= $index; track stCourse){
+            <mat-option  [value]="stCourse.name">
+              {{ stCourse.name }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if(myForm.get('stCourse')?.invalid && myForm.get('stCourse')?.touched){
+
+        <div class="error-message">
+          Please Select Course.
+        </div>
+      }
+
+
+
+    <!-- <select formControlName="courses" id="courses"  class="user-name" >
         <option value="" disabled selected hidden>Select Course</option>
      @for(module of staticCourses; let i= $index; track module){
 
        <option [value]="module.name">{{module.name}}</option>
       }
-    </select>
-    @if(myForm.get('courses')?.invalid && myForm.get('courses')?.touched){
+    </select> -->
+    <!-- @if(myForm.get('courses')?.invalid && myForm.get('courses')?.touched){
 
       <div class="error-message">
         Type is required.
-      </div>
-    }
+      </div> -->
+    <!-- } -->
     </div>
 
       <div class="button-container">

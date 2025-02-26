@@ -17,6 +17,7 @@
 
 * {
   font-family: "Poppins", sans-serif;
+  font-weight: 500;
 }
 
 #loading {
@@ -44,6 +45,16 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -10,16 +10,27 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  private token = localStorage.getItem('token');
+  // { headers: { Authorization: `Bearer ${this.token}` } }
+
   public users() {
-    return this.http.get(`${environment.api}/user/`)
+    return this.http.get(`${environment.api}/user/`,)
   }
 
-  addUser(firstName: string, lastName: string, email: string, type: string, batchno: string, status: string) {
-    return this.http.post(`${environment.api}/user/addUser`, { firstName, lastName, email, type, batchno, status });
+  // addUser(firstName: string, lastName: string, email: string, phone: any, type: string, batchno: string, status: string)
+  // addUser(firstName: string, lastName: string, email: string, type: string, batchno: string, status: string) {
+  //   return this.http.post(`${environment.api}/user/addUser`, { firstName, lastName, email, type, batchno, status });
+  // }
+
+  addUser(firstName: string, lastName: string, email: string, phone: any, type: string, stCourse: string, batchno?: any, moduleno?: any, status?: string) {
+
+    return this.http.post(`${environment.api}/user/addUser`, { firstName, lastName, email, phone, type, stCourse, batchno, moduleno, status });
   }
 
   getUsers() {
-    return this.http.get(`${environment.api}/user/`);
+    return this.http.get(`${environment.api}/user/`,
+      // { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
 
   getUser(userId: any) {
@@ -101,10 +112,24 @@ export class UserService {
   }
 
   getInstructors(): Observable<any> {
-    return this.http.get(`${environment.api}/instructors`);
+    return this.http.get(`${environment.api}/instructors`,);
   }
   getProfilePhoto(filename: string): string {
     return `${environment.api}/profile-photo/${filename}`;
+  }
+
+
+  //Fetching all modules
+  getAllBatches() {
+    return this.http.get(`${environment.api}/batches/list`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
+  }
+  getAllModules() {
+    return this.http.get(`${environment.api}/module/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
 
 }
