@@ -17,6 +17,15 @@ export interface Batch {
   module?: any;
 }
 
+export interface Module {
+  _id?: string;
+  moduleName?: string;
+  price?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  __v?: number;
+
+}
 // Define a new interface for the batch response
 export interface BatchWithStudents {
   [x: string]: any;
@@ -105,5 +114,19 @@ export class BatchService {
       { headers: { Authorization: `Bearer ${this.token}` } }
     );
   }
+  getAllModules(uri: string): Observable<any[]> {
+    return this.http.get<Module[]>(`${environment.api}/${uri}`, {
+      headers: { Authorization: `Bearer ${this.token}` }
+    });
+  }
+
+
+  // getBatches(uri: string): Observable<Batch[]> {
+  //   return this.http.get<Batch[]>(`${environment.api}/${uri}`,
+  //     { headers: { Authorization: `Bearer ${this.token}` } }
+
+  //   );
+  // }
+
 
 }

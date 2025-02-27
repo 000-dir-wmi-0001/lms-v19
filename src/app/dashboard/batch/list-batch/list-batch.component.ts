@@ -21,6 +21,8 @@ export class ListBatchComponent implements OnInit {
   // Array to manage all subscriptions for cleanup
   private subscriptions: Subscription[] = [];
 
+  moduleId: string = '';
+
   constructor(
     private batchService: BatchService, // Service to handle batch operations
     private batchStateService: BatchStateService, // Service to manage batch state
@@ -30,6 +32,12 @@ export class ListBatchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
+
+    const moduleId = this.route.snapshot.paramMap.get('name') as string; // Cast to string
+    this.moduleId = moduleId;
+    // console.log('Module ID:', moduleId);
     // Fetch the initial list of batches
     this.fetchBatches();
 
@@ -67,7 +75,7 @@ export class ListBatchComponent implements OnInit {
 
   // Fetch the list of batches from the service
   fetchBatches() {
-    this.batchService.getBatches('batches/list').subscribe({
+    this.batchService.getBatches(`batches/list/${this.moduleId}`).subscribe({
       next: (data: Batch[]) => {
         if (data && Array.isArray(data)) {
           this.batches = data; // Update local list of batches
@@ -154,9 +162,6 @@ export class ListBatchComponent implements OnInit {
 
   // Navigate to the batch details page
   viewBatch(batchId: string) {
-    console.log('View batch details:', batchId); // Log batch ID
-    // this.router.navigate(['dashboard/batch/details/', batchId]); // Navigate to details page
-    // this.router.navigate(['details']); // Navigate to details page
     this.router.navigate(['dashboard/batch/details/', batchId]); // Navigate to details page
 
   }
