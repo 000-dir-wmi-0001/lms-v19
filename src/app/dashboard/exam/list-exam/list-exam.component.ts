@@ -261,12 +261,12 @@ export class ListExamComponent implements OnInit, OnDestroy {
   // }
 
   attemptexam(exam: any, examId: any) {
-    console.log("Exam ID:", examId);
+    // console.log("Exam ID:", examId);
 
     // First, check if the student has already attempted the exam
     this.examservice.checkAtteptedorNot(examId, this.userId).subscribe({
       next: (data: any) => {
-        console.log("Check Attempted Response:", data);
+        // console.log("Check Attempted Response:", data);
 
         if (data && typeof data.attempted === 'boolean') {
           this.checkIfAttempted = data.attempted;
@@ -295,7 +295,7 @@ export class ListExamComponent implements OnInit, OnDestroy {
         // If not already attempted, proceed to check the exam date and time
         this.examservice.getMCQQuestions(examId).subscribe({
           next: (data: any) => {
-            console.log("Full Response from API:", data);
+            // console.log("Full Response from API:", data);
 
 
             const startTime = new Date(data.examQuestions.startTime); // Get the start time

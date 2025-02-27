@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import {
   Batch,
   BatchService,
@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-batch-details',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './batch-details.component.html',
   styleUrl: './batch-details.component.css'
 })
@@ -28,6 +28,9 @@ export class BatchDetailsComponent implements OnInit {
   studentsInBatch: any[] = []; // To hold students from the batch
   searchModalOpen: boolean = false; // To control the modal visibility
   filteredStudents: any[] = []; // To hold the filtered student results
+  startDate: any;
+  endDate: any;
+  moduleName: any;
 
   constructor(
     private router: Router,
@@ -42,8 +45,12 @@ export class BatchDetailsComponent implements OnInit {
       this.studentsDataList = res;
     });
 
-    const batchId = this.route.snapshot.paramMap.get('id') as string; // Cast to string
+
+
+
+    const batchId = this.route.snapshot.paramMap.get('name') as string; // Cast to string
     this.batchId = batchId;
+    // console.log('Batch ID:', batchId);
     if (batchId) {
       this.getBatchDetails(batchId);
     } else {
@@ -55,10 +62,14 @@ export class BatchDetailsComponent implements OnInit {
     this.batchService.getBatchById(`batches/details/${batchId}`).subscribe({
       next: (data: BatchWithStudents) => {
         console.log('Response from getBatchById:', data);
+        console.log('Batch:', data.batch);
         if (data) {
           this.batch = data.batch;
+          this.startDate = data.batch.startFrom;
+          this.endDate = data.batch.endAt;
+          this.moduleName = data.batch.module.moduleName;
           this.studentsInBatch = data.students;
-          console.log('Set batch to:', this.batch);
+          // console.log('Set batch to:', this.batch);
         } else {
           alert('Batch not found with the given ID');
         }
@@ -147,7 +158,6 @@ export class BatchDetailsComponent implements OnInit {
 
   meetingDetails(batchId: string) {
     this.router.navigate(['/dashboard/batch/meet', batchId]);
-    console.log("batch id", batchId);
   }
 
 }

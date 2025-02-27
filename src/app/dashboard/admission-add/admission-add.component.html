@@ -116,6 +116,8 @@
         @for(batch of allBacthecs_list; track batch){
 
         <mat-option  [value]="batch._id">
+
+
           {{ batch.name }}
         </mat-option>
       }
@@ -186,40 +188,7 @@
       }
     </div> -->
 
-    <div >
-      <label for="stCourse">Courses:</label>
-      <mat-form-field appearance="outline" id="courses" class="bg-white">
-        <mat-select formControlName="stCourse" id="stCourse">
-          @for(stCourse of staticCourses; let i= $index; track stCourse){
-            <mat-option  [value]="stCourse.name">
-              {{ stCourse.name }}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      @if(myForm.get('stCourse')?.invalid && myForm.get('stCourse')?.touched){
 
-        <div class="error-message">
-          Please Select Course.
-        </div>
-      }
-
-
-
-    <!-- <select formControlName="courses" id="courses"  class="user-name" >
-        <option value="" disabled selected hidden>Select Course</option>
-     @for(module of staticCourses; let i= $index; track module){
-
-       <option [value]="module.name">{{module.name}}</option>
-      }
-    </select> -->
-    <!-- @if(myForm.get('courses')?.invalid && myForm.get('courses')?.touched){
-
-      <div class="error-message">
-        Type is required.
-      </div> -->
-    <!-- } -->
-    </div>
 
       <div class="button-container">
         <button type="submit" [disabled]="myForm.invalid">Submit</button>

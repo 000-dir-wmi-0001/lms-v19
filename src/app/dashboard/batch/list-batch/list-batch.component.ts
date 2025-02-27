@@ -3,17 +3,17 @@ import { BatchService, Batch } from '../../../services/batch.service';
 import { BatchStateService } from '../../../services/batch-state.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-batch',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './list-batch.component.html',
   styleUrl: './list-batch.component.css'
 })
-export class ListBatchComponent implements OnInit, OnDestroy {
+export class ListBatchComponent implements OnInit {
   // Array to hold the list of batches
   batches: Batch[] = [];
   // Variable to hold the currently selected batch for editing
@@ -25,7 +25,8 @@ export class ListBatchComponent implements OnInit, OnDestroy {
     private batchService: BatchService, // Service to handle batch operations
     private batchStateService: BatchStateService, // Service to manage batch state
     private commonService: CommonService, // Common service for shared operations
-    private router: Router // Router service for navigation
+    private router: Router, // Router service for navigation
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -153,7 +154,11 @@ export class ListBatchComponent implements OnInit, OnDestroy {
 
   // Navigate to the batch details page
   viewBatch(batchId: string) {
-    this.router.navigate(['/dashboard/batch/details', batchId]); // Navigate to details page
+    console.log('View batch details:', batchId); // Log batch ID
+    // this.router.navigate(['dashboard/batch/details/', batchId]); // Navigate to details page
+    // this.router.navigate(['details']); // Navigate to details page
+    this.router.navigate(['dashboard/batch/details/', batchId]); // Navigate to details page
+
   }
 }
 

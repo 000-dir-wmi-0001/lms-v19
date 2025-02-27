@@ -63,7 +63,6 @@ export class AdmissionAddComponent implements OnInit {
 
       batchno: ['', [Validators.required]],
       moduleno: ['', [Validators.required]],
-      stCourse: ['', [Validators.required]],
       status: ['', [Validators.required]],
       // module: ['', [Validators.required]],
     });
@@ -76,7 +75,7 @@ export class AdmissionAddComponent implements OnInit {
       },
       (error) => {
         // Handle any errors if the Observable fails
-        console.error('Error fetching batches:', error);
+        console.error('Error fetching batches!!');
       }
     );
     this.userService.getAllModules().subscribe(
@@ -87,7 +86,7 @@ export class AdmissionAddComponent implements OnInit {
       },
       (error) => {
         // Handle any errors if the Observable fails
-        console.error('Error fetching batches:', error);
+        console.error('Error fetching batches!!');
       }
     );
   }
@@ -125,8 +124,7 @@ export class AdmissionAddComponent implements OnInit {
       formValues.phone,
       formValues.type,
       formValues.batchno,
-      formValues.modulenoe,
-      formValues.stCourse,
+      formValues.moduleno,
       formValues.status // Pass courses as an array of strings
     ).subscribe(
       (result: any) => {

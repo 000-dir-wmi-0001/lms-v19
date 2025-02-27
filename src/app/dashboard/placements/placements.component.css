@@ -47,7 +47,8 @@
 }
 
 .btn-primary {
-  background-color: #0972b4;
+  /* background-color: #0972b4; */
+  background-color: #1b78fd;
   border: none;
   margin-top: 10px;
   width: 45%;
@@ -63,6 +64,7 @@
   display: inline-block;
   /* Display as block-level element */
   margin-right: 5%;
+  background-color: #FF2400;
 }
 
 @media screen and (max-width: 768px) {

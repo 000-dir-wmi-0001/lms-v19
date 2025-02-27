@@ -9,8 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 export class CourseService {
   constructor(private http: HttpClient) { }
   // Get all courses with thumbnail URLs
+
+  private token = localStorage.getItem('token');
+
   public courses() {
-    return this.http.get(`${environment.api}/course/`).pipe(
+    return this.http.get(`${environment.api}/course/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    ).pipe(
       map((response: any) => {
         if (response.courses) {
           return {
@@ -32,7 +37,9 @@ export class CourseService {
   // Get course thumbnail URL
   public getCourseThumbnail(courseId: string, fileName: string): Observable<string> {
     return this.http.get<string>(
-      `${environment.api}/course/getThumbnail/${courseId}/${fileName}`
+      `${environment.api}/course/getThumbnail/${courseId}/${fileName}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
     );
   }
 
@@ -44,12 +51,16 @@ export class CourseService {
       price,
       description,
       thumbnail
-    });
+    },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
 
   // Get upload URL for thumbnail
   public getUploadURL(key: string) {
-    return this.http.post(`${environment.api}/course/getUploadURL/${key}`, {});
+    return this.http.post(`${environment.api}/course/getUploadURL/${key}`, {},
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
 
   // Add thumbnail to course
@@ -69,7 +80,9 @@ export class CourseService {
 
   // Get single course with thumbnail
   public getCourse(courseId: string) {
-    return this.http.get(`${environment.api}/course/getCourse/${courseId}`).pipe(
+    return this.http.get(`${environment.api}/course/getCourse/${courseId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    ).pipe(
       map((response: any) => {
         if (response.course && response.course.thumbnail) {
           return {
@@ -87,7 +100,9 @@ export class CourseService {
 
   // Get user courses with thumbnails
   public getUserCourses(courseIds: string) {
-    return this.http.get(`${environment.api}/course/getuserCourses/${courseIds}`).pipe(
+    return this.http.get(`${environment.api}/course/getuserCourses/${courseIds}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    ).pipe(
       map((response: any) => {
         if (response.course) {
           return {

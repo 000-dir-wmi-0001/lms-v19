@@ -61,8 +61,8 @@ export class FeeListComponent implements OnInit {
       next: (data: any) => {
         this.isLoading = false;
         this.studentList = data.studentUsers;
-        console.log("data", data.studentUsers);
-        console.log("thisone", this.studentList);
+        // console.log("data", data.studentUsers);
+        // console.log("thisone", this.studentList);
       },
       error: (err) => {
         console.log(err);

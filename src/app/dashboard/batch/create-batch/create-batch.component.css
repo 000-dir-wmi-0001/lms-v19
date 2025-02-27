@@ -60,7 +60,10 @@ h4 {
 
 /* Style for Create button */
 .create-button {
+  /* Center the button */
   padding: 10px 20px;
+  background-color: #1b78fd;
+  color: white;
   /* Increase padding for a bigger button */
   font-size: 16px;
   /* Ensure font size is readable */
@@ -68,6 +71,10 @@ h4 {
   /* Prevent text wrapping */
 }
 
+.create-button:hover {
+  background-color: #0048ac;
+  /* Darken the background color on hover */
+}
 
 /* Responsive layout adjustments */
 @media (min-width: 576px) {
@@ -90,4 +97,102 @@ h4 {
     margin-top: 0;
     /* Remove top margin on larger screens */
   }
+}
+
+
+.startDate-bg,
+.endDate-bg {
+  background-color: #1b78fd;
+  /* Blue color for Start Date */
+  border: 1px solid #1b78fd;
+  /* Border matching the background */
+  outline: none;
+  padding: 6px 12px;
+  /* Make it more compact */
+  border-radius: 5px;
+  /* Slightly round corners */
+  color: white;
+  font-size: 14px;
+  /* Smaller text */
+  width: 160px;
+  /* Adjust width for compactness */
+  transition: background-color 0.3s, border-color 0.3s;
+  /* Smooth transition */
+}
+
+.startDate-bg:hover {
+  background-color: #0048ac;
+  /* Darker blue on hover */
+  border-color: #0048ac;
+  /* Border changes to dark blue */
+}
+
+.endDate-bg {
+  background-color: #FF2400;
+  /* Red color for End Date */
+  border: 1px solid #FF2400;
+}
+
+.endDate-bg:hover {
+  background-color: #9c0202;
+  /* Darker red on hover */
+  border-color: #9c0202;
+}
+
+.datapickers {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  /* Add some gap between the date pickers */
+  align-items: center;
+  /* Vertically center the content */
+  padding: 16px 0;
+  /* Padding at the top and bottom */
+}
+
+.datapickers div {
+  display: flex;
+  flex-direction: column;
+  /* Stack label and input */
+  align-items: flex-start;
+  /* Align label to the left */
+}
+
+label {
+  font-size: 14px;
+  /* Smaller label text */
+  margin-bottom: 5px;
+  /* Space between label and input */
+  color: #333;
+  /* Dark grey color for labels */
+}
+
+
+
+.moduleDiv {
+  margin-bottom: 10px;
+  width: 100%;
+  /* margin-left: 25%; */
+  margin-block-start: 5%;
+}
+
+
+
+
+
+.moduleLabel {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
 }

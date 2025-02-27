@@ -24,12 +24,11 @@
       No batch found.
     </p>
   </div>
-
   <!-- Create button on the right -->
   <div class="ms-md-3 mt-2 mt-md-0">
     <button
       type="button"
-      class="btn btn-success create-button"
+      class="btn  create-button"
       (click)="openBatchModal(false)"
     >
       Create Batch
@@ -43,6 +42,8 @@
     </li>
   </ul>
 </div>
+
+
 
 <!-- Add/Edit Batch Modal -->
 <div
@@ -90,6 +91,32 @@
               required
             ></textarea>
           </div>
+          <div class="moduleDiv">
+          <label for="moduleId" class="moduleLabel">Modules:</label>
+          <select  id="moduleId" name="moduleId" [(ngModel)]="batchData.moduleId">
+            <option disabled>Please Select Modules</option>
+
+            @for(module of allModules_list; track module){
+              <option [value]="module._id"
+              >{{ module.moduleName}}</option>
+
+            }
+          </select>
+
+        </div>
+
+
+          <div class="datapickers">
+            <div>
+              <label for="startDate">Start Date:</label>
+              <input type="date" id="startDate" [(ngModel)]="batchData.startDate" name="startDate" class="startDate-bg" />
+            </div>
+            <div>
+              <label for="endDate">End Date:</label>
+              <input type="date" id="endDate" [(ngModel)]="batchData.endDate" name="endDate" class="endDate-bg" />
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary">
             {{ isEditMode ? "Update Batch" : "Create Batch" }}
           </button>
@@ -98,3 +125,22 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+@if(myForm.get('moduleno')?.invalid && myForm.get('moduleno')?.touched){
+
+  <div class="error-message">
+    Please Select Module.
+  </div>
+} -->
