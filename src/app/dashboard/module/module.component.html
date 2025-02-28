@@ -1,20 +1,15 @@
 <div class="" id="content">
 
       <!-- <button class="btn btn-warning" [routerLink]="['editCourseFee/']">Edit Course Fees</button> -->
+      <button class="btn btn-warning "routerLink="/dashboard/fee/addStaticCourse">Add New Module</button>
 
     <div class="float-end"><button class="btn btn-info" [routerLink]="['add-fee/']">Create Fee</button></div><br><br>
+    <router-outlet></router-outlet>
 
-<!-- <app-course-edit-fee></app-course-edit-fee> -->
-
-
-<!-- <router-outlet></router-outlet> -->
 
 <div class="p-4" id="content">
 
   <div class="table-container">
-    <!-- <button class="btn btn-warning "routerLink="/dashboard/fee/addStaticCourse">new course</button> -->
-    <!-- <button class="btn btn-info "routerLink="/dashboard/module/">Back to Module</button> -->
-
     <table class="table table-bordered table-hover">
           <thead>
             <tr class="text-center text-justify">
@@ -32,22 +27,6 @@
 
                       <td>{{module.moduleName}}</td>
                       <td>{{ module.price | currency:'INR' }}</td>
-                      <!-- <td>
-                          @if (editIndex !== i) {
-
-                              <button  class="btn btn-primary" (click)="setEdit(i)" >
-                                  Edit price
-                              </button>
-                          }@else {
-
-
-                              <ng-template #elseBlock>
-                                  <input  type="number" placeholder="enter new price" #tempVar>
-                                  <button (click)="editModulePrice(module._id,tempVar.value)" class="btn btn-warning">Save changes</button>
-                                  <button (click)="cancelEdit()" class="btn btn-danger">Cancel</button>
-
-                              </ng-template>
-                      </td> -->
                   </tr>
               }
           </tbody>
@@ -56,5 +35,4 @@
 </div>
 
 
-  <router-outlet></router-outlet>
 </div>

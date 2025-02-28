@@ -12,12 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class AddStaticCourseComponent implements OnInit {
 
-  constructor(private feeService:FeeService,private formBuilder: UntypedFormBuilder,private router:Router) { }
+  constructor(private feeService: FeeService, private formBuilder: UntypedFormBuilder, private router: Router) { }
 
-  
+
   productForm: UntypedFormGroup = new UntypedFormGroup({
-    name:new UntypedFormControl(''),
-    price:new UntypedFormControl('')
+    name: new UntypedFormControl(''),
+    price: new UntypedFormControl('')
   })
   ngOnInit(): void {
     this.productForm = this.formBuilder.group(
@@ -27,16 +27,20 @@ export class AddStaticCourseComponent implements OnInit {
       }
     )
   }
-  onSubmit(){
-    
+  onSubmit() {
+
     this.feeService.createStaticCourse(this.productForm.value).subscribe(
-      (data)=>{
+      (data) => {
         this.router.navigate(['/dashboard/fee/editCourseFee'])
       },
-      (error:any)=>{
+      (error: any) => {
         console.log(error)
       }
     )
+  }
+
+  onBack() {
+    this.router.navigate(['dashboard/module/'])
   }
 
 }

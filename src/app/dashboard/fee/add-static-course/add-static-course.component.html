@@ -30,6 +30,6 @@
 
     <div class="buttons">
       <button type="submit" class="btn btn-success" [disabled]="!productForm.valid">Submit</button>
-      <button type="button" class="btn btn-warning" routerLink="/dashboard/fee/editCourseFee">Back</button>
+      <button type="button" class="btn btn-warning" (click)="onBack()" >Back</button>
     </div>
   </form>

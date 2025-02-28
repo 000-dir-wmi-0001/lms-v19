@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SidebarService {
+
+
   private isSidebarExpanded = new BehaviorSubject<boolean>(true); // Default state: expanded
   isSidebarExpanded$ = this.isSidebarExpanded.asObservable();
 

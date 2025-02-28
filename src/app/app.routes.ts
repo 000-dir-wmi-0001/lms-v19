@@ -42,7 +42,7 @@ import { AdmissionComponent } from './dashboard/admission/admission.component';
 import { StudDashboardComponent } from './dashboard/stud-dashboard/stud-dashboard.component';
 import { AlumniListComponent } from './auth/alumni/alumni-list/alumni-list.component';
 import { AdminDailynoticeComponent } from './dashboard/admin-dailynotice/admin-dailynotice.component';
-import { BatchComponent } from './dashboard/batch/batch/batch.component';
+import { BatchComponent } from './dashboard/batch/batch.component';
 import { LiveClassComponent } from './dashboard/live-class/live-class.component';
 import { AddCodingQuestionComponent } from './dashboard/compiler/add-coding-question/add-coding-question.component';
 import { ExamDetailStudentComponent } from './dashboard/compiler/exam-detail-student/exam-detail-student.component';
@@ -263,7 +263,8 @@ export const routes: Routes = [
       {
         path: 'batch', component: BatchComponent, children:
           [
-            { path: 'module-batch-list/:id', component: ListBatchComponent },
+            { path: '', redirectTo: 'batch', pathMatch: 'full' },
+            { path: 'batch-list-module/:id', component: ListBatchComponent },
             // { path: 'details', component: BatchDetailsComponent },
             { path: 'meet/:id', component: MeetingsComponent },
             { path: 'start-meeting/:meetId/:pwd', component: StartMeetComponent },

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateBatchComponent } from '../create-batch/create-batch.component';
-import { ListBatchComponent } from '../list-batch/list-batch.component';
-import { BatchDetailsComponent } from '../batch-details/batch-details.component';
-import { BatchService, Batch, Module } from '../../../services/batch.service';
-import { BatchStateService } from '../../../services/batch-state.service';
+import { CreateBatchComponent } from './create-batch/create-batch.component';
+import { ListBatchComponent } from './list-batch/list-batch.component';
+import { BatchDetailsComponent } from './batch-details/batch-details.component';
+import { BatchService, Batch, Module } from '../../../app/services/batch.service'
+import { BatchStateService } from '../../services/batch-state.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { CommonService } from '../../../services/common.service';
+import { CommonService } from '../../services/common.service';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,11 +13,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-batch',
 
-  imports: [CreateBatchComponent, CommonModule],
+  imports: [CreateBatchComponent, CommonModule, RouterOutlet],
   templateUrl: './batch.component.html',
   styleUrl: './batch.component.css'
 })
 export class BatchComponent implements OnInit {
+  ouletVisible: boolean = false;
 
   modules: Module[] = [];
 
@@ -32,9 +33,16 @@ export class BatchComponent implements OnInit {
   ngOnInit() {
 
     this.fetchBatches();
+    if (this.ouletVisible) {
+      this.ouletVisible = false;
+    }
 
   }
 
+  isRouterOutletVisible(): boolean {
+    // Check if the current route includes 'moduleBatchList'
+    return this.router.url.includes('moduleBatchList');
+  }
 
 
 
@@ -59,7 +67,13 @@ export class BatchComponent implements OnInit {
 
 
   viewModule(moduleId: string) {
-    this.router.navigate(['dashboard/batches/module-batch-list/', moduleId]); // Navigate to details page
+    this.ouletVisible = true;
+    this.router.navigate(['dashboard/batch/batch-list-module/', moduleId]); // Navigate to details page
 
   }
+
+  // viewModule(moduleId: string) {
+  //   this.router.navigate(['dashboard/batches/module-batch-list/', moduleId]); // Navigate to details page
+
+  // }
 }

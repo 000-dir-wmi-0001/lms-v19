@@ -10,3 +10,23 @@
 .card-title {
   font-weight: bold;
 }
+
+
+
+/* Style for Create button */
+.create-button {
+  /* Center the button */
+  padding: 10px 20px;
+  background-color: #000;
+  color: white;
+  /* Increase padding for a bigger button */
+  font-size: 16px;
+  /* Ensure font size is readable */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.create-button:hover {
+  background-color: #1f1f20;
+  /* Darken the background color on hover */
+}
