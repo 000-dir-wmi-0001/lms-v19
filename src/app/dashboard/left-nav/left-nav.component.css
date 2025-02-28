@@ -122,5 +122,10 @@
 }
 
 .active-link {
-  color: #11D411 !important;
+  /* color: #11D411 !important; */
+  /* background-color: #0092dd; */
+  /* background-color: #4dc2ff; */
+  /* background-color: #0d6ffd; */
+  background-color: #1b78fd;
+  color: white;
 }

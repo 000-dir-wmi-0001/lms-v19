@@ -24,6 +24,8 @@ export interface Alumni {
   providedIn: 'root'
 })
 export class AlumniService {
+  private token = localStorage.getItem('token');
+
   constructor(
     private http: HttpClient,
     private authService: AuthService,
@@ -32,7 +34,10 @@ export class AlumniService {
 
   // Get all alumni
   getAlumni(uri: string, token: string): Observable<Alumni[]> {
-    return this.http.get<Alumni[]>(`${environment.api}/${uri}`);
+    return this.http.get<Alumni[]>(`${environment.api}/${uri}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   // Get a specific alumnus by ID
@@ -42,7 +47,11 @@ export class AlumniService {
 
   // Add a new alumnus
   addAlumnus(uri: string, alumniData: Alumni): Observable<Alumni> {
-    return this.http.post<Alumni>(`${environment.api}/${uri}`, { ...alumniData });
+    return this.http.post<Alumni>(`${environment.api}/${uri}`, { ...alumniData },
+
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   // Token and User ID management
@@ -72,11 +81,17 @@ export class AlumniService {
       currentCTC: alumnus.currentCTC || '',
       expectedCTC: alumnus.expectedCTC || ''
     };
-    return this.http.put<void>(`${environment.api}/${uri}`, updateData);
+    return this.http.put<void>(`${environment.api}/${uri}`, updateData,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   deleteAlumnus(uri: string): Observable<void> {
-    return this.http.delete<void>(`${environment.api}/${uri}`);
+    return this.http.delete<void>(`${environment.api}/${uri}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
 }

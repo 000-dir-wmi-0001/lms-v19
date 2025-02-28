@@ -15,18 +15,31 @@ export interface Review {
 
 export class ReviewService {
 
+  private token = localStorage.getItem('token');
+
   constructor(private http: HttpClient) { }
 
   public addReview(body: any) {
-    return this.http.post(`${environment.api}/addReview`, body);
+    return this.http.post(`${environment.api}/addReview`, body,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
   public getReview() {
-    return this.http.get(`${environment.api}/addReview`);
+    return this.http.get(`${environment.api}/addReview`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   public updateReview(uri: string, review: Review): Observable<void> {
-    return this.http.put<void>(`${environment.api}/${uri}`, review);
+    return this.http.put<void>(`${environment.api}/${uri}`, review,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   public deleteReview(id: any) {
-    return this.http.delete(`${environment.api}/addReview/${id}`);
+    return this.http.delete(`${environment.api}/addReview/${id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 }

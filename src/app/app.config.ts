@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()), provideAnimationsAsync('noop'), // This should work as intended
-    BsModalService 
+    BsModalService, provideAnimationsAsync('noop'), provideAnimationsAsync('noop'), provideAnimationsAsync(), provideAnimationsAsync('noop') 
   ]
 };

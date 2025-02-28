@@ -3,17 +3,17 @@ import { BatchService, Batch } from '../../../services/batch.service';
 import { BatchStateService } from '../../../services/batch-state.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-batch',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './list-batch.component.html',
   styleUrl: './list-batch.component.css'
 })
-export class ListBatchComponent implements OnInit, OnDestroy {
+export class ListBatchComponent implements OnInit {
   // Array to hold the list of batches
   batches: Batch[] = [];
   // Variable to hold the currently selected batch for editing
@@ -21,14 +21,23 @@ export class ListBatchComponent implements OnInit, OnDestroy {
   // Array to manage all subscriptions for cleanup
   private subscriptions: Subscription[] = [];
 
+  moduleId: string = '';
+
   constructor(
     private batchService: BatchService, // Service to handle batch operations
     private batchStateService: BatchStateService, // Service to manage batch state
     private commonService: CommonService, // Common service for shared operations
-    private router: Router // Router service for navigation
+    private router: Router, // Router service for navigation
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+
+
+
+    const moduleId = this.route.snapshot.paramMap.get('name') as string; // Cast to string
+    this.moduleId = moduleId;
+    // console.log('Module ID:', moduleId);
     // Fetch the initial list of batches
     this.fetchBatches();
 
@@ -66,7 +75,7 @@ export class ListBatchComponent implements OnInit, OnDestroy {
 
   // Fetch the list of batches from the service
   fetchBatches() {
-    this.batchService.getBatches('batches/list').subscribe({
+    this.batchService.getBatches(`batches/list/${this.moduleId}`).subscribe({
       next: (data: Batch[]) => {
         if (data && Array.isArray(data)) {
           this.batches = data; // Update local list of batches
@@ -153,7 +162,8 @@ export class ListBatchComponent implements OnInit, OnDestroy {
 
   // Navigate to the batch details page
   viewBatch(batchId: string) {
-    this.router.navigate(['/dashboard/batch/details', batchId]); // Navigate to details page
+    this.router.navigate(['dashboard/batch/details/', batchId]); // Navigate to details page
+
   }
 }
 

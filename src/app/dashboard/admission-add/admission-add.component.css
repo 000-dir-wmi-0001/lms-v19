@@ -1,7 +1,8 @@
 .card {
   width: 500px;
   margin-top: 7%;
-  background-color: #d1f2f9;
+  /* background-color: #d1f2f9; */
+  background-color: white;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
@@ -21,6 +22,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"],
 select {
   width: 100%;
   padding: 5px;

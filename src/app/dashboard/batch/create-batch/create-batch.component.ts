@@ -6,11 +6,11 @@ import { BatchStateService } from '../../../services/batch-state.service';
 import * as bootstrap from 'bootstrap';
 import { CommonService } from '../../../services/common.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-batch',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule,],
   templateUrl: './create-batch.component.html',
   styleUrl: './create-batch.component.css'
 })
@@ -22,18 +22,37 @@ export class CreateBatchComponent {
   batchName: string = '';
   batchDescription: string = '';
 
+  // selectedStartDate: any = '';
+  // selectedEndDate: any = '';
+
+  // selectedModuleId: any = '';
+
   // Properties for search functionality
   searchTerm: string = '';
   searchResults: any[] = [];
 
   // Flags and state for edit mode and batch data
   isEditMode = false;
-  batchData = { name: '', description: '' };
+  batchData = {
+    name: '',
+    description: '',
+    moduleId: '',
+    startDate: '',
+    endDate: ''
+  }; // Batch data object for form
+
+
   private modalInstance: any; // Modal instance for Bootstrap modal
   currentBatchData: any; // Data of the batch currently being edited
 
   // Array to store batches, initialized to prevent undefined error
   batches: Batch[] = [];
+
+
+
+  // batchForm!: FormGroup;
+  allModules_list: any[] = [];
+
 
   // Dependency injection of required services
   constructor(
@@ -42,10 +61,29 @@ export class CreateBatchComponent {
     private router: Router,
     private commonService: CommonService,
     private userService: UserService
-  ) { }
+  ) {
+
+  }
+
+
 
   // Lifecycle hook to initialize component and load data
   ngOnInit(): void {
+
+
+    this.userService.getAllModules().subscribe(
+      (tempArr: any) => {
+        // Once data is emitted, use spread operator to copy the array
+        this.allModules_list = [...tempArr.modules];
+        // console.log(this.allModules_list); // Log the result
+      },
+      (error) => {
+        // Handle any errors if the Observable fails
+        console.error('Error fetching batches!!');
+      }
+    );
+
+
     // Load all batches on component initialization
     this.batchService.getBatches('batches/list').subscribe({
       next: (data) => {
@@ -63,11 +101,14 @@ export class CreateBatchComponent {
     this.commonService.editBatch.subscribe({
       next: (res) => {
         if (res != null) {
-          console.log(res);
+          // console.log(res);
           this.currentBatchData = res;
           this.batchData = {
             name: res.name,
-            description: res.description
+            description: res.description,
+            startDate: res.startDate,
+            endDate: res.endDate,
+            moduleId: res.moduleId
           };
           this.openBatchModal(true, this.batchData); // Open modal in edit mode
         }
@@ -85,7 +126,7 @@ export class CreateBatchComponent {
       if (editMode && batch) {
         this.batchData = { ...batch }; // Populate batch data for editing
       } else {
-        this.batchData = { name: '', description: '' }; // Clear data for adding a new batch
+        this.batchData = { name: '', description: '', startDate: '', endDate: '', moduleId: '' }; // Clear data for adding a new batch
       }
       this.modalInstance = new bootstrap.Modal(this.batchModalRef.nativeElement); // Initialize modal instance
       this.modalInstance.show(); // Show the modal
@@ -109,22 +150,27 @@ export class CreateBatchComponent {
       }
       this.currentBatchData.name = this.batchData.name;
       this.currentBatchData.description = this.batchData.description;
+      this.currentBatchData.startDate = this.batchData.startDate;
+      this.currentBatchData.endDate = this.batchData.endDate;
+      this.currentBatchData.moduleId = this.batchData.moduleId;
 
       // Update the batch through the service
       this.batchService.updateBatch('batches/update', this.currentBatchData).subscribe({
         next: (updatedBatch) => {
-          console.log('Batch updated successfully:', updatedBatch);
+          // console.log('Batch updated successfully:', updatedBatch);
           this.commonService.updateBatch.next(true); // Notify about the update
           this.currentBatchData = {}; // Reset current batch data
-          this.batchData = { name: '', description: '' }; // Reset form data
+          this.batchData = { name: '', description: '', startDate: '', endDate: '', moduleId: '' }; // Reset form data
         },
         error: (error) => {
           console.error('Error updating batch:', error);
         }
+
       });
     } else {
       // Add mode logic
       this.upsertBatch(this.batchData);
+      // console.log(this.batchData);
     }
     this.modalInstance?.hide(); // Hide modal after submission
   }
@@ -139,17 +185,29 @@ export class CreateBatchComponent {
     const newBatch: Batch = {
       name: batchData.name,
       description: batchData.description,
+      startFrom: batchData.startDate,
+      endAt: batchData.endDate,
+      moduleId: batchData.moduleId
     };
 
     // Add the batch through the service
     this.batchService.addBatch('batches/create', newBatch).subscribe({
       next: (response) => {
         if (response && response.batch) { // Null check for response
-          console.log('Batch created successfully:', response);
+          // console.log('Batch created successfully:', response);
           const createdBatch = response.batch;
           this.batchStateService.addBatch(createdBatch); // Add to state service
           this.batchName = '';
           this.batchDescription = ''; // Clear form inputs
+          // this.selectedStartDate = '';
+          // this.selectedEndDate = '';
+          // this.selectedModuleId = '';
+
+          this.batchData = { name: '', description: '', startDate: '', endDate: '', moduleId: '' };
+          // this.selectedStartDate = '';
+          // this.selectedEndDate = '';
+
+
           this.router.navigate(['/dashboard/batch']); // Navigate to batch dashboard
         } else {
           console.error('Invalid response format');
@@ -171,6 +229,9 @@ export class CreateBatchComponent {
     this.searchResults = this.batches.filter((batch: any) =>
       batch?.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
-    console.log(this.searchResults);
+    // console.log(this.searchResults);
+
+
   }
+
 }

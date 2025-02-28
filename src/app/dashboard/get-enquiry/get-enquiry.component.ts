@@ -180,7 +180,7 @@ export class GetEnquiryComponent implements OnInit {
     this.isLoading = true; // Show loader
     this.authService.getenquiry(page).subscribe({
       next: (data: any) => {
-        console.log(data, data.meta, "data res from api");
+        // console.log(data, data.meta, "data res from api");
 
         this.isLoading = false
         this.enquiry = data.enquiries

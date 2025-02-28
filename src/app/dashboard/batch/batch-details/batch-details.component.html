@@ -16,10 +16,21 @@
           <h3 class="card-title text-primary h4 mb-0">
             Batch Name: <span class="fw-bold">{{ batch.name }}</span>
           </h3>
+          <p class="card-text text-secondary lead mb-0">({{moduleName}})</p>
           <p class="card-text text-secondary lead mb-0">
             <strong>Description:</strong> {{ batch.description }}
           </p>
+
+
+
+          <p class="card-text text-secondary lead mb-0">
+            StartDate: {{ startDate | date: "short" }}
+          </p>
+          <p class="card-text text-secondary lead mb-0">
+            EndDate: {{ endDate | date: "short" }}
+          </p>
         </div>
+
         <button class="btn btn-outline-primary  ms-3" (click)="meetingDetails(batch._id!)" >
           Meetings
         </button>
@@ -177,3 +188,6 @@
     </table>
   </div>
 </div>
+
+
+

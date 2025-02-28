@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FollowUp } from '../../services/follow-up.service';  
-import { NoticeService } from '../../services/notice.service'; 
+import { FollowUp } from '../../services/follow-up.service';
+import { NoticeService } from '../../services/notice.service';
 import { StorageService } from '../../services/storage.service';
-import { FollowUpService } from '../../services/follow-up.service';  
+import { FollowUpService } from '../../services/follow-up.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Batch } from '../../services/batch.service';
 
 @Component({
   selector: 'app-admin-dailynotice',
@@ -21,11 +22,12 @@ export class AdminDailynoticeComponent implements OnInit {
   userId: any; // User ID
   token: any; // User token
 
+
   constructor(
     private noticeService: NoticeService,
     private storageService: StorageService,
     private followUpService: FollowUpService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.token = this.storageService.getToken();
@@ -179,7 +181,7 @@ export class AdminDailynoticeComponent implements OnInit {
       icon: 'error',
       title: 'Error while deleting notice',
       text: 'An error occurred while processing. Please try again later.',
-      customClass: {popup:'swal-wide'},
+      customClass: { popup: 'swal-wide' },
     });
   }
 
@@ -189,7 +191,7 @@ export class AdminDailynoticeComponent implements OnInit {
       icon: 'success',
       title: 'Notice Deleted Successfully',
       text: 'The notice has been deleted successfully.',
-      customClass: {popup:'swal-wide'},
+      customClass: { popup: 'swal-wide' },
     });
   }
 }

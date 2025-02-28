@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild , TemplateRef, ChangeDetectorRef} from '@angular/core';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 import { StorageService } from '../services/storage.service';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { FeeService } from '../services/fee.service';
 import { StudentNotificationService } from '../services/student-notification.service';
 import { SidebarService } from '../services/sidebar.service';
@@ -14,7 +14,7 @@ import jsQR from 'jsqr';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 @Component({
-  imports: [LucideAngularModule, RouterOutlet, RouterLink, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
+  imports: [LucideAngularModule, RouterOutlet, RouterModule, ReactiveFormsModule, FormsModule, CommonModule, LeftNavComponent],
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',

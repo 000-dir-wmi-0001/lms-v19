@@ -267,8 +267,8 @@ export const routes: Routes = [
       {
         path: 'batch', component: BatchComponent, children:
           [
-            { path: '', component: BatchComponent },
-            { path: 'details/:id', component: BatchDetailsComponent },
+            { path: 'module-batch-list/:id', component: ListBatchComponent },
+            // { path: 'details', component: BatchDetailsComponent },
             { path: 'meet/:id', component: MeetingsComponent },
             { path: 'start-meeting/:meetId/:pwd', component: StartMeetComponent },
             { path: 'userbatches', component: UserBatchComponent },
@@ -313,8 +313,11 @@ export const routes: Routes = [
   { path: 'courseInfo', component: CourseInfoComponent },
 
   //Dashboard Batch component
-  { path: 'dashboard/batch', component: ListBatchComponent },
+  // { path: 'dashboard/batch', component: ListBatchComponent },
 
+  //dashboard/batch/details/:name
+  { path: 'dashboard/batch/details/:name', component: BatchDetailsComponent },
 
-  { path: 'dashboard/batch/details/:name', component: BatchDetailsComponent }
+  { path: 'dashboard/batches/module-batch-list/:name', component: ListBatchComponent },
+
 ]

@@ -8,6 +8,8 @@ import { HttpParams } from '@angular/common/http';
 })
 export class ExamService {
 
+  private token = localStorage.getItem('token');
+
   topic: string = ''
   private isAddByLLM = false;
   constructor(private http: HttpClient) { }
@@ -18,104 +20,180 @@ export class ExamService {
 
 
   public addExam(name: string, type: string, startDate: string, courseId: string, instructorId: any, startTime: any, endTime: any) {
-    return this.http.post(`${environment.api}/exam/`, { name, type, startDate, courseId, instructorId, startTime, endTime });
+    return this.http.post(`${environment.api}/exam/`, { name, type, startDate, courseId, instructorId, startTime, endTime },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public addverbalquestion(name: String, marks: any, examId: any) {
-    return this.http.post(`${environment.api}/verbal_question/`, { name, marks, examId });
+    return this.http.post(`${environment.api}/verbal_question/`, { name, marks, examId },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getExams() {
-    return this.http.get(`${environment.api}/exam/`);
+    return this.http.get(`${environment.api}/exam/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getUser() {
-    return this.http.get(`${environment.api}/user/`);
+    return this.http.get(`${environment.api}/user/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getCourse() {
-    return this.http.get(`${environment.api}/course/`);
+    return this.http.get(`${environment.api}/course/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getcourseDropDownValue() {
-    return this.http.get(`${environment.api}/course/`);
+    return this.http.get(`${environment.api}/course/`,
+
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public addquestion(question: string, options: Array<String>, answers: Array<String>, mark: any, examId: string) {
-    return this.http.post(`${environment.api}/question/`, { question, options, answers, mark, examId });
+    return this.http.post(`${environment.api}/question/`, { question, options, answers, mark, examId },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getMCQQuestions(examId: any) {
     console.log(`get mcq ${examId}`)
-    return this.http.get(`${environment.api}/question/exam/${examId}`);
+    return this.http.get(`${environment.api}/question/exam/${examId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getCODINGQuestions(examId: any) {
-    return this.http.get(`${environment.api}/compiler/exam/${examId}`);
+    return this.http.get(`${environment.api}/compiler/exam/${examId}`,
+
+    );      { headers: { Authorization: `Bearer ${this.token}` } }
+
   }
 
   public getVERBALQuestions(examId: any) {
-    return this.http.get(`${environment.api}/verbal_question/exam/${examId}`);
+    return this.http.get(`${environment.api}/verbal_question/exam/${examId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public SubmitVERBALQuestions(examId: any, studId: any, questionId: any, recording: any) {
-    return this.http.post(`${environment.api}/record/`, { examId, studId, questionId, recording });
+    return this.http.post(`${environment.api}/record/`, { examId, studId, questionId, recording },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public deleteExam(id: any) {
-    return this.http.delete(`${environment.api}/exam/${id}`);
+    return this.http.delete(`${environment.api}/exam/${id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public deleteCompilerQuestion(examId: any, questionId: any) {
-    return this.http.delete(`${environment.api}/compiler/${examId}/${questionId}`);
+    return this.http.delete(`${environment.api}/compiler/${examId}/${questionId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getResult(sid: any, eid: any) {
-    return this.http.get(`${environment.api}/attempt/${sid}/${eid}`);
+    return this.http.get(`${environment.api}/attempt/${sid}/${eid}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getQuestionsforStudent(examId: any) {
-    return this.http.get(`${environment.api}/question/exam/${examId}/studentllm`);
+    return this.http.get(`${environment.api}/question/exam/${examId}/studentllm`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public postanswer(examId: any, questionId: any, studId: any, answersSelected: Array<String>) {
-    return this.http.post(`${environment.api}/attempt/`, { questionId, examId, studId, answersSelected });
+    return this.http.post(`${environment.api}/attempt/`, { questionId, examId, studId, answersSelected },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public deleteQuestion(examId: any, questionId: any) {
-    return this.http.delete(`${environment.api}/question/${examId}/${questionId}`);
+    return this.http.delete(`${environment.api}/question/${examId}/${questionId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public deletecodingQuestion(examId: any, questionId: any) {
-    return this.http.delete(`${environment.api}/compiler/${examId}/${questionId}`);
+    return this.http.delete(`${environment.api}/compiler/${examId}/${questionId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public addcode(script: any, language: any) {
-    return this.http.post(`${environment.api}/compiler/`, { script, language });
+    return this.http.post(`${environment.api}/compiler/`, { script, language },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public addcodingquestion(language: any, question: any, description: any, editable: any, nonEditable: any, marks: any, numberOfTestCases: any, examId: any) {
-    return this.http.post(`${environment.api}/compiler/add/`, { language, question, description, editable, nonEditable, marks, numberOfTestCases, examId });
+    return this.http.post(`${environment.api}/compiler/add/`, { language, question, description, editable, nonEditable, marks, numberOfTestCases, examId },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getCODINGquestionbyid(id: any) {
-    return this.http.get(`${environment.api}/compiler/${id}`);
+    return this.http.get(`${environment.api}/compiler/${id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public postVerbalanswer(form: any) {
-    return this.http.post(`${environment.api}/record/`, form);
+    return this.http.post(`${environment.api}/record/`, form,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public checkAtteptedorNot(examId: any, studentId: any) {
-    return this.http.get(`${environment.api}/attempt/result/${studentId}/${examId}`);
+    return this.http.get(`${environment.api}/attempt/result/${studentId}/${examId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public ViewStudentAttemptedVerbalExam(examId: any) {
-    return this.http.get(`${environment.api}/record/${examId}/students`);
+    return this.http.get(`${environment.api}/record/${examId}/students`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getVerbalResultForStudent(examId: any, studentId: any) {
-    return this.http.get(`${environment.api}/record/${examId}/${studentId}`);
+    return this.http.get(`${environment.api}/record/${examId}/${studentId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   private startTime!: string;

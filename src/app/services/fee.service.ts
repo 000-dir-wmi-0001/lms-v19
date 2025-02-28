@@ -10,12 +10,19 @@ export class FeeService {
 
   serviceStudentList: any = [];
   serviceFeeList: any = [];
+  private token = localStorage.getItem('token');
 
   getFeeList() {
-    return this.http.get(`${environment.api}/fee/getfees/`);
+    return this.http.get(`${environment.api}/fee/getfees/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   getStudentUser() {
-    return this.http.get(`${environment.api}/fee/getStudentUser`);
+    return this.http.get(`${environment.api}/fee/getStudentUser`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   setFee(
     firstName: string,
@@ -28,38 +35,66 @@ export class FeeService {
       lastName,
       totalFee,
       paymentMode,
-    });
+    },
+    { headers: { Authorization: `Bearer ${this.token}` } }
+  );
   }
   searchStudent(query: string): Observable<any[]> {
     return this.http.get<any[]>(
-      `${environment.api}/fee/searchStudent?q=${query}`
+      `${environment.api}/fee/searchStudent?q=${query}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
     );
   }
 
   getUserFee(id: any) {
-    return this.http.get(`${environment.api}/fee/getUserFee/${id}`);
+    return this.http.get(`${environment.api}/fee/getUserFee/${id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   editUserFee(id: any, data: any) {
-    return this.http.put(`${environment.api}/fee/updateFee/${id}`, data);
+    return this.http.put(`${environment.api}/fee/updateFee/${id}`, data,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   getAllCourses() {
-    return this.http.get(`${environment.api}/course/`);
+    return this.http.get(`${environment.api}/course/`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   editCoursePrice(id: any, newPrice: any) {
-    return this.http.put(`${environment.api}/course/editCoursePrice/${id}`, { price: newPrice })
+    return this.http.put(`${environment.api}/course/editCoursePrice/${id}`, { price: newPrice },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
   getALlStaticCourses() {
-    return this.http.get(`${environment.api}/staticCourse/readCourse`);
+    return this.http.get(`${environment.api}/staticCourse/readCourse`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   createStaticCourse(data: any) {
-    return this.http.post(`${environment.api}/staticCourse/createCourse`, data)
+    return this.http.post(`${environment.api}/staticCourse/createCourse`, data,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
   editStaticCoursePrice(id: any, newPrice: any) {
-    return this.http.put(`${environment.api}/staticCourse/updateCourse`, { id: id, price: newPrice })
+    return this.http.put(`${environment.api}/staticCourse/updateCourse`, { id: id, price: newPrice },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
   getFeesStud(id: any) {
-    return this.http.get(`${environment.api}/fee/getFeesStud/${id}`);
+    return this.http.get(`${environment.api}/fee/getFeesStud/${id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
 }
