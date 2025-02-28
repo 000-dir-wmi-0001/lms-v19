@@ -99,6 +99,8 @@ import { RegisterStudentComponent } from './pos/register-student/register-studen
 import { CodeSharingComponent } from './dashboard/code-sharing/code-sharing.component';
 import { AdmissionAddComponent } from './dashboard/admission-add/admission-add.component';
 import { PlacementsComponent } from './dashboard/placements/placements.component';
+import { CreateSessionComponent } from './dashboard/create-session/create-session.component';
+import { AttendanceReportComponent } from './dashboard/attendance-report/attendance-report.component';
 
 export const routes: Routes = [
 
@@ -213,6 +215,8 @@ export const routes: Routes = [
       { path: 'task/create', component: AddTaskComponent },
 
       { path: 'task/:id', component: UpdateTaskComponent },
+      { path: 'session', component: CreateSessionComponent },
+      { path: 'attendance-report', component: AttendanceReportComponent },
 
       {
         path: 'compiler', component: CompilerComponent, children:

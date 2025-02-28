@@ -1,0 +1,45 @@
+<div class="report-container">
+    <h2>📊 Student Attendance Report</h2>
+
+    <div class="date-filter">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" [(ngModel)]="startDate">
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" [(ngModel)]="endDate">
+
+        <button class="btn-primary" (click)="fetchReport()">Generate Report</button>
+    </div>
+
+    <!-- Loading Animation -->
+    <div *ngIf="isLoading" class="loader-container">
+        <div class="loader">
+            <span class="loader-text">Loading...</span>
+            <span class="load"></span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="error-message">
+        ❌ {{ errorMessage }}
+    </div>
+
+    <!-- Attendance Table -->
+    <table *ngIf="students.length > 0" class="styled-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Attendance Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students">
+                <!-- <td>{{ student.rollNumber }}</td> -->
+                 <td>{{ student.email }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.attendancePercentage }}%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
