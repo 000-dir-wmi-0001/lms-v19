@@ -71,7 +71,7 @@
     <label for="moduleno">Modules:</label>
     <mat-form-field appearance="outline" id="moduleno" class="bg-white">
 
-      <mat-select formControlName="moduleno" multiple>
+      <mat-select formControlName="moduleno" [(ngModel)]="selectedModuleIds" multiple (selectionChange)="onModuleChange($event)">
         <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"  [ngModelOptions]="{standalone: true}"></mat-select-search> -->
         @for(module of allModules_list; track module){
 
@@ -109,7 +109,7 @@
 
     <div>
       <label for="batchno">Batches:</label>
-      <mat-form-field appearance="outline" id="batchno" class="bg-white">
+      <mat-form-field appearance="outline" id="batchno" class="bg-white" >
 
       <mat-select formControlName="batchno" multiple>
         <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"></mat-select-search> -->

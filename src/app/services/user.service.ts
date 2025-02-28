@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -172,6 +172,15 @@ export class UserService {
     return this.http.get(`${environment.api}/module/`,
       { headers: { Authorization: `Bearer ${this.token}` } }
     );
+  }
+
+  //fetching all Batches by module Ids
+  getAllBatchByModuleIds(body: any) {
+    //headers
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+
+    //POST request with the headers and body passed in the options object
+    return this.http.post(`${environment.api}/batches/batch-list-module`, body, { headers: headers });
   }
 
 }
