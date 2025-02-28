@@ -160,7 +160,7 @@ export class AdmissionAddComponent implements OnInit {
         this.isLoading = false; // Stop the loader if there is an error
       }
     );
-    console.log(formValues);
+    // console.log(formValues);
   }
   getStaticCourses(): void {
     this.userService.getALlStaticCourses().subscribe({

@@ -122,38 +122,58 @@ export class CourseService {
 
   // Keep your existing methods unchanged
   public getUserModules(moduleIds: any) {
-    return this.http.get(`${environment.api}/staticCourse/getUserModules/${moduleIds}`);
+    return this.http.get(`${environment.api}/staticCourse/getUserModules/${moduleIds}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getModulewithName(name: any) {
-    return this.http.get(`${environment.api}/staticCourse/getModulebyName/${name}`);
+    return this.http.get(`${environment.api}/staticCourse/getModulebyName/${name}`),
+    { headers: { Authorization: `Bearer ${this.token}` } }
+
   }
 
   public updateCourse(courseId: any, course: any) {
-    return this.http.put(`${environment.api}/course/updateCourse/${courseId}`, course);
+    return this.http.put(`${environment.api}/course/updateCourse/${courseId}`, course,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
   }
 
   public deleteCourse(courseId: any) {
-    return this.http.delete(`${environment.api}/course/deleteCourse/${courseId}`);
+    return this.http.delete(`${environment.api}/course/deleteCourse/${courseId}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public addLecture(name: any, description: any, video: any, courseId: any) {
-    return this.http.post(`${environment.api}/course/${courseId}/add`, { name, description, video });
+    return this.http.post(`${environment.api}/course/${courseId}/add`, { name, description, video },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public getLecture(_id: any) {
-    return this.http.get(`${environment.api}/lecture/getLectureInfo/${_id}`);
+    return this.http.get(`${environment.api}/lecture/getLectureInfo/${_id}`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   public updateLecture(title: any, description: any, key: any, courseId: any, lecture: any) {
     return this.http.put(`${environment.api}/lecture/updateLecture/${lecture}/${courseId}`,
-      { title, description, key }
+      { title, description, key },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
     );
   }
 
   public createOrder(amount: number, module: any, userId: any) {
     return this.http.post(`${environment.api}/static_courses/createPayment`,
-      { amount, module, userId }
+      { amount, module, userId },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
     ).pipe(
       map((response: any) => response)
     );
@@ -161,7 +181,9 @@ export class CourseService {
 
   public verifyPayment(paymentId: any, orderId: any, signature: any) {
     return this.http.post(`${environment.api}/static_courses/webhook`,
-      { paymentId, orderId, signature }
+      { paymentId, orderId, signature },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
     );
   }
 }

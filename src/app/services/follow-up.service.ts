@@ -15,20 +15,28 @@ export interface FollowUp {
 })
 export class FollowUpService {
   private followUps: FollowUp[] = [];
+  private token = localStorage.getItem('token');
+
   private notificationSubject = new BehaviorSubject<FollowUp | null>(null);
 
   constructor(private readonly http: HttpClient) { }
 
   // Save follow-up
   saveFollowUp(followUp: FollowUp): Observable<any> {
-    console.log("followup from service", followUp);
+    // console.log("followup from service", followUp);
 
-    return this.http.post(`${environment.api}/followup/followups`, followUp);
+    return this.http.post(`${environment.api}/followup/followups`, followUp,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   // Fetch follow-ups
   getFollowUps(): Observable<FollowUp[]> {
-    return this.http.get<FollowUp[]>(`${environment.api}/followup/followups`);
+    return this.http.get<FollowUp[]>(`${environment.api}/followup/followups`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   // Check notifications

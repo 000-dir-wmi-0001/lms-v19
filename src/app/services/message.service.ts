@@ -5,10 +5,16 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService{
-  constructor(private readonly http: HttpClient) {}
+export class MessageService {
+  private token = localStorage.getItem('token');
 
-  createMsg(data:any) {
-    return this.http.post(`${environment.api}/message/createMsg`,data)
+  constructor(private readonly http: HttpClient) { }
+
+
+  createMsg(data: any) {
+    return this.http.post(`${environment.api}/message/createMsg`, data,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
 }

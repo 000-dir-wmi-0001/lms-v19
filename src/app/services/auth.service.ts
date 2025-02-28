@@ -12,6 +12,8 @@ import { environment } from '../../environments/environment';
 
 export class AuthService {
 
+  private token = localStorage.getItem('token');
+
   userData: any
   constructor(private readonly http: HttpClient) { }
 
@@ -28,7 +30,8 @@ export class AuthService {
       email,
       password,
       mobileno
-    }, { observe: 'response' });
+    }, { observe: 'response' , headers: { Authorization: `Bearer ${this.token}` } }
+  );
   }
 
   setUserData(data: any) {
@@ -42,30 +45,51 @@ export class AuthService {
 
 
   sendOtp(email: string) {
-    return this.http.post(`${environment.api}/user/sendOtp`, { email })
+    return this.http.post(`${environment.api}/user/sendOtp`, { email },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
 
   verifyOtpAndRegister(data: any) {
-    return this.http.post(`${environment.api}/user/verifyOtpAndRegister`, data)
+    return this.http.post(`${environment.api}/user/verifyOtpAndRegister`, data,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
 
   resendOtp(email: any) {
-    return this.http.patch(`${environment.api}/user/resendOtp`, { email })
+    return this.http.patch(`${environment.api}/user/resendOtp`, { email },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
 
   approveUser(userId: any) {
-    return this.http.patch(`${environment.api}/user/approve/${userId}`, {})
+    return this.http.patch(`${environment.api}/user/approve/${userId}`, {},
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    )
   }
 
 
   signIn(email: string, password: string): Observable<any> {
-    return this.http.post(`${environment.api}/user/login`, { email, password });
+    return this.http.post(`${environment.api}/user/login`, { email, password },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   forgotPassword(email: string) {
-    return this.http.post(`${environment.api}/user/forgetpassword`, { email });
+    return this.http.post(`${environment.api}/user/forgetpassword`, { email },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   resetPassword(token: string, password: string) {
-    return this.http.put(environment.api + '/user/resetpassword', { token, password });
+    return this.http.put(environment.api + '/user/resetpassword', { token, password },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
   enquiry(
     fullName: string,
@@ -85,30 +109,47 @@ export class AuthService {
       courseEnrolledIn,
       status,
       enqDescription,
-    });
+    },
+    { headers: { Authorization: `Bearer ${this.token}` } }
+  );
   }
 
   getenquiry(page: number): Observable<any> {
-    return this.http.get(`${environment.api}/user/enquiry?page=${page}&limit=10`);
+    return this.http.get(`${environment.api}/user/enquiry?page=${page}&limit=10`,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   deleteEnquiry(id: any) {
-    return this.http.delete(`${environment.api}/user/enquiry/` + id);
+    return this.http.delete(`${environment.api}/user/enquiry/` + id,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 
   updateStatus(dataToUpdate: any) {
     return this.http
-      .patch(`${environment.api}/user/status`, { dataToUpdate })
+      .patch(`${environment.api}/user/status`, { dataToUpdate },
+        { headers: { Authorization: `Bearer ${this.token}` } }
+
+      )
 
   }
 
   updateReview(reviewToUpdate: any) {
     return this.http
-      .patch(`${environment.api}/user/review`, { reviewToUpdate })
+      .patch(`${environment.api}/user/review`, { reviewToUpdate },
+        { headers: { Authorization: `Bearer ${this.token}` } }
+
+      )
   }
 
   verifyUser(token: any) {
-    return this.http.post(`${environment.api}/user/userVerify`, { token });
+    return this.http.post(`${environment.api}/user/userVerify`, { token },
+      { headers: { Authorization: `Bearer ${this.token}` } }
+
+    );
   }
 }
 
