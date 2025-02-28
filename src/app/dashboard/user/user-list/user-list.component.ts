@@ -54,8 +54,26 @@ export class UserListComponent implements OnInit {
         this.isLoading = false;
 
         if (Array.isArray(data)) { // Check if data is actually an array
-          this.users = data.filter(user => user.isVerified === true);
-          this.loginAccessUsers = data.filter(user => user.isVerified === false);
+
+          this.users = data.filter(user => {
+            const role = this.getRole(); // Get current user role
+
+            return (role === 'ADMIN')
+              ? user.type !== 'SUPERADMIN' && user.type !== 'ADMIN' && user.isVerified === true
+              : (role === 'SUPERADMIN')
+                ? true // If role is 'SUPERADMIN', fetch all users
+                : user.isVerified === true; // For other roles, only show verified users
+          });
+          this.loginAccessUsers = data.filter(user => {
+            const role = this.getRole(); // Get current user role
+
+            return (role === 'ADMIN')
+              ? user.type !== 'SUPERADMIN' && user.type !== 'ADMIN' && user.isVerified === false
+              : (role === 'SUPERADMIN')
+                ? true // If role is 'SUPERADMIN', fetch all users
+                : user.isVerified === true; // For other roles, only show verified users
+          });
+
         } else {
           console.error("Unexpected response format:", data);
         }
@@ -139,56 +157,109 @@ export class UserListComponent implements OnInit {
   }
 
 
-  deleteUser(userId: any): void {
-    console.log(userId);
-    this.userService.deleteUser(userId).subscribe({
-      next: (user: any) => {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 4000,
-          timerProgressBar: true,
-          customClass: {
-            container: 'swal-wide'
-          },
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
-        Toast.fire({
-          icon: 'success',
-          title: 'User Deleted Successfully',
-        });
-        this.closeModal()
-        this.getUsers();
-      },
-      error: (err) => {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 4000,
-          timerProgressBar: true,
-          customClass: {
-            container: 'swal-wide'
-          },
-          didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer);
-            toast.addEventListener('mouseleave', Swal.resumeTimer);
-          },
-        });
-        Toast.fire({
-          icon: 'error',
-          title: 'Failed to delete user',
-        });
-      },
-    });
+  // deleteUser(userId: any): void {
+  //   console.log(userId);
+  //   this.userService.deleteUser(userId).subscribe({
+  //     next: (user: any) => {
+  //       const Toast = Swal.mixin({
+  //         toast: true,
+  //         position: 'top-end',
+  //         showConfirmButton: false,
+  //         timer: 4000,
+  //         timerProgressBar: true,
+  //         customClass: {
+  //           container: 'swal-wide'
+  //         },
+  //         didOpen: (toast) => {
+  //           toast.addEventListener('mouseenter', Swal.stopTimer);
+  //           toast.addEventListener('mouseleave', Swal.resumeTimer);
+  //         },
+  //       });
+  //       Toast.fire({
+  //         icon: 'success',
+  //         title: 'User Deleted Successfully',
+  //       });
+  //       this.closeModal()
+  //       this.getUsers();
+  //     },
+  //     error: (err) => {
+  //       const Toast = Swal.mixin({
+  //         toast: true,
+  //         position: 'top-end',
+  //         showConfirmButton: false,
+  //         timer: 4000,
+  //         timerProgressBar: true,
+  //         customClass: {
+  //           container: 'swal-wide'
+  //         },
+  //         didOpen: (toast) => {
+  //           toast.addEventListener('mouseenter', Swal.stopTimer);
+  //           toast.addEventListener('mouseleave', Swal.resumeTimer);
+  //         },
+  //       });
+  //       Toast.fire({
+  //         icon: 'error',
+  //         title: 'Failed to delete user',
+  //       });
+  //     },
+  //   });
 
+  // }
+  // cancel(): void {
+  //   this.modalRef.hide();
+  // }
+  deleteUser(userId: any): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true, // Shows a cancel button
+      confirmButtonColor: '#d33', // Color for confirm button
+      cancelButtonColor: '#1b78fd', // Color for cancel button
+      confirmButtonText: 'Yes, delete it!' // Text for confirm button
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(userId).subscribe({
+          next: (user: any) => {
+            Swal.fire(
+              'Deleted!',
+              'The user has been deleted.',
+              'success'
+            );
+            this.closeModal();
+            this.getUsers(); // Refresh the user list
+          },
+          error: (err) => {
+            Swal.fire(
+              'Error!',
+              'There was an error deleting the user.',
+              'error'
+            );
+          }
+        });
+      }
+    });
   }
-  cancel(): void {
-    this.modalRef.hide();
+
+  showActionPopup(user: any) {
+    Swal.fire({
+      title: 'Do you Want to Approve?',
+      text: `${user.firstName} ${user.lastName}?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Approve',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Approve the user if Confirm button was clicked
+        this.approveUser(user._id);
+      } else {
+        // Action canceled
+        console.log('Action canceled');
+      }
+    });
   }
 
   approveUser(userId: string) {
@@ -207,7 +278,7 @@ export class UserListComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Error approving user',
-          text: err.error.message,
+          text: err.error?.message || 'Something went wrong.',
           timer: 3000,
           toast: true,
           position: 'top-end',
@@ -219,7 +290,72 @@ export class UserListComponent implements OnInit {
 
 
 
-  rejectUser(userId: any) {
+  // showActionPopup(user: any) {
+  //   Swal.fire({
+  //     title: 'Do you Want to Approve??',
+  //     text: `${user.firstName} ${user.lastName}?`,
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Approve',
+  //     cancelButtonText: 'Cancel',
+  //     customClass: {
+  //       confirmButton: 'swal2-confirm',  // Custom class for the Approve button
+  //       cancelButton: 'swal2-cancel'     // Custom class for the Cancel button
+  //     },
+  //     // footer: `<button class="btn btn-danger" (click)="rejectUser(user)">Reject</button>`,
+  //     preConfirm: (result) => {
+  //       // This function is called when "Approve" is clicked
+  //       if (result) {
+  //         this.approveUser(user._id); // Approve the user
+  //       } else {
+  //         Swal.close(); // If Cancel is pressed, close the pop-up
+  //       }
+  //     },
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this.approveUser(user._id);
+  //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+  //       // Cancel was clicked
+  //       // console.log('Action canceled');
+  //     }
+  //   });
+  // }
 
-  }
+  // approveUser(userId: string) {
+  //   this.authService.approveUser(userId).subscribe({
+  //     next: (res: any) => {
+  //       Swal.fire({
+  //         icon: 'success',
+  //         title: 'User approved successfully!',
+  //         timer: 3000,
+  //         toast: true,
+  //         position: 'top-end',
+  //         showConfirmButton: false,
+  //       });
+  //     },
+  //     error: (err: any) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Error approving user',
+  //         text: err.error?.message || 'Something went wrong.',
+  //         timer: 3000,
+  //         toast: true,
+  //         position: 'top-end',
+  //         showConfirmButton: false,
+  //       });
+  //     }
+  //   });
+  // }
+
+
+  // rejectUser(user: any) {
+  //   console.log(`User ${user.firstName} rejected`);
+  //   Swal.fire({
+  //     icon: 'error',
+  //     title: 'User rejected',
+  //     text: `${user.firstName} ${user.lastName} has been rejected.`,
+  //   });
+  // }
+
+
 }

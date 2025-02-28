@@ -76,7 +76,7 @@ export class LeftNavComponent implements OnInit {
   }
 
   toggleSidebar() {
-    console.log("toggleSidebar: ", this.isSidebarExpanded);
+    // console.log("toggleSidebar: ", this.isSidebarExpanded);
 
     this.sidebarService.toggleSidebar();
     this.isSidebarExpanded = !this.isSidebarExpanded;

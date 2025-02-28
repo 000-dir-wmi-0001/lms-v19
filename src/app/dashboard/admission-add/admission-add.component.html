@@ -72,7 +72,6 @@
     <mat-form-field appearance="outline" id="moduleno" class="bg-white">
 
       <mat-select formControlName="moduleno" [(ngModel)]="selectedModuleIds" multiple (selectionChange)="onModuleChange($event)">
-        <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"  [ngModelOptions]="{standalone: true}"></mat-select-search> -->
         @for(module of allModules_list; track module){
 
         <mat-option  [value]="module._id">
@@ -89,30 +88,11 @@
 }
     </div>
 
-    <!-- <div>
-      <label for="batchno">Modules:</label>
-      <select formControlName="batchno" id="batchno">
-        <option disabled>Please Select Modules</option>
-
-        @for(module of allModules_list; track module){
-          <option value="{{module._id}}">{{ module.moduleName}}</option>
-
-        }
-      </select>
-      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
-
-        <div class="error-message">
-           Please Select Batch.
-        </div>
-      }
-    </div> -->
-
     <div>
       <label for="batchno">Batches:</label>
       <mat-form-field appearance="outline" id="batchno" class="bg-white" >
 
       <mat-select formControlName="batchno" multiple>
-        <!-- <mat-select-search [(ngModel)]="searchText" placeholder="'Search options'"></mat-select-search> -->
         @for(batch of allBacthecs_list; track batch){
 
         <mat-option  [value]="batch._id">
@@ -131,23 +111,6 @@
 }
     </div>
 
-    <!-- <div>
-      <label for="batchno">Batch:</label>
-      <select formControlName="batchno" id="batchno">
-        <option disabled>Please Select Batch</option>
-
-        @for(batch of allBacthecs_list; track batch){
-          <option value="{{batch._id}}">{{ batch.name}}</option>
-
-        }
-      </select>
-      @if(myForm.get('batchno')?.invalid && myForm.get('batchno')?.touched){
-
-        <div class="error-message">
-           Please Select Batch.
-        </div>
-      }
-    </div> -->
 
     <div>
     <label for="status">Status:</label>
@@ -168,25 +131,7 @@
       </div>
     }
     </div>
-<!--
-    <div>
-      <label for="status">Status:</label>
-      <select formControlName="status" id="status">
-        <option value="" disabled selected hidden>Select Status</option>
-        <option value="Neutral">Neutral</option>
-        <option value="Prospect">Prospect</option>
-        <option value="Enrolled">Enrolled</option>
-        <option value="Follow Up">Follow Up</option>
-        <option value="Closed">Closed</option>
 
-      </select>
-      @if(myForm.get('type')?.invalid && myForm.get('type')?.touched){
-
-        <div class="error-message">
-          Type is required.
-        </div>
-      }
-    </div> -->
 
 
 

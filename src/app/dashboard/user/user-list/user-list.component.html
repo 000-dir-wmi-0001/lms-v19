@@ -70,26 +70,26 @@
           <td>{{ user.type }}</td>
           <td>
             <div class="dropdown">
-              <button class="btn btn-dark border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-dark border-0" type="button" (click)=" showActionPopup(user)" >
                 <i class="bi bi-three-dots-vertical"></i>
               </button>
-              <ul class="dropdown-menu">
+              <!-- <button class="btn btn-dark border-0" type="button" (click)=" showActionPopup(user._id)" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button> -->
+
+              <!-- <ul class="dropdown-menu">
                 <li>
                   <button class="dropdown-item text-success" (click)="approveUser(user._id)">
                     <i class="bi bi-check-circle"></i> Approve
                   </button>
                 </li>
-                <li>
-                  <!-- <button class="dropdown-item text-warning" (click)="rejectUser(user._id)">
-                    <i class="bi bi-x-circle"></i> Reject
-                  </button> -->
-                </li>
+
                 <li>
                   <button class="dropdown-item text-danger" (click)="openModal(template,user)">
                     <i class="bi bi-trash"></i> Reject
                   </button>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </td>
         </tr>
