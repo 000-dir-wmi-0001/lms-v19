@@ -1,54 +1,163 @@
 <div class="main">
   <app-left-nav></app-left-nav>
-  <div class="right" [ngClass]="{'expanded-right': isSidebarExpanded, 'collapsed-right': !isSidebarExpanded}">
-
+  <div
+    class="right"
+    [ngClass]="{'expanded-right': isSidebarExpanded, 'collapsed-right': !isSidebarExpanded}"
+  >
     <div id="navbar">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <!-- Logo -->
           <a href="#" class="navbar-brand">
-            <img src="linkcodelogo.png" alt="Logo" width="180" height="40" class="mb-1 mt-3"
-                 [ngClass]="{'d-none': isSidebarExpanded && !isMobile}" />
+            <img
+              src="linkcodelogo.png"
+              alt="Logo"
+              width="180"
+              height="40"
+              class="mb-1 mt-3"
+              [ngClass]="{'d-none': isSidebarExpanded && !isMobile}"
+            />
           </a>
 
           <!-- User Profile Dropdown with Logout Inside -->
           <div class="navbar-right">
+            <div class="scanner" (click)="openModal(template)"></div>
+            @if(getRole()=='STUDENT'){
+            <input type="button" (click)="openModal(template)" class="scic" />
+            }
+
+            <ng-template #template>
+              <div class="modal-header">
+                <h4 class="modal-title">Camera Modal</h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  (click)="closeModal()"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div class="modal-body">
+                <!-- Camera Selection -->
+                <div class="camera-selection mb-3">
+                  <label for="camera" class="form-label fw-bold"
+                    >Select Camera:</label
+                  >
+                  <select
+                    id="camera"
+                    class="form-select w-100"
+                    (change)="onDeviceSelectChange($event)"
+                  >
+                    <option
+                      *ngFor="let device of devices"
+                      [value]="device.deviceId"
+                    >
+                      {{ device.label || 'Unnamed Camera' }}
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Video Display -->
+                <div class="video-container rounded shadow-sm">
+                  <video
+                    #videoElement
+                    class="video-feed w-100 rounded"
+                    autoplay
+                    playsinline
+                  ></video>
+                  <canvas #canvasElement></canvas>
+                </div>
+
+                <!-- Control Buttons -->
+                <div
+                  class="clickables mt-3 d-flex justify-content-center gap-3"
+                >
+                  <!-- <button (click)="captureQR()">Capture</button> -->
+
+                  <input type="button"
+                    (click)="startVideoStream()"
+                    class="cam_on"
+                  >
+                  
+
+                  <input type="button"
+                    (click)="stopVideoStream()"
+                    class="cam_off"
+                  >
+                    
+                </div>
+
+                <!-- Messages -->
+                <div *ngIf="attendanceMessage" class="alert alert-success mt-3">
+                  {{ attendanceMessage }}
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+            </ng-template>
             <div class="nav-item dropdown user-dropdown">
-              <a #userIcon class="nav-link" href="#" id="userDropdown"
-                 (click)="toggleDropdown($event)" aria-expanded="false">
+              <a
+                #userIcon
+                class="nav-link"
+                href="#"
+                id="userDropdown"
+                (click)="toggleDropdown($event)"
+                aria-expanded="false"
+              >
                 <i class="fa-solid fa-user-circle user-icon"></i>
               </a>
-              <div #dropdownMenu class="dropdown-menu" [class.show]="isDropdownOpen"
-                   aria-labelledby="userDropdown">
+              <div
+                #dropdownMenu
+                class="dropdown-menu"
+                [class.show]="isDropdownOpen"
+                aria-labelledby="userDropdown"
+              >
+                <!-- Notifications for Student role -->
+                <div *ngIf="getRole() === 'STUDENT'">
+                  <div class="notification-submenu">
+                    <a class="dropdown-item" href="#">
+                      <i class="fa-solid fa-bell"></i> Notifications
+                    </a>
+                    <div class="dropdown-divider"></div>
+                  </div>
 
-
-              <!-- Notifications for Student role -->
-              <div *ngIf="getRole() === 'STUDENT'">
-                <div class="notification-submenu">
-                  <a class="dropdown-item" href="#">
-                    <i class="fa-solid fa-bell"></i> Notifications
+                  <!-- Cart Link -->
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['course/cart']"
+                    (click)="closeNavbar()"
+                  >
+                    <i class="fa-solid fa-cart-shopping me-2"></i>Cart
                   </a>
                   <div class="dropdown-divider"></div>
                 </div>
 
-                <!-- Cart Link -->
-                <a class="dropdown-item" [routerLink]="['course/cart']" (click)="closeNavbar()">
-                  <i class="fa-solid fa-cart-shopping me-2"></i>Cart
+                <!-- Profile and Logout Options -->
+                <a
+                  class="dropdown-item"
+                  [routerLink]="['profile']"
+                  (click)="closeNavbar()"
+                >
+                  <i class="fa-solid fa-user me-2"></i>Profile
                 </a>
                 <div class="dropdown-divider"></div>
+                @if(getRole()=='STUDENT'){
+                <a
+                  class="dropdown-item"
+                  href="javascript:void(0);"
+                  (click)="openModal(template); closeNavbar()"
+                >
+                  <i class="fa-solid fa-user me-2"></i>Attendance
+                </a>
+                <div class="dropdown-divider"></div>
+              }
+                <a class="dropdown-item" (click)="logout(); closeNavbar()">
+                  <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
+                </a>
               </div>
-
-              <!-- Profile and Logout Options -->
-              <a class="dropdown-item" [routerLink]="['profile']" (click)="closeNavbar()">
-                <i class="fa-solid fa-user me-2"></i>Profile
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout(); closeNavbar()">
-                <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
-              </a>
             </div>
           </div>
-        </div>
         </div>
       </nav>
     </div>

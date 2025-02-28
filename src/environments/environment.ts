@@ -7,8 +7,8 @@ export const environment = {
 
   // api: 'https://6n41s4zaoi.execute-api.ap-south-1.amazonaws.com/prod',
   // api: 'http://localhost:3000',
-  api: 'https://6n41s4zaoi.execute-api.ap-south-1.amazonaws.com/prod',
-  // api: 'http://localhost:3000',
+  // api: 'https://6n41s4zaoi.execute-api.ap-south-1.amazonaws.com/prod',
+  api: 'http://localhost:3000',
 
   raz_key_id: 'rzp_live_VhZQMJybXpoSA0', //for live testing
 };

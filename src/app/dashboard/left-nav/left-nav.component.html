@@ -92,6 +92,18 @@
           </a>
         </li>
       }
+      @if(getRole()=='INSTRUCTOR'){
+
+        <li class="nav-item">
+          <a class="nav-link bg-light" [routerLink]="['session']" [ngClass]="{'collapsed': !isSidebarExpanded, 'active-link': activeLink === 'session'}" (click)="setActiveLink('session')">
+            <img src="receipts_lms.png" alt="Session" width="35" class="px-2 py-2" />&nbsp;
+            @if(isSidebarExpanded){
+
+              <span>Session</span>
+            }
+          </a>
+        </li>
+      }
       @if( getRole()== 'ADMIN' || getRole()=='SUPERADMIN'){
 
         <li class="nav-item">
