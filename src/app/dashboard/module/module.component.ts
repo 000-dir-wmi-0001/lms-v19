@@ -20,94 +20,42 @@ import { CommonModule } from '@angular/common';
 import { ReceiptService } from '../../services/receipt.service';
 import { provideHttpClient } from '@angular/common/http';
 import { CourseEditFeeComponent } from "../fee/course-edit-fee/course-edit-fee.component";
+import { BatchService, Module } from '../../services/batch.service';
+import { CommonService } from '../../services/common.service';
 @Component({
   selector: 'app-module',
-  imports: [CommonModule, RouterLink, RouterOutlet, ReactiveFormsModule, FormsModule, CourseEditFeeComponent],
+  imports: [CommonModule, RouterLink, RouterOutlet, ReactiveFormsModule, FormsModule],
   templateUrl: './module.component.html',
   styleUrl: './module.component.css'
 })
 export class ModuleComponent {
-  // name: any;
-  // studentList: any = [];
-  // isLoading = true;
-  // // modalRef!: BsModalRef;
-  // bsModalRef!: import('ngx-bootstrap/modal').BsModalRef<unknown>;
-  // msgText: any;
-  // toWAnumber: any;
-  // listTitles = [
-  //   { name: 'index' },
-  //   { name: 'studentName' },
-  //   // { name: 'Mobile no. '},
-  //   // { name: 'totalFee' },
-  //   // { name: 'pendingFee' },
-  //   { name: 'Details' },
-  //   { name: 'Action' },
-  // ];
+  modulesList: Module[] = [];
+  commonService: any;
 
-  // constructor(
-  //   private feeService: FeeService,
-  //   private storageService: StorageService,
-  //   private modalService: BsModalService,
-  //   private router: Router,
-  //   private userService: UserService
-  // ) { }
 
-  // ngOnInit(): void {
-  //   this.getStudents();
-  // }
-  // getStudents() {
-  //   this.feeService.getStudentUser().subscribe({
-  //     next: (data: any) => {
-  //       this.isLoading = false;
-  //       this.studentList = data.studentUsers;
-  //       console.log("data", data.studentUsers);
-  //       console.log("thisone", this.studentList);
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
+  constructor(private _userService: UserService, private _storageService: StorageService, router: Router, private batchService: BatchService, commonService: CommonService) { }
 
-  // handleDoubleClick(i: any) {
-  //   this.router.navigate(['/dashboard/fee/displayStudentInfo/', i])
-  // }
+  ngOnInit(): void {
+    this.fetchModules();
+  }
 
-  // searchStudent() {
-  //   if (!this.name) {
-  //     this.getStudents();
-  //   } else {
-  //     this.studentList = this.studentList.filter((student: any) => {
-  //       console.log(student)
-  //       return student.user?.firstName?.toLowerCase().includes(this.name.toLowerCase())
-  //     }
-  //     );
-  //   }
-  // }
 
-  // editFee(id: any) {
-  //   console.log(id);
-  //   this.router.navigate(['dashboard/fee/edit', id]);
-  // }
+  fetchModules() {
+    this.batchService.getAllModules('module/').subscribe({
+      next: (data: any) => {
+        if (data.modules && Array.isArray(data.modules)) {
+          this.modulesList = data.modules; // Update local list of batches
+        } else {
+          // console.error('Invalid data format received:', data); // Log invalid data format
+          this.commonService.showError('Invalid data format received from server'); // Show error notification
+        }
+      },
+      error: (error) => {
+        const errorMessage = error.error?.message || 'Failed to fetch batches'; // Get error message
+        console.error('Error fetching batches:', errorMessage); // Log error
+        this.commonService.showError(errorMessage); // Show error notification
+      },
+    });
+  }
 
-  // writeReminderMsg(template: TemplateRef<any>, id: any) {
-  //   this.bsModalRef = this.modalService.show(template);
-  //   this.userService.getUser(id).subscribe({
-  //     next: (data: any) => {
-  //       this.toWAnumber = data.user.mobileno;
-  //       console.log(this.toWAnumber);
-
-  //     },
-  //     error: (err) => {
-  //       console.log(err)
-  //     }
-  //   })
-  // }
-
-  // sendReminder(text: any) {
-  //   this.msgText = text;
-  //   const whatsappUrl = `https://wa.me/${this.toWAnumber}?text=${encodeURIComponent(this.msgText)}`;
-  //   // Redirect the user to the WhatsApp URL
-  //   window.location.href = whatsappUrl;
-  // }
 }
