@@ -58,8 +58,8 @@ export class ListExamComponent implements OnInit, OnDestroy {
 
     this.examservice.getExams().subscribe({
       next: (data: any) => {
-        console.log("exam :");
-        console.log(data.exams);
+        // console.log("exam :");
+        // console.log(data.exams);
 
         this.isLoading = false;
         this.exams = data.exams;

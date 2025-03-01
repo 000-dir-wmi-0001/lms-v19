@@ -81,6 +81,29 @@ export class BatchService {
     );
   }
 
+  updateBatchOfModule(uri: string, batch: Batch): Observable<Batch> {
+    // Create a copy of the batch object to avoid mutating the original batch
+    const updatedBatch: Batch = { ...batch };
+
+    // Only keep startFrom if it has been changed, otherwise delete it
+    if (!updatedBatch.startFrom) {
+      delete updatedBatch.startFrom;
+    }
+
+    // Only keep endAt if it has been changed, otherwise delete it
+    if (!updatedBatch.endAt) {
+      delete updatedBatch.endAt;
+    }
+
+    // Perform the PUT request to update the batch
+    return this.http.put<Batch>(
+      `${environment.api}/${uri}/${batch._id}`,
+      updatedBatch,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    );
+  }
+
+
   // Delete a batch
   deleteBatch(uri: string, batchId: string): Observable<BatchResponse> {
     return this.http.delete<BatchResponse>(`${environment.api}/${uri}/${batchId}`,

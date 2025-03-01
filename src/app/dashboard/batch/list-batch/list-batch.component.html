@@ -16,12 +16,12 @@
     <div class="bg-primary bg-gradient text-white p-3 rounded-3 mt-2 align-middle ">
       <h4 class="text-center p-2">Edit Batch</h4>
       <div class="d-flex justify-content-between gap-2 mt-3">
-        <p>Start: <span class="text-warning">{{selectedBatch.startFrom | date:'MM/dd/yy'}}</span></p>
-        <p>End: <span class="text-warning">{{selectedBatch.endAt | date:'MM/dd/yy'}}</span></p>
+        <p><span class="text-warning">Start: </span>{{selectedBatch.startFrom | date:'MM/dd/yy'}}</p>
+        <p><span  class="text-warning">End: </span>{{selectedBatch.endAt | date:'MM/dd/yy'}}</p>
       </div>
     </div>
 
-    <form (ngSubmit)="onUpdateBatch()" #batchForm="ngForm">
+    <form  #batchForm="ngForm" (ngSubmit)="saveChanges()">
       <div class="form-group">
         <label for="name">Batch Name</label>
         <input
@@ -113,49 +113,3 @@
 </div>
 
 }
-
-
-<!-- <div class="ms-md-3 mt-2 mt-md-0">
-    <button
-      type="button"
-      class="btn  create-button"
-      (click)="backToBatch()"
-    >
-      Back to Batch
-    </button>
-</div>
-
-<div class="row m-3">
-  @for(batch of batches;track batch){
-      <div class="col-md-4 mb-5">
-        <div class="card h-100 w-100 shadow-sm border-0 hover-shadow transition">
-          <div class="card-header bg-primary text-white py-2">
-            <h5 class="card-title mb-0">
-              <i class="fas fa-graduation-cap me-2"></i>{{ batch.name || "No Name" }}
-            </h5>
-          </div>
-          <div class="card-body bg-light">
-            <p class="card-text text-muted">
-              <i class="fas fa-info-circle me-2"></i>{{ batch.description || "No Description" }}
-            </p>
-            <div class="d-flex justify-content-between gap-2 mt-3">
-              <button class="btn btn-warning btn-sm" (click)="onEdit(batch)">
-                <i class="fas fa-edit me-1"></i> Edit
-              </button>
-              <button class="btn btn-info btn-sm" (click)="viewBatch(batch._id!)">
-                <i class="fas fa-eye me-1"></i> View
-              </button>
-              <button
-                class="btn btn-danger btn-sm"
-                (click)="onDelete(batch._id!)"
-                *ngIf="batch._id"
-              >
-                <i class="fas fa-trash me-1"></i> Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-  }
-</div>
- -->
