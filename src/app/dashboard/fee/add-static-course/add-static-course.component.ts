@@ -3,6 +3,8 @@ import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormContro
 import { Router } from '@angular/router';
 import { FeeService } from '../../../services/fee.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../../services/user.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-add-static-course',
@@ -12,7 +14,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AddStaticCourseComponent implements OnInit {
 
-  constructor(private feeService: FeeService, private formBuilder: UntypedFormBuilder, private router: Router) { }
+  Module: any;
+
+  constructor(private feeService: FeeService, private formBuilder: UntypedFormBuilder, private router: Router, private userService: UserService) { }
 
 
   productForm: UntypedFormGroup = new UntypedFormGroup({
@@ -29,14 +33,30 @@ export class AddStaticCourseComponent implements OnInit {
   }
   onSubmit() {
 
-    this.feeService.createStaticCourse(this.productForm.value).subscribe(
+    this.Module = this.productForm.value;
+    console.log(this.Module)
+    this.userService.addNewModule(this.Module).subscribe(
       (data) => {
-        this.router.navigate(['/dashboard/fee/editCourseFee'])
+        console.log("successfully added module");
+        console.log(data);
+        this.router.navigate(['/dashboard/module/'])
       },
       (error: any) => {
         console.log(error)
       }
-    )
+    );
+
+    // /addModulesfromAdmin/:id
+
+
+    // this.feeService.createStaticCourse(this.productForm.value).subscribe(
+    //   (data) => {
+    //     this.router.navigate(['/dashboard/fee/editCourseFee'])
+    //   },
+    //   (error: any) => {
+    //     console.log(error)
+    //   }
+    // )
   }
 
   onBack() {

@@ -183,4 +183,16 @@ export class UserService {
     return this.http.post(`${environment.api}/batches/batch-list-module`, body, { headers: headers });
   }
 
+
+  addNewModule(module: any) {
+    return this.http.post(`${environment.api}/module/`, module,
+      { headers: { Authorization: `Bearer ${this.token}` } }
+    )
+  }
+  // addNewModule(module: any) {
+  //   return this.http.post(`${environment.api}/addModulesfromAdmin/${module._id}`, module,
+  //     { headers: { Authorization: `Bearer ${this.token}` } }
+  //   )
+  // }
+
 }
