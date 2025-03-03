@@ -126,15 +126,17 @@ export class ListBatchComponent implements OnInit, OnDestroy {
         endAt: this.selectedBatch.endAt ? new Date(this.selectedBatch.endAt) : this.selectedBatch.endAt,
       };
 
-      this.batchService.updateBatchOfModule(`batches/update`, updatedBatch).subscribe(
-        () => {
-          console.log('Batch updated successfully');
-          this.fetchBatches(); // Refresh batch list
-          this.onCancelEdit(); // Close edit mode
-        },
+      this.batchService.updateBatchOfModule(`batches/update/${updatedBatch._id}`, updatedBatch).subscribe(
+
+      (data) => {
+
+        console.log('Batch updated successfully');
+        this.fetchBatches(); // Refresh batch list
+        this.onCancelEdit(); // Close edit mode
+      },
         (error) => {
           console.error('Error updating batch:', error);
-          this.commonService.showError('Failed to update batch');
+          // this.commonService.showError('Failed to update batch');
         }
       );
     }

@@ -97,8 +97,7 @@ export class BatchService {
 
     // Perform the PUT request to update the batch
     return this.http.put<Batch>(
-      `${environment.api}/${uri}/${batch._id}`,
-      updatedBatch,
+      `${environment.api}/${uri}`, updatedBatch,
       { headers: { Authorization: `Bearer ${this.token}` } }
     );
   }
